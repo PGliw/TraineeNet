@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 
 class CardStackAdapter(
     private val context: Context,
-    val offers : Array<Offer>) : RecyclerView.Adapter<CardStackAdapter.CardViewHolder>(){
+    var offers : Array<Offer>) : RecyclerView.Adapter<CardStackAdapter.CardViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val cardView = LayoutInflater.from(parent.context).inflate(R.layout.offer_card, parent, false) as CardView
         return CardViewHolder(cardView)

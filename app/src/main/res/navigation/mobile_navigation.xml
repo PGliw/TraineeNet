@@ -9,4 +9,14 @@
         android:name="com.pwr.trainwithme.OffersFragment"
         android:label="fragment_offers"
         tools:layout="@layout/fragment_offers" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.pwr.trainwithme.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/locationFragment"
+        android:name="com.pwr.trainwithme.LocationFragment"
+        android:label="fragment_location"
+        tools:layout="@layout/fragment_location" />
 </navigation>
