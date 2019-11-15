@@ -50,4 +50,8 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
     // CardStackView
     implementation "com.yuyakaido.android:card-stack-view:2.3.4"
+    // MultiToggleButton
+    implementation 'org.honorato.multistatetogglebutton:multistatetogglebutton:0.2.2'
+    // Slide to Act
+    implementation 'com.ncorti:slidetoact:0.7.0'
 }

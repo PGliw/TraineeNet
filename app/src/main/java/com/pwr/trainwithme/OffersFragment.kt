@@ -6,7 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
+import com.yuyakaido.android.cardstackview.StackFrom
 import kotlinx.android.synthetic.main.fragment_offers.*
 
 /**
@@ -24,12 +27,13 @@ class OffersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val dataSet = arrayOf(
-            Offer("https://thumbs.dreamstime.com/z/atleta-divertido-44183141.jpg", "Gruby", "Profesjonalny trener"),
-            Offer("https://www.wikihow.com/images/thumb/f/f8/Become-a-Personal-Trainer-Step-1.jpg/aid101070-v4-728px-Become-a-Personal-Trainer-Step-1.jpg.webp", "Jan Niezbędny", "fn iaonf niaonf onoifn aon on[")
+        val sports = arrayOf(
+            Sport("Tennis","https://images.pexels.com/photos/1432039/pexels-photo-1432039.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"),
+            Sport("Gym", "https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"),
+            Sport("Box", "https://images.pexels.com/photos/163403/box-sport-men-training-163403.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")
         )
-        card_stack.layoutManager = CardStackLayoutManager(requireContext())
-        card_stack.adapter = CardStackAdapter(requireContext(), dataSet)
+        sports_recycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        sports_recycler.adapter = SportsAdapter(requireContext(), sports)
     }
 
 
