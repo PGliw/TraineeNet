@@ -23,3 +23,11 @@ class Sport(
     get() = name
 }
 
+class SportObject(
+    val name: String,
+    override val imageUrl: String
+) : Summarisable {
+    override val title
+    get() = name
+}
+

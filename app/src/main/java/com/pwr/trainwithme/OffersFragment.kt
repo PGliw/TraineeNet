@@ -35,12 +35,17 @@ class OffersFragment : Fragment() {
         val trainers = arrayOf<Summarisable>(
             Trainer("John", "Doe", "https://images.pexels.com/photos/1546139/pexels-photo-1546139.jpeg?cs=srgb&dl=chlopak-czas-wolny-deska-surfingowa-dorosly-1546139.jpg&fm=jpg", "Surfing instructor"),
             Trainer("Bob", "Smith", "https://images.pexels.com/photos/733500/pexels-photo-733500.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260", "Trainer")
-
+        )
+        val sportObjects = arrayOf<Summarisable>(
+            SportObject("Surfpoint", "https://www.surfpoint.pl/wp-content/uploads/2015/04/team-biegnie-compressor.jpg"),
+            SportObject("Fitness Academy", "https://i.ytimg.com/vi/0-f1meMXtCI/maxresdefault.jpg")
         )
         sports_recycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         sports_recycler.adapter = SummaryAdapter(requireContext(), sports)
         trainers_recycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         trainers_recycler.adapter = SummaryAdapter(requireContext(), trainers)
+        objects_recycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        objects_recycler.adapter = SummaryAdapter(requireContext(), sportObjects)
     }
 
 
