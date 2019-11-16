@@ -12,4 +12,8 @@
     <string name="sports">Sports</string>
     <string name="trainers">Trainers</string>
     <string name="objects">Objects</string>
+    <string name="where_to_train">Where to train?</string>
+    <string name="location">Location</string>
+    <string name="sport">Sport</string>
+    <string name="date">Date</string>
 </resources>

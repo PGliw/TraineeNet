@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
@@ -15,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_offers.*
 /**
  * A simple [Fragment] subclass.
  */
-class OffersFragment : Fragment() {
+class OffersFragment : Fragment(), OnSummarySelectedListener {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,12 +42,18 @@ class OffersFragment : Fragment() {
             SportObject("Fitness Academy", "https://i.ytimg.com/vi/0-f1meMXtCI/maxresdefault.jpg")
         )
         sports_recycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        sports_recycler.adapter = SummaryAdapter(requireContext(), sports)
+        sports_recycler.adapter = SummaryAdapter(requireContext(), sports, this, SummaryAdapter.MEDIUM)
         trainers_recycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        trainers_recycler.adapter = SummaryAdapter(requireContext(), trainers)
+        trainers_recycler.adapter = SummaryAdapter(requireContext(), trainers, this)
         objects_recycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        objects_recycler.adapter = SummaryAdapter(requireContext(), sportObjects)
+        objects_recycler.adapter = SummaryAdapter(requireContext(), sportObjects, this, SummaryAdapter.MEDIUM)
     }
 
+    override fun onSummarySelected(summary: Summarisable) {
+        findNavController().navigate(R.id.action_offersFragment_to_searchFragment)
+        // TODO: Event driven architecture - don't navigate here - change state machine
+        // and than listen to state machine status
+        // if the state machine says so, than navigate
+    }
 
 }
