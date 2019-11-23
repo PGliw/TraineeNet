@@ -11,14 +11,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/search_edit_text"
+        <LinearLayout
+            android:id="@+id/search_box"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent"
-            android:hint="@string/where_to_train"
-            android:padding="5dp"
-            />
+            android:padding="10dp"
+            >
+
+            <EditText
+                android:id="@+id/edit_text_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_search_black_24dp"
+                android:hint="@string/e_g_soccer_surfing"
+                />
+
+            <EditText
+                android:id="@+id/edit_text_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_date_range_black_24dp"
+                android:focusable="false"/>
+
+            <EditText
+                android:id="@+id/edit_text_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_location_on_black_24dp"
+                android:hint="@string/training_location"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/search"
+                style="@style/PrimaryButton"/>
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/sports_text"
@@ -30,7 +60,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_edit_text" />
+            app:layout_constraintTop_toBottomOf="@id/search_box" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/sports_recycler"
