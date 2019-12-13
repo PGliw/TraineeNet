@@ -15,7 +15,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/background_image"
+            android:id="@+id/image_left_side"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:contentDescription="@string/trainer_photo"
@@ -26,36 +26,36 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/text_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            app:layout_constraintBottom_toTopOf="@+id/rating"
+            app:layout_constraintBottom_toTopOf="@+id/text_subtitle"
             app:layout_constraintStart_toEndOf="@id/guideline"
             android:layout_marginStart="20dp"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Alex, 21" />
 
         <TextView
-            android:id="@+id/rating"
+            android:id="@+id/text_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            app:layout_constraintBottom_toTopOf="@+id/price"
+            app:layout_constraintBottom_toTopOf="@+id/text_extra"
             app:layout_constraintStart_toEndOf="@id/guideline"
             android:layout_marginStart="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:layout_constraintTop_toBottomOf="@+id/text_title"
             tools:text="5/5" />
 
         <TextView
-            android:id="@+id/price"
+            android:id="@+id/text_extra"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/guideline"
             android:layout_marginStart="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/rating"
+            app:layout_constraintTop_toBottomOf="@+id/text_subtitle"
             tools:text="30$/hour" />
 
         <androidx.constraintlayout.widget.Guideline

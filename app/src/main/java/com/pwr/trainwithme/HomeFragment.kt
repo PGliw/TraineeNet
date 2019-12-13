@@ -27,34 +27,57 @@ class HomeFragment : Fragment(), OnSummarySelectedListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        upcoming_trainings_recycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        upcoming_trainings_recycler.adapter = SummaryAdapter(requireContext(),trainings, this, cardType = SummaryAdapter.MEDIUM)
+        upcoming_trainings_recycler.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        upcoming_trainings_recycler.adapter =
+            SummaryAdapter(requireContext(), trainings, this, cardType = SummaryAdapter.MEDIUM)
 
-        passes_recycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        passes_recycler.adapter = SummaryAdapter(requireContext(), passes, this, SummaryAdapter.WIDE)
+        passes_recycler.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        passes_recycler.adapter =
+            SummaryAdapter(requireContext(), passes, this, SummaryAdapter.WIDE)
     }
 
     override fun onSummarySelected(summary: Summarisable) {
-        when(summary){
-            is Training -> findNavController().navigate(R.id.action_searchFragment_to_appointmentFragment)
-            else -> {} // TODO add pass details fragment and navigation
+        when (summary) {
+            is TrainingFacade -> findNavController().navigate(R.id.action_searchFragment_to_appointmentFragment)
+            else -> {
+            } // TODO add pass details fragment and navigation
         }
     }
 
     val trainings = arrayOf<Summarisable>(
-        Training(Date(), 1.5f, 10, Sport(
-            "Tennis",
-            "https://images.pexels.com/photos/1432039/pexels-photo-1432039.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-        )),
-        Training(Date(), 2.0f, 10, Sport(
-            "Tennis",
-            "https://images.pexels.com/photos/1432039/pexels-photo-1432039.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-        ))
+        TrainingFacade(
+            Training(
+                Date(), 1.5f, 10, Sport(
+                    "Tennis",
+                    "https://images.pexels.com/photos/1432039/pexels-photo-1432039.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                )
+            )
+        ),
+        TrainingFacade(
+            Training(
+                Date(), 2.0f, 10, Sport(
+                    "Tennis",
+                    "https://images.pexels.com/photos/1432039/pexels-photo-1432039.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                )
+            )
+        )
     )
 
     val passes = arrayOf<Summarisable>(
-        Pass("MultiSport", "https://fitness-legionowo.pl/wp-content/uploads/2017/06/MultiSportPlus.jpg"),
-        Pass("FitProfit", "http://www.pcs-belchatow.pl/media/k2/items/cache/e9b0f857826ab994b1b1904c051bbf59_XL.jpg")
+        PassFacade(
+            Pass(
+                "MultiSport",
+                "https://fitness-legionowo.pl/wp-content/uploads/2017/06/MultiSportPlus.jpg"
+            )
+        ),
+        PassFacade(
+            Pass(
+                "FitProfit",
+                "http://www.pcs-belchatow.pl/media/k2/items/cache/e9b0f857826ab994b1b1904c051bbf59_XL.jpg"
+            )
         )
+    )
 
 }

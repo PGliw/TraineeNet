@@ -18,8 +18,9 @@ import kotlinx.android.synthetic.main.fragment_search_results.*
 /**
  * A simple [Fragment] subclass.
  */
-class SearchResultsFragment : Fragment(), OnOfferSelectedListener {
+class SearchResultsFragment : Fragment(), OnItemSelectedListener {
 
+    private val trainers = MockData.trainersDetails
     var sortByIndex = 0
     var filterIndex = 0
 
@@ -35,7 +36,7 @@ class SearchResultsFragment : Fragment(), OnOfferSelectedListener {
         super.onViewCreated(view, savedInstanceState)
 
         offer_recycler.layoutManager = LinearLayoutManager(requireContext())
-        offer_recycler.adapter = OfferAdapter(requireContext(), trainers, this)
+        offer_recycler.adapter = DetailableAdapter(requireContext(), trainers, this, DetailableAdapter.ImageType.CIRCLE)
         offer_recycler.addOnScrollListener(VerticalScrollHider(button_sort, button_filter))
 
         button_sort.setOnClickListener {
@@ -61,53 +62,7 @@ class SearchResultsFragment : Fragment(), OnOfferSelectedListener {
         }
     }
 
-    override fun onOfferSelected(summary: Summarisable) {
+    override fun onItemSelected(summary: Summarisable) {
         findNavController().navigate(R.id.action_searchFragment_to_appointmentFragment)
     }
-
-    val trainers = arrayOf<Offer>(
-        Trainer(
-            "John",
-            "Doe",
-            "https://images.pexels.com/photos/1546139/pexels-photo-1546139.jpeg?cs=srgb&dl=chlopak-czas-wolny-deska-surfingowa-dorosly-1546139.jpg&fm=jpg",
-            "Surfing instructor",
-            20.0f
-        ),
-        Trainer(
-            "Bob",
-            "Smith",
-            "https://images.pexels.com/photos/733500/pexels-photo-733500.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-            "Trainer",
-            30.0f
-        ),
-        Trainer(
-            "John",
-            "Doe",
-            "https://images.pexels.com/photos/1546139/pexels-photo-1546139.jpeg?cs=srgb&dl=chlopak-czas-wolny-deska-surfingowa-dorosly-1546139.jpg&fm=jpg",
-            "Surfing instructor",
-            20.0f
-        ),
-        Trainer(
-            "Bob",
-            "Smith",
-            "https://images.pexels.com/photos/733500/pexels-photo-733500.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-            "Trainer",
-            30.0f
-        ),
-        Trainer(
-            "John",
-            "Doe",
-            "https://images.pexels.com/photos/1546139/pexels-photo-1546139.jpeg?cs=srgb&dl=chlopak-czas-wolny-deska-surfingowa-dorosly-1546139.jpg&fm=jpg",
-            "Surfing instructor",
-            20.0f
-        ),
-        Trainer(
-            "Bob",
-            "Smith",
-            "https://images.pexels.com/photos/733500/pexels-photo-733500.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-            "Trainer",
-            30.0f
-        )
-    )
-
 }

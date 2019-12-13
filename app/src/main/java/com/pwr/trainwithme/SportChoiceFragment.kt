@@ -6,16 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ListAdapter
 import androidx.appcompat.app.AlertDialog
+import androidx.navigation.fragment.findNavController
 import com.smarteist.autoimageslider.IndicatorAnimations
-import kotlinx.android.synthetic.main.fragment_appointment.*
+import kotlinx.android.synthetic.main.fragment_sport_choice.*
 
 /**
  * A simple [Fragment] subclass.
  */
-class AppointmentFragment : Fragment() {
+class SportChoiceFragment : Fragment() {
 
     var sportIndex = 0
     var timeOptionIndex = 0
@@ -26,7 +25,7 @@ class AppointmentFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_appointment, container, false)
+        return inflater.inflate(R.layout.fragment_sport_choice, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,38 +34,22 @@ class AppointmentFragment : Fragment() {
         imageSlider.setIndicatorAnimation(IndicatorAnimations.DROP)
 
         button_sport.setOnClickListener {
-            val builder = AlertDialog.Builder(requireContext())
-                .setTitle(R.string.sport_discipline)
-                .setSingleChoiceItems(sports, sportIndex) { dialog, which ->
-                    sportIndex = which
-                    dialog.dismiss()
-                }
-            builder.create().show()
+            renderSportChoice()
         }
 
-        // TODO: button_date -> navigate to calendar fragment
-
-        button_time.setOnClickListener {
-            val builder = AlertDialog.Builder(requireContext())
-                .setTitle(R.string.duration)
-                .setSingleChoiceItems(timeOptions, timeOptionIndex) { dialog, which ->
-                    timeOptionIndex = which
-                    dialog.dismiss()
-                }
-            builder.create().show()
+        button_sport_fragment_next.setOnClickListener {
+            findNavController().navigate(R.id.action_appointmentFragment_to_dateChoiceFragment)
         }
+    }
 
-        /* TODO: change listener to open location fragment to pick up one place of given in the list and return it to this fragment
-         */
-        button_training_location.setOnClickListener {
-            val builder = AlertDialog.Builder(requireContext())
-                .setTitle(R.string.location)
-                .setSingleChoiceItems(locations, locationIndex) { dialog, which ->
-                    locationIndex = which
-                    dialog.dismiss()
-                }
-            builder.create().show()
-        }
+    private fun renderSportChoice(){
+        val builder = AlertDialog.Builder(requireContext())
+            .setTitle(R.string.sport_discipline)
+            .setSingleChoiceItems(sports, sportIndex) { dialog, which ->
+                sportIndex = which
+                dialog.dismiss()
+            }
+        builder.create().show()
     }
 
     val imagesUrls = arrayOf(

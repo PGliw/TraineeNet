@@ -1,7 +1,6 @@
 package com.pwr.trainwithme
 
 import android.content.Context
-import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,9 +14,9 @@ import com.smarteist.autoimageslider.SliderViewAdapter
 
 class SummaryAdapter(
     private val context: Context,
-    summaries : Array<Summarisable>,
-    val onSummarySelectedListener: OnSummarySelectedListener,
-    val cardType : Int = THIN
+    summaries: Array<out Summarisable>,
+    private val onSummarySelectedListener: OnSummarySelectedListener,
+    private val cardType: Int = THIN
 ) : RecyclerView.Adapter<SummaryAdapter.SummaryCardViewHolder>() {
 
     companion object CardType {
@@ -27,13 +26,14 @@ class SummaryAdapter(
     }
 
     var summaries = summaries
-    set(value) {
-        field = value
-        notifyDataSetChanged()
-    }
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SummaryCardViewHolder {
-        val cardView = LayoutInflater.from(parent.context).inflate(cardType, parent, false) as CardView
+        val cardView =
+            LayoutInflater.from(parent.context).inflate(cardType, parent, false) as CardView
         return SummaryCardViewHolder(cardView)
     }
 
@@ -42,83 +42,102 @@ class SummaryAdapter(
     override fun onBindViewHolder(holder: SummaryCardViewHolder, position: Int) {
         holder.title.text = summaries[position].title
         val glideOptions = RequestOptions().apply { centerCrop() }
-        Glide.with(context).load(summaries[position].imageUrl).apply(glideOptions).into(holder.image)
-        holder.cardView.setOnClickListener{
+        Glide.with(context).load(summaries[position].imageUrl).apply(glideOptions)
+            .into(holder.image)
+        holder.cardView.setOnClickListener {
             onSummarySelectedListener.onSummarySelected(summaries[position])
         }
     }
 
-    class SummaryCardViewHolder(val cardView: CardView) : RecyclerView.ViewHolder(cardView){
-        val image: ImageView = cardView.findViewById(R.id.background_image)
-        val title: TextView = cardView.findViewById(R.id.title)
+    class SummaryCardViewHolder(val cardView: CardView) : RecyclerView.ViewHolder(cardView) {
+        val image: ImageView = cardView.findViewById(R.id.image_left_side)
+        val title: TextView = cardView.findViewById(R.id.text_title)
     }
 }
 
-interface OnSummarySelectedListener{
-    fun onSummarySelected(summary : Summarisable)
+interface OnSummarySelectedListener {
+    fun onSummarySelected(summary: Summarisable)
 }
 
-class OfferAdapter(
+class DetailableAdapter(
     private val context: Context,
-    offers : Array<Offer>,
-    val onOfferSelectedListener: OnOfferSelectedListener
-) : RecyclerView.Adapter<OfferAdapter.OfferCardViewHolder>() {
+    items: Array<out Detailable>,
+    private val onItemSelectedListener: OnItemSelectedListener,
+    private val imageType: ImageType = ImageType.SQUARE
+) : RecyclerView.Adapter<DetailableAdapter.DetailedCardViewHolder>() {
 
 
-    var offers = offers
+    enum class ImageType{ CIRCLE, SQUARE }
+
+    var items = items
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OfferCardViewHolder{
-        val cardView = LayoutInflater.from(parent.context).inflate(R.layout.offer_card, parent, false) as CardView
-        return OfferCardViewHolder(cardView)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailedCardViewHolder {
+        val cardView = LayoutInflater.from(parent.context).inflate(
+            myLayout,
+            parent,
+            false
+        ) as CardView
+        return DetailedCardViewHolder(cardView)
     }
 
-    override fun getItemCount(): Int = offers.size
+    override fun getItemCount(): Int = items.size
 
-    override fun onBindViewHolder(holder: OfferCardViewHolder, position: Int) {
-        holder.title.text = offers[position].title
-        holder.rating.text = offers[position].rating.toString()
-        holder.price.text = offers[position].price
-        val glideOptions = RequestOptions.circleCropTransform()
-        Glide.with(context).load(offers[position].imageUrl).apply(glideOptions).into(holder.image)
-        holder.cardView.setOnClickListener{
-            onOfferSelectedListener.onOfferSelected(offers[position])
+    override fun onBindViewHolder(holder: DetailedCardViewHolder, position: Int) {
+        holder.title.text = items[position].title
+        holder.rating.text = items[position].rating.toString()
+        holder.price?.text = items[position].price
+        val glideOptions = when(imageType){
+            ImageType.CIRCLE -> RequestOptions.circleCropTransform()
+            else -> RequestOptions()
+        }
+        Glide.with(context).load(items[position].imageUrl).apply(glideOptions).into(holder.image)
+        holder.cardView.setOnClickListener {
+            onItemSelectedListener.onItemSelected(items[position])
         }
     }
 
-    class OfferCardViewHolder(val cardView: CardView) : RecyclerView.ViewHolder(cardView){
-        val image: ImageView = cardView.findViewById(R.id.background_image)
-        val title: TextView = cardView.findViewById(R.id.title)
-        val rating: TextView = cardView.findViewById(R.id.rating)
-        val price: TextView = cardView.findViewById(R.id.price)
+    private val myLayout: Int
+        get() = if (items.isNotEmpty()) {
+            when (items[0]) {
+                is TrainerOfferFacade -> R.layout.offer_card
+                else -> R.layout.centre_card
+            }
+        } else R.layout.centre_card
 
+    class DetailedCardViewHolder(val cardView: CardView) : RecyclerView.ViewHolder(cardView) {
+        val image: ImageView = cardView.findViewById(R.id.image_left_side)
+        val title: TextView = cardView.findViewById(R.id.text_title)
+        val rating: TextView = cardView.findViewById(R.id.text_subtitle)
+        val price: TextView? = cardView.findViewById(R.id.text_extra)
     }
 }
 
-interface OnOfferSelectedListener{
-    fun onOfferSelected(summary : Summarisable)
+interface OnItemSelectedListener {
+    fun onItemSelected(summary: Summarisable)
 }
 
 class SliderAdapter(
     private val context: Context,
-    private val imagesUrls : Array<String>)
-    : SliderViewAdapter<SliderAdapter.SlideViewHolder>(){
+    private val imagesUrls: Array<out String>
+) : SliderViewAdapter<SliderAdapter.SlideViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup): SlideViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.image_slide, parent, false)
         return SlideViewHolder(view)
     }
+
     override fun onBindViewHolder(viewHolder: SlideViewHolder, position: Int) {
         Glide.with(context)
             .load(imagesUrls[position])
             .into(viewHolder.image)
     }
+
     override fun getCount(): Int = imagesUrls.size
 
-    class SlideViewHolder(itemView: View) : SliderViewAdapter.ViewHolder(itemView){
-        val image : ImageView= itemView.findViewById(R.id.slide_image)
+    class SlideViewHolder(itemView: View) : SliderViewAdapter.ViewHolder(itemView) {
+        val image: ImageView = itemView.findViewById(R.id.slide_image)
     }
-
 }

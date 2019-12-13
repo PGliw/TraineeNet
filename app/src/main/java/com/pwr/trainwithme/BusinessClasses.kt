@@ -8,47 +8,69 @@ interface Summarisable{
     val imageUrl : String
 }
 
-interface Offer : Summarisable {
-    val price : String
+interface Detailable : Summarisable {
+    val price : String?
     val rating : Float
 }
 
-interface Contactable{
-    val phone: String
-    val email: String
+class TrainerOfferFacade(private val trainer: Trainer) : Detailable{
+    override val title: String
+        get() = trainer.name
+    override val imageUrl: String
+        get() = trainer.imagesUrls[0]
+    override val price: String
+        get() = trainer.pricePerHour.toString()
+    override val rating: Float
+        get() = trainer.rating
 }
 
 class Trainer(
     val name: String,
     val surname: String,
-    override val imageUrl: String,
     val description: String,
+    val email: String,
+    val phone: String,
     val pricePerHour: Float,
-    override val rating: Float = 0f
-) : Offer {
-    override val title
-    get() = name
+    val rating: Float = 0f,
+    val imagesUrls: Array<String>
+)
 
-    override val price
-    get() = pricePerHour.toString()
-
+class SportFacade(private val sport: Sport) : Summarisable{
+    override val title: String
+        get() = sport.name
+    override val imageUrl: String
+        get() = sport.imageUrl
 
 }
 
 class Sport(
     val name: String,
+    val imageUrl: String
+)
+
+class SportCentreFacade(private val sportCentre : SportCentre) : Detailable {
+    override val title: String
+        get() = sportCentre.name
     override val imageUrl: String
-) : Summarisable {
-    override val title
-    get() = name
+        get() = sportCentre.imageUrl
+    override val price: String?
+        get() = null
+    override val rating: Float
+        get() = sportCentre.rating
+
 }
 
-class SportObject(
+class SportCentre(
     val name: String,
+    val imageUrl: String,
+    val rating: Float
+)
+
+class TrainingFacade(private val training: Training) : Summarisable{
+    override val title: String
+        get() = training.sport.name
     override val imageUrl: String
-) : Summarisable {
-    override val title
-    get() = name
+        get() = training.sport.imageUrl
 }
 
 class Training(
@@ -56,24 +78,18 @@ class Training(
     val duration: Float,
     val maxTrainees: Int,
     val sport: Sport
-) : Summarisable {
-    override val title: String
-        get() = "${sport.name}, $startDate "
-
-    override val imageUrl: String
-        get() = sport.imageUrl
-}
-
-class Reading(
-    val name: String,
-    val value: Float,
-    val unit: String
 )
+
+class PassFacade(private val pass: Pass) : Summarisable{
+    override val title: String
+        get() = pass.name
+    override val imageUrl: String
+        get() = pass.imageUrl
+}
 
 class Pass(
     val name: String,
-    override val imageUrl: String
-) : Summarisable{
-    override val title: String
-    get() = name
-}
+    val imageUrl: String
+)
+
+

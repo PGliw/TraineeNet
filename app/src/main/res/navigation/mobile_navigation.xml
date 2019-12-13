@@ -38,12 +38,30 @@
     </fragment>
     <fragment
         android:id="@+id/appointmentFragment"
-        android:name="com.pwr.trainwithme.AppointmentFragment"
+        android:name="com.pwr.trainwithme.SportChoiceFragment"
         android:label="fragment_appointment"
-        tools:layout="@layout/fragment_appointment" />
+        tools:layout="@layout/fragment_sport_choice" >
+        <action
+            android:id="@+id/action_appointmentFragment_to_dateChoiceFragment"
+            app:destination="@id/dateChoiceFragment" />
+    </fragment>
     <fragment
         android:id="@+id/trainingFragment"
         android:name="com.pwr.trainwithme.TrainingFragment"
         android:label="fragment_training"
         tools:layout="@layout/fragment_training" />
+    <fragment
+        android:id="@+id/centreChoiceFragment"
+        android:name="com.pwr.trainwithme.CentreChoiceFragment"
+        android:label="fragment_centre_choice"
+        tools:layout="@layout/fragment_centre_choice" />
+    <fragment
+        android:id="@+id/dateChoiceFragment"
+        android:name="com.pwr.trainwithme.DateChoiceFragment"
+        android:label="fragment_date_choice"
+        tools:layout="@layout/fragment_date_choice" >
+        <action
+            android:id="@+id/action_dateChoiceFragment_to_centreChoiceFragment"
+            app:destination="@id/centreChoiceFragment" />
+    </fragment>
 </navigation>
