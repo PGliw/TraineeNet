@@ -2,23 +2,20 @@ package com.pwr.trainwithme
 
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModel
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.pwr.trainwithme.adapters.DetailableAdapter
 import kotlinx.android.synthetic.main.fragment_search_results.*
 
 /**
  * A simple [Fragment] subclass.
  */
-class SearchResultsFragment : Fragment(), OnItemSelectedListener {
+class SearchResultsFragment : Fragment(), DetailableAdapter.OnItemSelectedListener {
 
     private val trainers = MockData.trainersDetails
     var sortByIndex = 0

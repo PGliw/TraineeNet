@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
+import com.pwr.trainwithme.adapters.SliderAdapter
 import com.smarteist.autoimageslider.IndicatorAnimations
 import kotlinx.android.synthetic.main.fragment_sport_choice.*
 

@@ -8,13 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.pwr.trainwithme.adapters.SummaryAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.*
 
 /**
  * A simple [Fragment] subclass.
  */
-class HomeFragment : Fragment(), OnSummarySelectedListener {
+class HomeFragment : Fragment(), SummaryAdapter.OnSummarySelectedListener {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,12 +31,22 @@ class HomeFragment : Fragment(), OnSummarySelectedListener {
         upcoming_trainings_recycler.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         upcoming_trainings_recycler.adapter =
-            SummaryAdapter(requireContext(), trainings, this, cardType = SummaryAdapter.MEDIUM)
+            SummaryAdapter(
+                requireContext(),
+                trainings,
+                this,
+                cardType = SummaryAdapter.MEDIUM
+            )
 
         passes_recycler.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         passes_recycler.adapter =
-            SummaryAdapter(requireContext(), passes, this, SummaryAdapter.WIDE)
+            SummaryAdapter(
+                requireContext(),
+                passes,
+                this,
+                SummaryAdapter.WIDE
+            )
     }
 
     override fun onSummarySelected(summary: Summarisable) {

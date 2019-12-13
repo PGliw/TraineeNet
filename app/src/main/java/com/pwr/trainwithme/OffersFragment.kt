@@ -10,11 +10,12 @@ import android.widget.DatePicker
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.pwr.trainwithme.adapters.SummaryAdapter
 import kotlinx.android.synthetic.main.fragment_offers.*
 import java.util.*
 
 
-class OffersFragment : Fragment(), OnSummarySelectedListener, DatePickerDialog.OnDateSetListener {
+class OffersFragment : Fragment(), SummaryAdapter.OnSummarySelectedListener, DatePickerDialog.OnDateSetListener {
 
     private val calendar = Calendar.getInstance()
     private val sports = MockData.sportsSummaries
@@ -35,14 +36,25 @@ class OffersFragment : Fragment(), OnSummarySelectedListener, DatePickerDialog.O
         sports_recycler.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         sports_recycler.adapter =
-            SummaryAdapter(requireContext(), sports, this, SummaryAdapter.MEDIUM)
+            SummaryAdapter(
+                requireContext(),
+                sports,
+                this,
+                SummaryAdapter.MEDIUM
+            )
         trainers_recycler.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        trainers_recycler.adapter = SummaryAdapter(requireContext(), trainers, this)
+        trainers_recycler.adapter =
+            SummaryAdapter(requireContext(), trainers, this)
         objects_recycler.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         objects_recycler.adapter =
-            SummaryAdapter(requireContext(), sportCentres, this, SummaryAdapter.MEDIUM)
+            SummaryAdapter(
+                requireContext(),
+                sportCentres,
+                this,
+                SummaryAdapter.MEDIUM
+            )
 
         edit_text_date.setOnClickListener {
             DatePickerDialog(
