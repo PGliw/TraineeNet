@@ -33,7 +33,7 @@ class SearchResultsFragment : Fragment(), DetailableAdapter.OnItemSelectedListen
         super.onViewCreated(view, savedInstanceState)
 
         offer_recycler.layoutManager = LinearLayoutManager(requireContext())
-        offer_recycler.adapter = DetailableAdapter(requireContext(), trainers, this, DetailableAdapter.ImageType.CIRCLE)
+        offer_recycler.adapter = DetailableAdapter(requireContext(), trainers, this, null, DetailableAdapter.ImageType.CIRCLE)
         offer_recycler.addOnScrollListener(VerticalScrollHider(button_sort, button_filter))
 
         button_sort.setOnClickListener {
@@ -59,7 +59,7 @@ class SearchResultsFragment : Fragment(), DetailableAdapter.OnItemSelectedListen
         }
     }
 
-    override fun onItemSelected(summary: Summarisable) {
+    override fun onItemSelected(detailable: Detailable) {
         findNavController().navigate(R.id.action_searchFragment_to_appointmentFragment)
     }
 }

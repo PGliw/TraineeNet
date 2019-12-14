@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pwr.trainwithme.adapters.DetailableAdapter
 import kotlinx.android.synthetic.main.fragment_centre_choice.*
@@ -14,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_centre_choice.*
 /**
  * A simple [Fragment] subclass.
  */
-class CentreChoiceFragment : Fragment(), DetailableAdapter.OnItemSelectedListener {
+class CentreChoiceFragment : Fragment(), DetailableAdapter.OnItemSelectedListener, DetailableAdapter.OnMoreInfoListener {
 
     companion object{
         const val TAG = "CentreChoiceFragment"
@@ -32,11 +33,15 @@ class CentreChoiceFragment : Fragment(), DetailableAdapter.OnItemSelectedListene
         super.onViewCreated(view, savedInstanceState)
         recycler_centre_choice_fragment_centres.layoutManager = LinearLayoutManager(requireContext())
         recycler_centre_choice_fragment_centres.adapter = DetailableAdapter(
-            requireContext(), MockData.centresDetails, this
+            requireContext(), MockData.centresDetails, this, this
         )
     }
 
-    override fun onItemSelected(summary: Summarisable) {
+    override fun onItemSelected(detailable: Detailable) {
+        findNavController().navigate(R.id.action_centreChoiceFragment_to_proposalConclusionFragment)
+    }
+
+    override fun onMoreInfo(detailable: Detailable) {
         Log.i(TAG, "onItemSelected()")
     }
 

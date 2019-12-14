@@ -54,7 +54,11 @@
         android:id="@+id/centreChoiceFragment"
         android:name="com.pwr.trainwithme.CentreChoiceFragment"
         android:label="fragment_centre_choice"
-        tools:layout="@layout/fragment_centre_choice" />
+        tools:layout="@layout/fragment_centre_choice" >
+        <action
+            android:id="@+id/action_centreChoiceFragment_to_proposalConclusionFragment"
+            app:destination="@id/proposalConclusionFragment" />
+    </fragment>
     <fragment
         android:id="@+id/dateChoiceFragment"
         android:name="com.pwr.trainwithme.DateChoiceFragment"
@@ -63,5 +67,15 @@
         <action
             android:id="@+id/action_dateChoiceFragment_to_centreChoiceFragment"
             app:destination="@id/centreChoiceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/proposalConclusionFragment"
+        android:name="com.pwr.trainwithme.ProposalConclusionFragment"
+        android:label="fragment_proposal_conclusion"
+        tools:layout="@layout/fragment_proposal_conclusion" >
+        <action
+            android:id="@+id/action_proposalConclusionFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@+id/offersFragment" />
     </fragment>
 </navigation>

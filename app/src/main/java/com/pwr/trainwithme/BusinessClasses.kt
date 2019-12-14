@@ -9,11 +9,11 @@ interface Summarisable{
 }
 
 interface Detailable : Summarisable {
-    val price : String?
     val rating : Float
+    val price : String?
 }
 
-class TrainerOfferFacade(private val trainer: Trainer) : Detailable{
+class TrainerVM(private val trainer: Trainer) : Detailable{
     override val title: String
         get() = trainer.name
     override val imageUrl: String
@@ -48,7 +48,7 @@ class Sport(
     val imageUrl: String
 )
 
-class SportCentreFacade(private val sportCentre : SportCentre) : Detailable {
+class SportVM(private val sportCentre : SportCentre) : Detailable {
     override val title: String
         get() = sportCentre.name
     override val imageUrl: String
@@ -66,7 +66,7 @@ class SportCentre(
     val rating: Float
 )
 
-class TrainingFacade(private val training: Training) : Summarisable{
+class TrainingVM(private val training: Training) : Summarisable{
     override val title: String
         get() = training.sport.name
     override val imageUrl: String
@@ -80,7 +80,7 @@ class Training(
     val sport: Sport
 )
 
-class PassFacade(private val pass: Pass) : Summarisable{
+class PassVM(private val pass: Pass) : Summarisable{
     override val title: String
         get() = pass.name
     override val imageUrl: String

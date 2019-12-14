@@ -47,6 +47,17 @@
         app:layout_constraintTop_toBottomOf="@id/name"
         tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur" />
 
+    <TextView
+        style="@style/TextAppearance.AppCompat.Large"
+        android:id="@+id/text_fragment_sport_choice_cost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/button_sport"
+        app:layout_constraintStart_toStartOf="@id/button_sport"
+        app:layout_constraintBottom_toTopOf="@id/button_sport"
+        tools:text="Price: $21" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_sport"
         style="@style/SecondaryButton"

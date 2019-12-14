@@ -65,6 +65,17 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.33" />
 
+        <ImageButton
+            style="@style/SecondaryButton"
+            android:src="@drawable/ic_info_black_24dp"
+            android:id="@+id/button_info_offer_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/more_info_button" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

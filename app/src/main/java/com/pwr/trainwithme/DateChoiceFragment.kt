@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_date_choice.*
@@ -13,7 +14,9 @@ import kotlinx.android.synthetic.main.fragment_date_choice.*
 /**
  * A simple [Fragment] subclass.
  */
-class DateChoiceFragment : Fragment() {
+class DateChoiceFragment : Fragment(), AdapterView.OnItemClickListener {
+
+    private val timeSlots =  MockData.timeSlots
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,8 +28,10 @@ class DateChoiceFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1, timeslots)
+        val adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1, timeSlots)
         list_date_choice_fragment_dates.adapter = adapter
+
+        list_date_choice_fragment_dates.onItemClickListener = this
 
         button_date_choice_fragment_back.setOnClickListener {
             findNavController().navigateUp()
@@ -36,6 +41,8 @@ class DateChoiceFragment : Fragment() {
         }
     }
 
-    val timeslots =  arrayOf("12:00 - 13:30", "13:30 - 15:00", "15:00 - 16:30")
+    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        findNavController().navigate(R.id.action_dateChoiceFragment_to_centreChoiceFragment)
+    }
 
 }

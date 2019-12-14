@@ -2,20 +2,18 @@ package com.pwr.trainwithme
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pwr.trainwithme.adapters.SummaryAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
-import java.util.*
 
-/**
- * A simple [Fragment] subclass.
- */
 class HomeFragment : Fragment(), SummaryAdapter.OnSummarySelectedListener {
+
+    private val trainings = MockData.trainingsSummaries
+    private val passes = MockData.passesSummaries
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,45 +48,6 @@ class HomeFragment : Fragment(), SummaryAdapter.OnSummarySelectedListener {
     }
 
     override fun onSummarySelected(summary: Summarisable) {
-        when (summary) {
-            is TrainingFacade -> findNavController().navigate(R.id.action_searchFragment_to_appointmentFragment)
-            else -> {
-            } // TODO add pass details fragment and navigation
-        }
+        // TODO implement
     }
-
-    val trainings = arrayOf<Summarisable>(
-        TrainingFacade(
-            Training(
-                Date(), 1.5f, 10, Sport(
-                    "Tennis",
-                    "https://images.pexels.com/photos/1432039/pexels-photo-1432039.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-                )
-            )
-        ),
-        TrainingFacade(
-            Training(
-                Date(), 2.0f, 10, Sport(
-                    "Tennis",
-                    "https://images.pexels.com/photos/1432039/pexels-photo-1432039.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-                )
-            )
-        )
-    )
-
-    val passes = arrayOf<Summarisable>(
-        PassFacade(
-            Pass(
-                "MultiSport",
-                "https://fitness-legionowo.pl/wp-content/uploads/2017/06/MultiSportPlus.jpg"
-            )
-        ),
-        PassFacade(
-            Pass(
-                "FitProfit",
-                "http://www.pcs-belchatow.pl/media/k2/items/cache/e9b0f857826ab994b1b1904c051bbf59_XL.jpg"
-            )
-        )
-    )
-
 }
