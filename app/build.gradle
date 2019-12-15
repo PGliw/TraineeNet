@@ -61,11 +61,9 @@ dependencies {
     /**
      * Lifecycle scopes for coroutines
      */
-    // ViewModelScope
-    //implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-rc03'
     // LifecycleScope
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0-rc03'
     // LiveData
-
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0-rc03'
 
 }
