@@ -22,6 +22,7 @@ class TrainerVM(private val trainer: Trainer) : Detailable{
         get() = trainer.pricePerHour.toString()
     override val rating: Float
         get() = trainer.rating
+    var onClick: () -> Unit = {}
 }
 
 class Trainer(
@@ -35,12 +36,11 @@ class Trainer(
     val imagesUrls: Array<String>
 )
 
-class SportFacade(private val sport: Sport) : Summarisable{
+class SportVM(private val sport: Sport): Summarisable{
     override val title: String
         get() = sport.name
     override val imageUrl: String
         get() = sport.imageUrl
-
 }
 
 class Sport(
@@ -48,7 +48,7 @@ class Sport(
     val imageUrl: String
 )
 
-class SportVM(private val sportCentre : SportCentre) : Detailable {
+class SportCentreVM(private val sportCentre : SportCentre) : Detailable {
     override val title: String
         get() = sportCentre.name
     override val imageUrl: String
@@ -74,11 +74,25 @@ class TrainingVM(private val training: Training) : Summarisable{
 }
 
 class Training(
+    val trainer: Trainer,
     val startDate: Date,
-    val duration: Float,
+    val endDate: Date,
+    val centre: SportCentre,
     val maxTrainees: Int,
-    val sport: Sport
-)
+    val sport: Sport,
+    val totalPrice: Float,
+    val status: Status
+){
+    enum class Status{
+        NOT_DEFINED,
+        PROPOSED,
+        DENIED,
+        ACCEPTED,
+        CANCELLED,
+        IN_PROGRESS,
+        FINISHED
+    }
+}
 
 class PassVM(private val pass: Pass) : Summarisable{
     override val title: String

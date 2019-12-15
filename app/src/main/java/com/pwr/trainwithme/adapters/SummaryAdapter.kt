@@ -14,7 +14,7 @@ import com.pwr.trainwithme.Summarisable
 
 class SummaryAdapter(
     private val context: Context,
-    summaries: Array<out Summarisable>,
+    summaries: List<Summarisable>,
     private val onSummarySelectedListener: OnSummarySelectedListener,
     private val cardType: Int = THIN
 ) : RecyclerView.Adapter<SummaryAdapter.SummaryCardViewHolder>() {

@@ -18,7 +18,7 @@ import com.pwr.trainwithme.TrainerVM
 
 class DetailableAdapter(
     private val context: Context,
-    items: Array<out Detailable>,
+    items: List<Detailable>,
     private val onItemSelectedListener: OnItemSelectedListener,
     private val onMoreInfoListener: OnMoreInfoListener? = null,
     private val imageType: ImageType = ImageType.SQUARE

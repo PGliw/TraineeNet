@@ -3,11 +3,15 @@ package com.pwr.trainwithme
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pwr.trainwithme.adapters.SummaryAdapter
@@ -16,6 +20,14 @@ import java.util.*
 
 
 class OffersFragment : Fragment(), SummaryAdapter.OnSummarySelectedListener, DatePickerDialog.OnDateSetListener {
+
+    companion object{
+        const val TAG = "OffersFragment"
+    }
+
+    private val proposalViewModel : TrainingProposalViewModel by lazy {
+        ViewModelProviders.of(requireActivity())[TrainingProposalViewModel::class.java]
+    }
 
     private val calendar = Calendar.getInstance()
     private val sports = MockData.sportsSummaries
@@ -35,13 +47,20 @@ class OffersFragment : Fragment(), SummaryAdapter.OnSummarySelectedListener, Dat
 
         sports_recycler.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        sports_recycler.adapter =
-            SummaryAdapter(
-                requireContext(),
-                sports,
-                this,
-                SummaryAdapter.MEDIUM
-            )
+        val sportsAdapter = SummaryAdapter(
+            requireContext(),
+            listOf(),
+            this,
+            SummaryAdapter.MEDIUM
+        )
+        sports_recycler.adapter = sportsAdapter
+        proposalViewModel.sportsSummaries.observe(viewLifecycleOwner,
+            Observer<List<Summarisable>> { observedSportSummaries ->
+                sportsAdapter.summaries = observedSportSummaries
+                Log.d(TAG, observedSportSummaries.toString())
+                Log.d(TAG,sportsAdapter.summaries.toString())
+            })
+
         trainers_recycler.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         trainers_recycler.adapter =
@@ -68,7 +87,7 @@ class OffersFragment : Fragment(), SummaryAdapter.OnSummarySelectedListener, Dat
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // TODO set date in view model
     }
 
     override fun onSummarySelected(summary: Summarisable) {
