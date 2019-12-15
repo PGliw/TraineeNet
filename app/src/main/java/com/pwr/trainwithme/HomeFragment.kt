@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.pwr.trainwithme.adapters.SummaryAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 
-class HomeFragment : Fragment(), SummaryAdapter.OnSummarySelectedListener {
+class HomeFragment : Fragment(){
 
     private val trainings = MockData.trainingsSummaries
     private val passes = MockData.passesSummaries
@@ -32,7 +32,7 @@ class HomeFragment : Fragment(), SummaryAdapter.OnSummarySelectedListener {
             SummaryAdapter(
                 requireContext(),
                 trainings,
-                this,
+                {}, // TODO implement
                 cardType = SummaryAdapter.MEDIUM
             )
 
@@ -42,12 +42,9 @@ class HomeFragment : Fragment(), SummaryAdapter.OnSummarySelectedListener {
             SummaryAdapter(
                 requireContext(),
                 passes,
-                this,
+                {}, // TODO implement
                 SummaryAdapter.WIDE
             )
     }
 
-    override fun onSummarySelected(summary: Summarisable) {
-        // TODO implement
-    }
 }

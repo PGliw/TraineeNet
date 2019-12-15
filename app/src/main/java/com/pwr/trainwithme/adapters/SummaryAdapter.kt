@@ -15,7 +15,7 @@ import com.pwr.trainwithme.Summarisable
 class SummaryAdapter(
     private val context: Context,
     summaries: List<Summarisable>,
-    private val onSummarySelectedListener: OnSummarySelectedListener,
+    private val onSummarySelected: (Summarisable) -> Unit,
     private val cardType: Int = THIN
 ) : RecyclerView.Adapter<SummaryAdapter.SummaryCardViewHolder>() {
 
@@ -45,7 +45,7 @@ class SummaryAdapter(
         Glide.with(context).load(summaries[position].imageUrl).apply(glideOptions)
             .into(holder.image)
         holder.cardView.setOnClickListener {
-            onSummarySelectedListener.onSummarySelected(summaries[position])
+            onSummarySelected(summaries[position])
         }
     }
 
@@ -54,13 +54,6 @@ class SummaryAdapter(
         val title: TextView = cardView.findViewById(R.id.text_title)
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return super.getItemViewType(position)
-    }
-
-    interface OnSummarySelectedListener {
-        fun onSummarySelected(summary: Summarisable)
-    }
 }
 
 

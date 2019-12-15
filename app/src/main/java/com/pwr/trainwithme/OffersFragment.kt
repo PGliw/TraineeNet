@@ -10,20 +10,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.*
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pwr.trainwithme.adapters.SummaryAdapter
 import kotlinx.android.synthetic.main.fragment_offers.*
+import java.text.DateFormat
 import java.util.*
 
 
-class OffersFragment : Fragment(), SummaryAdapter.OnSummarySelectedListener,
-    DatePickerDialog.OnDateSetListener {
+class OffersFragment : Fragment(), DatePickerDialog.OnDateSetListener {
 
     companion object {
         const val TAG = "OffersFragment"
@@ -34,9 +32,6 @@ class OffersFragment : Fragment(), SummaryAdapter.OnSummarySelectedListener,
     }
 
     private val calendar = Calendar.getInstance()
-    private val sports = MockData.sportsSummaries
-    private val trainers = MockData.trainersSummaries
-    private val sportCentres = MockData.centresSummaries
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,16 +45,25 @@ class OffersFragment : Fragment(), SummaryAdapter.OnSummarySelectedListener,
         super.onViewCreated(view, savedInstanceState)
 
         sports_recycler.initAndObserve(
-            requireContext(), this, proposalViewModel.sportsSummaries, SummaryAdapter.MEDIUM
-        )
+            requireContext(), viewLifecycleOwner,proposalViewModel.sportsSummaries, SummaryAdapter.MEDIUM
+        ){
+            proposalViewModel.sportID = it.id
+            navigateNext()
+        }
 
         trainers_recycler.initAndObserve(
-            requireContext(), this, proposalViewModel.trainersSummaries, SummaryAdapter.THIN
-        )
+            requireContext(), viewLifecycleOwner, proposalViewModel.trainersSummaries, SummaryAdapter.THIN
+        ){
+            proposalViewModel.trainerID = it.id
+            navigateNext()
+        }
 
         objects_recycler.initAndObserve(
-            requireContext(), this, proposalViewModel.centresSummaries, SummaryAdapter.MEDIUM
-        )
+            requireContext(), viewLifecycleOwner, proposalViewModel.centresSummaries, SummaryAdapter.MEDIUM
+        ){
+            proposalViewModel.centreID = it.id
+            navigateNext()
+        }
 
         proposalViewModel.day.observe(viewLifecycleOwner, Observer { observedDate ->
             calendar.time = observedDate
@@ -72,8 +76,13 @@ class OffersFragment : Fragment(), SummaryAdapter.OnSummarySelectedListener,
                 calendar[Calendar.YEAR],
                 calendar[Calendar.MONTH],
                 calendar[Calendar.DAY_OF_MONTH]
-            ).show() // show dialog
+            ).show()
         }
+
+        proposalViewModel.day.observe(viewLifecycleOwner, Observer {
+            val dateFormat: DateFormat = DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault())
+            edit_text_date.setText(dateFormat.format(it))
+        })
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
@@ -84,22 +93,23 @@ class OffersFragment : Fragment(), SummaryAdapter.OnSummarySelectedListener,
         }.time
     }
 
-    override fun onSummarySelected(summary: Summarisable) {
+    private fun navigateNext(){
         findNavController().navigate(R.id.action_offersFragment_to_searchFragment)
     }
 
     private fun RecyclerView.initAndObserve(
         context: Context,
-        onSummarySelectedListener: SummaryAdapter.OnSummarySelectedListener,
+        lifecycleOwner: LifecycleOwner,
         summaryLiveData: LiveData<List<Summarisable>>,
-        cardType: Int
-    ) {
+        cardType: Int,
+        onSummarySelected: (Summarisable) -> Unit
+        ) {
         layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         val summaryAdapter = SummaryAdapter(
-            requireContext(), listOf(), onSummarySelectedListener, cardType
+            requireContext(), listOf(), onSummarySelected, cardType
         )
         adapter = summaryAdapter
-        summaryLiveData.observe(viewLifecycleOwner, Observer {
+        summaryLiveData.observe(lifecycleOwner, Observer {
             summaryAdapter.summaries = it
         })
     }

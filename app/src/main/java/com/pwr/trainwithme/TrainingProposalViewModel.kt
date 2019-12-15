@@ -11,7 +11,9 @@ class TrainingProposalViewModel : ViewModel() {
     val day = MutableLiveData<Date>(Date())
     var startDate: Date? = null
     var endDate: Date? = null
-    var trainer: Trainer? = null
+    var trainerID: String? = null
+    var sportID: String? = null
+    var centreID: String? = null
 
 
     // TODO timeSlots
@@ -39,5 +41,10 @@ class TrainingProposalViewModel : ViewModel() {
     val centresSummaries: LiveData<List<Summarisable>> = Transformations.map(centres) {
         it.map { sportCentre -> SportCentreVM(sportCentre) }
     }
+
+    fun getSports(locationID: String?){}
+    fun getTrainers(locationID: String?){}
+    fun getCentres(locationID: String?){}
+    fun postTraining(trainingDTO : String){} // TODO request
 
 }

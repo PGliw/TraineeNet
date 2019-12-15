@@ -1,9 +1,9 @@
 package com.pwr.trainwithme
 
-import java.time.Duration
 import java.util.*
 
 interface Summarisable{
+    val id: String
     val title : String
     val imageUrl : String
 }
@@ -14,6 +14,8 @@ interface Detailable : Summarisable {
 }
 
 class TrainerVM(private val trainer: Trainer) : Detailable{
+    override val id: String
+        get() = trainer.name // TODO change to Trainer.id
     override val title: String
         get() = trainer.name
     override val imageUrl: String
@@ -37,6 +39,8 @@ class Trainer(
 )
 
 class SportVM(private val sport: Sport): Summarisable{
+    override val id: String
+        get() = sport.name // TODO change to SportCentre.id
     override val title: String
         get() = sport.name
     override val imageUrl: String
@@ -49,6 +53,8 @@ class Sport(
 )
 
 class SportCentreVM(private val sportCentre : SportCentre) : Detailable {
+    override val id: String
+        get() = sportCentre.name // TODO change to SportCentre.id
     override val title: String
         get() = sportCentre.name
     override val imageUrl: String
@@ -67,6 +73,9 @@ class SportCentre(
 )
 
 class TrainingVM(private val training: Training) : Summarisable{
+    // TODO fix tight coupling (calling like training.sport.name)
+    override val id: String
+        get() = training.sport.name // TODO change to training.id
     override val title: String
         get() = training.sport.name
     override val imageUrl: String
@@ -95,6 +104,8 @@ class Training(
 }
 
 class PassVM(private val pass: Pass) : Summarisable{
+    override val id: String
+        get() = pass.name // TODO change to pass.id
     override val title: String
         get() = pass.name
     override val imageUrl: String
