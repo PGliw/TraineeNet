@@ -66,4 +66,7 @@ dependencies {
     // LiveData
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0-rc03'
 
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
 }

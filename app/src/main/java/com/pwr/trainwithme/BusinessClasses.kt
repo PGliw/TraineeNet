@@ -15,27 +15,29 @@ interface Detailable : Summarisable {
 
 class TrainerVM(private val trainer: Trainer) : Detailable{
     override val id: String
-        get() = trainer.name // TODO change to Trainer.id
+        get() = trainer.id ?: trainer.firstName // TODO change ONLY to Trainer.id
     override val title: String
-        get() = trainer.name
+        get() = trainer.firstName
     override val imageUrl: String
-        get() = trainer.imagesUrls[0]
+        get() = trainer.photoUrl ?: trainer.imagesUrls[0]
     override val price: String
         get() = trainer.pricePerHour.toString()
     override val rating: Float
         get() = trainer.rating
-    var onClick: () -> Unit = {}
 }
 
+// TODO refactor trainer class
 class Trainer(
-    val name: String,
-    val surname: String,
+    val firstName: String,
+    val lastName: String,
     val description: String,
-    val email: String,
-    val phone: String,
+    val email: String = "", // TODO
+    val phone: String = "", // TODO
     val pricePerHour: Float,
     val rating: Float = 0f,
-    val imagesUrls: Array<String>
+    val imagesUrls: Array<String> = arrayOf(), // TODO
+    val photoUrl: String? = null,
+    val id: String? = null // TODO
 )
 
 class SportVM(private val sport: Sport): Summarisable{
@@ -73,7 +75,7 @@ class SportCentre(
 )
 
 class TrainingVM(private val training: Training) : Summarisable{
-    // TODO fix tight coupling (calling like training.sport.name)
+    // TODO fix tight coupling (calling like training.sport.firstName)
     override val id: String
         get() = training.sport.name // TODO change to training.id
     override val title: String

@@ -1,11 +1,16 @@
 package com.pwr.trainwithme
 
+import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
-import kotlinx.coroutines.*
+import com.pwr.trainwithme.data.TrainingService
 import java.util.*
-import kotlin.coroutines.coroutineContext
 
-class TrainingProposalViewModel : ViewModel() {
+class TrainingProposalViewModel(application: Application) : AndroidViewModel(application) {
+
+    companion object{
+        const val TAG = "TrainingProposalVM"
+    }
 
     // inputs
     val day = MutableLiveData<Date>(Date())
@@ -15,10 +20,13 @@ class TrainingProposalViewModel : ViewModel() {
     var sportID: String? = null
     var centreID: String? = null
 
+    private val ts = (application as TrainingNetApplication).trainingService // TODO refactor casting
 
     // TODO timeSlots
     private val trainers = liveData {
-        emit(MockData.trainers)
+        val trainersRes = ts.getTrainers()
+        if(trainersRes.isSuccessful) emit(trainersRes.body())
+        else emit(listOf()) // TODO handle errors
     }
     private val sports = liveData {
         emit(MockData.sports)
@@ -29,7 +37,7 @@ class TrainingProposalViewModel : ViewModel() {
 
     // trainers
     val trainersSummaries: LiveData<List<Summarisable>> = Transformations.map(trainers) {
-        it.map { trainer -> TrainerVM(trainer) }
+        it?.map { trainer -> TrainerVM(trainer) } ?: listOf()
     }
 
     // sports
@@ -41,10 +49,4 @@ class TrainingProposalViewModel : ViewModel() {
     val centresSummaries: LiveData<List<Summarisable>> = Transformations.map(centres) {
         it.map { sportCentre -> SportCentreVM(sportCentre) }
     }
-
-    fun getSports(locationID: String?){}
-    fun getTrainers(locationID: String?){}
-    fun getCentres(locationID: String?){}
-    fun postTraining(trainingDTO : String){} // TODO request
-
 }
