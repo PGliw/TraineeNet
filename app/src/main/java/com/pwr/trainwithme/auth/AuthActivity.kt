@@ -1,7 +1,8 @@
-package com.pwr.trainwithme
+package com.pwr.trainwithme.auth
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.pwr.trainwithme.R
 
 class AuthActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.pwr.trainwithme
+package com.pwr.trainwithme.auth
 
 
 import android.os.Bundle
@@ -7,31 +7,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import kotlinx.android.synthetic.main.fragment_login.*
+import com.pwr.trainwithme.R
+import kotlinx.android.synthetic.main.fragment_register.*
 
 /**
  * A simple [Fragment] subclass.
  */
-class LoginFragment : Fragment() {
+class RegisterFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        return inflater.inflate(R.layout.fragment_register, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        button_login_fragment_sign_in.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_mainActivity)
+        button_register_fragment_back.setOnClickListener {
+            findNavController().navigateUp()
         }
 
-        text_login_fragment_register.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+        button_register_fragment_next.setOnClickListener {
+            findNavController().navigate(R.id.action_registerFragment_to_loginFragment2)
         }
     }
-
 }
