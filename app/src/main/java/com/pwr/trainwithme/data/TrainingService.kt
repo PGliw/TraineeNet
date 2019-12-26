@@ -6,6 +6,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.POST
 import java.util.concurrent.TimeUnit
 
 interface TrainingService {
@@ -35,4 +36,8 @@ interface TrainingService {
 
     @GET("trainers")
     suspend fun getTrainers(): Response<List<Trainer>>
+
+    @POST("")
+    suspend fun authorize(): Response<List<Trainer>>
 }
+

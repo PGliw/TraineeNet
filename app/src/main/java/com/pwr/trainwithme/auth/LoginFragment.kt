@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_login.*
  */
 class LoginFragment : Fragment() {
 
-    companion object{
+    companion object {
         const val TAG = "LoginFragment"
     }
 
@@ -56,21 +56,14 @@ class LoginFragment : Fragment() {
             }
         })
 
-        // Validate email and password after change
+        // Validate email and password after email change
         text_input_edit_text_login_fragment_email.afterTextChanged {
-            Log.d(TAG, it)
-            loginViewModel.loginDataChanged(
-                username = text_input_edit_text_login_fragment_email.text.toString(),
-                password = text_input_edit_text_login_fragment_password.text.toString()
-            )
+            validateInputs()
         }
 
+        // Validate email and password after password change
         text_input_edit_text_login_fragment_password.afterTextChanged {
-            Log.d(TAG, it)
-            loginViewModel.loginDataChanged(
-                username = text_input_edit_text_login_fragment_email.text.toString(),
-                password = text_input_edit_text_login_fragment_password.text.toString()
-            )
+            validateInputs()
         }
 
         // Sign in on button click
@@ -83,6 +76,13 @@ class LoginFragment : Fragment() {
         text_login_fragment_register.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
+    }
+
+    private fun validateInputs() {
+        loginViewModel.loginDataChanged(
+            username = text_input_edit_text_login_fragment_email.text.toString(),
+            password = text_input_edit_text_login_fragment_password.text.toString()
+        )
     }
 }
 

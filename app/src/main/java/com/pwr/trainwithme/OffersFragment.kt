@@ -45,7 +45,7 @@ class OffersFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         super.onViewCreated(view, savedInstanceState)
 
         sports_recycler.initAndObserve(
-            requireContext(), viewLifecycleOwner,proposalViewModel.sportsSummaries, SummaryAdapter.MEDIUM
+            requireContext(), viewLifecycleOwner, proposalViewModel.sportsSummaries, SummaryAdapter.MEDIUM
         ){
             proposalViewModel.sportID = it.id
             navigateNext()
