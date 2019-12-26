@@ -1,9 +1,7 @@
 package com.pwr.trainwithme
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
-import com.pwr.trainwithme.data.TrainingService
 import java.util.*
 
 class TrainingProposalViewModel(application: Application) : AndroidViewModel(application) {

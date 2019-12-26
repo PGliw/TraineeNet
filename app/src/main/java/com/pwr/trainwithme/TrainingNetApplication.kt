@@ -1,8 +1,8 @@
 package com.pwr.trainwithme
 
 import android.app.Application
-import com.pwr.trainwithme.data.TrainingService
+import com.pwr.trainwithme.data.TrainingNetAPI
 
 class TrainingNetApplication : Application() {
-    val trainingService = TrainingService()
+    val trainingService = TrainingNetAPI()
 }

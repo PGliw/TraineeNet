@@ -1,15 +1,14 @@
 package com.pwr.trainwithme.auth
 
-import android.util.Log
+import android.app.Application
 import android.util.Patterns
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.pwr.trainwithme.R
-import kotlinx.coroutines.launch
+import com.pwr.trainwithme.TrainingNetApplication
+import com.pwr.trainwithme.data.Result
+import com.pwr.trainwithme.data.TrainingNetAPI
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
     companion object {
         const val TAG = "LoginVM"
@@ -19,8 +18,18 @@ class LoginViewModel : ViewModel() {
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
 
-    fun login() = viewModelScope.launch {
-        // TODO implement
+    private val ts = (application as TrainingNetApplication).trainingService // TODO refactor casting
+
+    fun login(username: String, password: String) = liveData{
+        emit(Result.loading())
+        val response = ts.getAuthToken(username, password)
+        val body = response.body()
+        if (response.isSuccessful && body != null){
+            TrainingNetAPI.accessToken = body.accessToken
+            TrainingNetAPI.refreshToken = body.refreshToken
+            emit(Result.success(null))
+        }
+        else emit(Result.error(response.message()))
     }
 
 
@@ -34,7 +43,6 @@ class LoginViewModel : ViewModel() {
                 passwordError = R.string.invalid_password
             )
         }
-        Log.d(TAG, "$username $password ${_loginForm.value}")
     }
 
     // Username validation check

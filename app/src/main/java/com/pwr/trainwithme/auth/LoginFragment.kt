@@ -10,10 +10,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.pwr.trainwithme.R
+import com.pwr.trainwithme.data.Result
+import com.pwr.trainwithme.utils.afterTextChanged
+import com.pwr.trainwithme.utils.snack
 import kotlinx.android.synthetic.main.fragment_login.*
 
 /**
@@ -68,8 +75,7 @@ class LoginFragment : Fragment() {
 
         // Sign in on button click
         button_login_fragment_sign_in.setOnClickListener {
-            // TODO sign in
-            findNavController().navigate(R.id.action_loginFragment_to_mainActivity)
+            signIn()
         }
 
         // Navigate to register fragment on text click
@@ -84,19 +90,28 @@ class LoginFragment : Fragment() {
             password = text_input_edit_text_login_fragment_password.text.toString()
         )
     }
-}
 
-/**
- * Extension function to simplify setting an afterTextChanged action to EditText components.
- */
-fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
-    this.addTextChangedListener(object : TextWatcher {
-        override fun afterTextChanged(editable: Editable?) {
-            afterTextChanged.invoke(editable.toString())
+    private fun signIn(){
+        val loginLiveData = loginViewModel.login(
+            username = text_input_edit_text_login_fragment_email.text.toString(),
+            password = text_input_edit_text_login_fragment_password.text.toString()
+        )
+        loginLiveData.observe(viewLifecycleOwner){
+            Log.d(TAG, it.toString())
+            when(it.status){
+                Result.Status.LOADING -> button_login_fragment_sign_in.isEnabled = false
+                Result.Status.SUCCESS -> {
+                    findNavController().navigate(R.id.action_loginFragment_to_mainActivity)
+                    button_login_fragment_sign_in.isEnabled = true
+                }
+                else -> {
+                    snack(it.message ?: getString(R.string.login_error))
+                    button_login_fragment_sign_in.isEnabled = true
+                }
+            }
         }
+    }
 
-        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
-        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
-    })
 }
+
+
