@@ -1,4 +1,4 @@
-package com.pwr.trainwithme
+package com.pwr.trainwithme.training_proposal
 
 
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.ncorti.slidetoact.SlideToActView
+import com.pwr.trainwithme.R
 import kotlinx.android.synthetic.main.fragment_proposal_conclusion.*
 
 /**

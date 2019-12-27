@@ -1,9 +1,11 @@
-package com.pwr.trainwithme
+package com.pwr.trainwithme.training_proposal
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
+import com.pwr.trainwithme.*
+import com.pwr.trainwithme.data.*
 import java.util.*
+import java.time.LocalDateTime
 
 class TrainingProposalViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -17,11 +19,19 @@ class TrainingProposalViewModel(application: Application) : AndroidViewModel(app
 
     // inputs
     val day = MutableLiveData<Date>(Date())
-    var startDate: Date? = null
-    var endDate: Date? = null
+    var startDate: LocalDateTime? = null
+    var endDate: LocalDateTime? = null
     var trainerID: String? = null
     var sportID: String? = null
     var centreID: String? = null
+
+    fun searchOffers() = liveData {
+        emit(Result.loading(null))
+        val trainersResponse = ts.getTrainers()
+        if(trainersResponse.isSuccessful && trainersResponse.body() != null){
+        }
+        emit(Result.success(null))
+    }
 
     private val ts = (application as TrainingNetApplication).trainingService // TODO refactor casting
 
@@ -54,6 +64,10 @@ class TrainingProposalViewModel(application: Application) : AndroidViewModel(app
 
     // centres
     val centresSummaries: LiveData<List<Summarisable>> = Transformations.map(centres) {
-        it.map { sportCentre -> SportCentreVM(sportCentre) }
+        it.map { sportCentre ->
+            SportCentreVM(
+                sportCentre
+            )
+        }
     }
 }

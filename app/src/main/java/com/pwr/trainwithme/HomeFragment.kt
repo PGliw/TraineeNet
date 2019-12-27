@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pwr.trainwithme.adapters.SummaryAdapter
+import com.pwr.trainwithme.data.MockData
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment(){

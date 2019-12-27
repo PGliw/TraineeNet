@@ -11,10 +11,8 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.pwr.trainwithme.Detailable
+import com.pwr.trainwithme.data.Detailable
 import com.pwr.trainwithme.R
-import com.pwr.trainwithme.Summarisable
-import com.pwr.trainwithme.TrainerVM
 
 class DetailableAdapter(
     private val context: Context,

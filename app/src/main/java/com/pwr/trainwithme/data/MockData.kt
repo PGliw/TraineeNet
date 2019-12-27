@@ -1,4 +1,4 @@
-package com.pwr.trainwithme
+package com.pwr.trainwithme.data
 
 import java.util.*
 
@@ -74,7 +74,11 @@ object MockData {
         )
     )
 
-    private val trainersVMs = trainers.map { TrainerVM(it) }
+    private val trainersVMs = trainers.map {
+        TrainerVM(
+            it
+        )
+    }
 
     val sportCentres = listOf(
         SportCentre(
@@ -89,7 +93,11 @@ object MockData {
         )
     )
 
-    private val sportCentresVMs = sportCentres.map { SportCentreVM(it) }
+    private val sportCentresVMs = sportCentres.map {
+        SportCentreVM(
+            it
+        )
+    }
 
     val trainings = listOf(
         Training(
@@ -114,7 +122,11 @@ object MockData {
         )
     )
 
-    private val trainingsVMs = trainings.map { TrainingVM(it) }
+    private val trainingsVMs = trainings.map {
+        TrainingVM(
+            it
+        )
+    }
 
     val passes = listOf(
         Pass(
@@ -127,7 +139,11 @@ object MockData {
         )
     )
 
-    private val passesVMs: List<Summarisable> = passes.map { PassVM(it) }
+    private val passesVMs: List<Summarisable> = passes.map {
+        PassVM(
+            it
+        )
+    }
 
     val imagesUrls = listOf(
         "https://www.fit-academy.pl/wp-content/uploads/kompleksowy-1024x683-1.jpg",

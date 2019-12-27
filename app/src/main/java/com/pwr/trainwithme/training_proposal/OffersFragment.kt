@@ -1,10 +1,8 @@
-package com.pwr.trainwithme
+package com.pwr.trainwithme.training_proposal
 
 
 import android.app.DatePickerDialog
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.pwr.trainwithme.R
 import com.pwr.trainwithme.adapters.SummaryAdapter
 import com.pwr.trainwithme.utils.initAndObserve
 import kotlinx.android.synthetic.main.fragment_offers.*
@@ -45,6 +42,10 @@ class OffersFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        button_fragment_offers_search.setOnClickListener {
+            navigateNext()
+        }
+
         sports_recycler.initAndObserve(
             requireContext(), viewLifecycleOwner, proposalViewModel.sportsSummaries, SummaryAdapter.MEDIUM
         ){
@@ -55,7 +56,7 @@ class OffersFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         trainers_recycler.initAndObserve(
             requireContext(), viewLifecycleOwner, proposalViewModel.trainersSummaries, SummaryAdapter.THIN
         ){
-            proposalViewModel.trainerID = it.id
+            findNavController().navigate(R.id.action_offersFragment_to_searchFragment)
             navigateNext()
         }
 

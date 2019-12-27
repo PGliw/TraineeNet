@@ -1,4 +1,4 @@
-package com.pwr.trainwithme
+package com.pwr.trainwithme.utils
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

@@ -2,7 +2,6 @@ package com.pwr.trainwithme.data
 
 import android.content.Context
 import com.google.gson.annotations.SerializedName
-import com.pwr.trainwithme.Trainer
 import com.pwr.trainwithme.utils.ConnectivityInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

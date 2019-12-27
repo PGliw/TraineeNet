@@ -1,4 +1,4 @@
-package com.pwr.trainwithme
+package com.pwr.trainwithme.training_proposal
 
 
 import android.os.Bundle
@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
+import com.pwr.trainwithme.data.MockData
+import com.pwr.trainwithme.R
 import kotlinx.android.synthetic.main.fragment_date_choice.*
 
 /**
@@ -16,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_date_choice.*
  */
 class DateChoiceFragment : Fragment(), AdapterView.OnItemClickListener {
 
-    private val timeSlots =  MockData.timeSlots
+    private val timeSlots = MockData.timeSlots
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

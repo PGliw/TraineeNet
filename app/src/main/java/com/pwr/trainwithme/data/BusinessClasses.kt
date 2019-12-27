@@ -1,4 +1,4 @@
-package com.pwr.trainwithme
+package com.pwr.trainwithme.data
 
 import java.util.*
 
@@ -13,7 +13,8 @@ interface Detailable : Summarisable {
     val price : String?
 }
 
-class TrainerVM(private val trainer: Trainer) : Detailable{
+class TrainerVM(private val trainer: Trainer) :
+    Detailable {
     override val id: String
         get() = trainer.id ?: trainer.firstName // TODO change ONLY to Trainer.id
     override val title: String
@@ -40,7 +41,8 @@ class Trainer(
     val id: String? = null // TODO
 )
 
-class SportVM(private val sport: Sport): Summarisable{
+class SportVM(private val sport: Sport):
+    Summarisable {
     override val id: String
         get() = sport.name // TODO change to SportCentre.id
     override val title: String
@@ -54,7 +56,8 @@ class Sport(
     val imageUrl: String
 )
 
-class SportCentreVM(private val sportCentre : SportCentre) : Detailable {
+class SportCentreVM(private val sportCentre : SportCentre) :
+    Detailable {
     override val id: String
         get() = sportCentre.name // TODO change to SportCentre.id
     override val title: String
@@ -74,7 +77,8 @@ class SportCentre(
     val rating: Float
 )
 
-class TrainingVM(private val training: Training) : Summarisable{
+class TrainingVM(private val training: Training) :
+    Summarisable {
     // TODO fix tight coupling (calling like training.sport.firstName)
     override val id: String
         get() = training.sport.name // TODO change to training.id
@@ -105,7 +109,8 @@ class Training(
     }
 }
 
-class PassVM(private val pass: Pass) : Summarisable{
+class PassVM(private val pass: Pass) :
+    Summarisable {
     override val id: String
         get() = pass.name // TODO change to pass.id
     override val title: String

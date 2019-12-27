@@ -1,4 +1,4 @@
-package com.pwr.trainwithme
+package com.pwr.trainwithme.training_proposal
 
 
 import android.app.AlertDialog
@@ -9,6 +9,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.pwr.trainwithme.data.Detailable
+import com.pwr.trainwithme.data.MockData
+import com.pwr.trainwithme.R
+import com.pwr.trainwithme.utils.VerticalScrollHider
 import com.pwr.trainwithme.adapters.DetailableAdapter
 import kotlinx.android.synthetic.main.fragment_search_results.*
 
@@ -32,9 +36,16 @@ class SearchResultsFragment : Fragment(), DetailableAdapter.OnItemSelectedListen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // viewModel apply search
+
         offer_recycler.layoutManager = LinearLayoutManager(requireContext())
         offer_recycler.adapter = DetailableAdapter(requireContext(), trainers, this, null, DetailableAdapter.ImageType.CIRCLE)
-        offer_recycler.addOnScrollListener(VerticalScrollHider(button_sort, button_filter))
+        offer_recycler.addOnScrollListener(
+            VerticalScrollHider(
+                button_sort,
+                button_filter
+            )
+        )
 
         button_sort.setOnClickListener {
             val builder = AlertDialog.Builder(requireContext())

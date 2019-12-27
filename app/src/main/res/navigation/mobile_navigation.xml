@@ -6,7 +6,7 @@
     app:startDestination="@id/offersFragment">
     <fragment
         android:id="@+id/offersFragment"
-        android:name="com.pwr.trainwithme.OffersFragment"
+        android:name="com.pwr.trainwithme.training_proposal.OffersFragment"
         android:label="fragment_offers"
         tools:layout="@layout/fragment_offers" >
         <action
@@ -29,7 +29,7 @@
         tools:layout="@layout/fragment_location" />
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.pwr.trainwithme.SearchResultsFragment"
+        android:name="com.pwr.trainwithme.training_proposal.SearchResultsFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search_results" >
         <action
@@ -52,7 +52,7 @@
         tools:layout="@layout/fragment_training" />
     <fragment
         android:id="@+id/centreChoiceFragment"
-        android:name="com.pwr.trainwithme.CentreChoiceFragment"
+        android:name="com.pwr.trainwithme.training_proposal.CentreChoiceFragment"
         android:label="fragment_centre_choice"
         tools:layout="@layout/fragment_centre_choice" >
         <action
@@ -61,7 +61,7 @@
     </fragment>
     <fragment
         android:id="@+id/dateChoiceFragment"
-        android:name="com.pwr.trainwithme.DateChoiceFragment"
+        android:name="com.pwr.trainwithme.training_proposal.DateChoiceFragment"
         android:label="fragment_date_choice"
         tools:layout="@layout/fragment_date_choice" >
         <action
@@ -70,7 +70,7 @@
     </fragment>
     <fragment
         android:id="@+id/proposalConclusionFragment"
-        android:name="com.pwr.trainwithme.ProposalConclusionFragment"
+        android:name="com.pwr.trainwithme.training_proposal.ProposalConclusionFragment"
         android:label="fragment_proposal_conclusion"
         tools:layout="@layout/fragment_proposal_conclusion" >
         <action

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".CentreChoiceFragment">
+    tools:context=".training_proposal.CentreChoiceFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_centre_choice_fragment_centres"

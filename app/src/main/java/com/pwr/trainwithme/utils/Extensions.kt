@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import com.pwr.trainwithme.Summarisable
+import com.pwr.trainwithme.data.Summarisable
 import com.pwr.trainwithme.adapters.SummaryAdapter
 
 fun Fragment.toast(message: String) = Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()

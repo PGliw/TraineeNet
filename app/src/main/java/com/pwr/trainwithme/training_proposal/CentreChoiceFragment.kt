@@ -1,4 +1,4 @@
-package com.pwr.trainwithme
+package com.pwr.trainwithme.training_proposal
 
 
 import android.os.Bundle
@@ -9,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.pwr.trainwithme.data.Detailable
+import com.pwr.trainwithme.data.MockData
+import com.pwr.trainwithme.R
 import com.pwr.trainwithme.adapters.DetailableAdapter
 import kotlinx.android.synthetic.main.fragment_centre_choice.*
 
@@ -33,7 +36,8 @@ class CentreChoiceFragment : Fragment(), DetailableAdapter.OnItemSelectedListene
         super.onViewCreated(view, savedInstanceState)
         recycler_centre_choice_fragment_centres.layoutManager = LinearLayoutManager(requireContext())
         recycler_centre_choice_fragment_centres.adapter = DetailableAdapter(
-            requireContext(), MockData.centresDetails, this, this
+            requireContext(),
+            MockData.centresDetails, this, this
         )
     }
 
