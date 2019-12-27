@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pwr.trainwithme.adapters.SummaryAdapter
+import com.pwr.trainwithme.utils.initAndObserve
 import kotlinx.android.synthetic.main.fragment_offers.*
 import java.text.DateFormat
 import java.util.*
@@ -97,20 +98,5 @@ class OffersFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         findNavController().navigate(R.id.action_offersFragment_to_searchFragment)
     }
 
-    private fun RecyclerView.initAndObserve(
-        context: Context,
-        lifecycleOwner: LifecycleOwner,
-        summaryLiveData: LiveData<List<Summarisable>>,
-        cardType: Int,
-        onSummarySelected: (Summarisable) -> Unit
-        ) {
-        layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        val summaryAdapter = SummaryAdapter(
-            requireContext(), listOf(), onSummarySelected, cardType
-        )
-        adapter = summaryAdapter
-        summaryLiveData.observe(lifecycleOwner, Observer {
-            summaryAdapter.summaries = it
-        })
-    }
+
 }

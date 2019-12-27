@@ -1,6 +1,7 @@
 package com.pwr.trainwithme
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import java.util.*
 
@@ -9,6 +10,10 @@ class TrainingProposalViewModel(application: Application) : AndroidViewModel(app
     companion object{
         const val TAG = "TrainingProposalVM"
     }
+
+    // authentication status - TODO handle it in repository / data source
+    private val _isAuthenticated = MutableLiveData<Boolean>(true)
+    val isAuthenticated: LiveData<Boolean> = _isAuthenticated
 
     // inputs
     val day = MutableLiveData<Date>(Date())
@@ -24,7 +29,11 @@ class TrainingProposalViewModel(application: Application) : AndroidViewModel(app
     private val trainers = liveData {
         val trainersRes = ts.getTrainers()
         if(trainersRes.isSuccessful) emit(trainersRes.body())
-        else emit(listOf()) // TODO handle errors
+        else {
+            val code = trainersRes.code()
+            if(code == 401) _isAuthenticated.value = false
+            emit(listOf())
+        } // TODO handle errors
     }
     private val sports = liveData {
         emit(MockData.sports)

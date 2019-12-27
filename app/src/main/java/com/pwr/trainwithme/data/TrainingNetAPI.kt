@@ -1,7 +1,9 @@
 package com.pwr.trainwithme.data
 
+import android.content.Context
 import com.google.gson.annotations.SerializedName
 import com.pwr.trainwithme.Trainer
+import com.pwr.trainwithme.utils.ConnectivityInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -14,18 +16,20 @@ import java.util.concurrent.TimeUnit
 interface TrainingNetAPI {
 
     companion object {
-        private const val SERVER_URL = "http://192.168.1.169:8080/"
+        private const val SERVER_URL = "http://192.168.0.103:8080/"
         var accessToken: String? = null
         var refreshToken: String? = null
 
         operator fun invoke(
+            context: Context
         ): TrainingNetAPI {
 
             val okHttpClient = OkHttpClient.Builder()
-                .addInterceptor(BasicAuthHeaderInterceptor()) // TODO DI
+                //.addInterceptor(BasicAuthHeaderInterceptor()) // TODO DI
                 .addInterceptor(HttpLoggingInterceptor().apply {
                     level = HttpLoggingInterceptor.Level.BODY
                 })
+                .addInterceptor(ConnectivityInterceptor(context))
                 .connectTimeout(15, TimeUnit.SECONDS)
                 .readTimeout(15, TimeUnit.SECONDS)
                 .writeTimeout(15, TimeUnit.SECONDS)
@@ -40,12 +44,13 @@ interface TrainingNetAPI {
         }
     }
 
-    @GET("trainers")
+    @GET("trainers2")
     suspend fun getTrainers(
         @Header("Authorization")
         authorizationHeaderValue: String = "Bearer $accessToken"
     ): Response<List<Trainer>>
 
+    @Headers("Authorization: Basic ZnJvbnRlbmRDbGllbnRJZDpmcm9udGVuZENsaWVudFNlY3JldA==")
     @FormUrlEncoded
     @POST("oauth/token")
     suspend fun getAuthToken(
