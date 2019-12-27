@@ -1,6 +1,7 @@
 package com.pwr.trainwithme.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -11,6 +12,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.pwr.trainwithme.R
 import com.pwr.trainwithme.data.Summarisable
+import com.squareup.picasso.Picasso
+import com.squareup.picasso.PicassoProvider
 
 class SummaryAdapter(
     private val context: Context,
@@ -42,7 +45,10 @@ class SummaryAdapter(
     override fun onBindViewHolder(holder: SummaryCardViewHolder, position: Int) {
         holder.title.text = summaries[position].title
         val glideOptions = RequestOptions().apply { centerCrop() }
-        Glide.with(context).load(summaries[position].imageUrl).apply(glideOptions)
+        Glide.with(context)
+            .load(summaries[position].imageUrl)
+            .apply(glideOptions)
+            .error(R.drawable.ic_info_black_24dp)
             .into(holder.image)
         holder.cardView.setOnClickListener {
             onSummarySelected(summaries[position])

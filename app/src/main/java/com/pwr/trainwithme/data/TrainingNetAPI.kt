@@ -49,6 +49,24 @@ interface TrainingNetAPI {
         authorizationHeaderValue: String = "Bearer $accessToken"
     ): Response<List<Trainer>>
 
+    @GET("trainers2/summaries")
+    suspend fun getTrainersSummaries(
+        @Header("Authorization")
+        authorizationHeaderValue: String = "Bearer $accessToken"
+    ): Response<List<Summary>>
+
+    @GET("centres/summaries")
+    suspend fun getCentresSummaries(
+        @Header("Authorization")
+        authorizationHeaderValue: String = "Bearer $accessToken"
+    ): Response<List<Summary>>
+
+    @GET("sports/summaries")
+    suspend fun getSportsSummaries(
+        @Header("Authorization")
+        authorizationHeaderValue: String = "Bearer $accessToken"
+    ): Response<List<Summary>>
+
     @Headers("Authorization: Basic ZnJvbnRlbmRDbGllbnRJZDpmcm9udGVuZENsaWVudFNlY3JldA==")
     @FormUrlEncoded
     @POST("oauth/token")

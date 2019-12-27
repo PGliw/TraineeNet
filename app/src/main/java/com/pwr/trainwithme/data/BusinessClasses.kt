@@ -8,6 +8,12 @@ interface Summarisable{
     val imageUrl : String
 }
 
+data class Summary(
+    override val id: String,
+    override val title: String,
+    override val imageUrl: String
+) : Summarisable
+
 interface Detailable : Summarisable {
     val rating : Float
     val price : String?

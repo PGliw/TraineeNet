@@ -3,6 +3,7 @@ package com.pwr.trainwithme.utils
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -14,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.pwr.trainwithme.data.Summarisable
 import com.pwr.trainwithme.adapters.SummaryAdapter
+import com.pwr.trainwithme.data.MockData
+import com.pwr.trainwithme.data.Result
 
 fun Fragment.toast(message: String) = Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
 fun Fragment.snack(message: String) = Snackbar.make(view!!, message, Snackbar.LENGTH_SHORT).show()
@@ -36,7 +39,7 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
 fun RecyclerView.initAndObserve(
     context: Context,
     lifecycleOwner: LifecycleOwner,
-    summaryLiveData: LiveData<List<Summarisable>>,
+    summaryLiveData: LiveData<Result<List<Summarisable>>>,
     cardType: Int,
     onSummarySelected: (Summarisable) -> Unit
 ) {
@@ -46,6 +49,7 @@ fun RecyclerView.initAndObserve(
     )
     adapter = summaryAdapter
     summaryLiveData.observe(lifecycleOwner, Observer {
-        summaryAdapter.summaries = it
+        if(it.status == Result.Status.SUCCESS
+            && it.data != null) summaryAdapter.summaries = it.data
     })
 }

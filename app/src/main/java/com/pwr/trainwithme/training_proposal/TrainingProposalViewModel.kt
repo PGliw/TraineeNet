@@ -1,6 +1,7 @@
 package com.pwr.trainwithme.training_proposal
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.pwr.trainwithme.*
 import com.pwr.trainwithme.data.*
@@ -45,6 +46,7 @@ class TrainingProposalViewModel(application: Application) : AndroidViewModel(app
             emit(listOf())
         } // TODO handle errors
     }
+
     private val sports = liveData {
         emit(MockData.sports)
     }
@@ -53,21 +55,53 @@ class TrainingProposalViewModel(application: Application) : AndroidViewModel(app
     }
 
     // trainers
-    val trainersSummaries: LiveData<List<Summarisable>> = Transformations.map(trainers) {
-        it?.map { trainer -> TrainerVM(trainer) } ?: listOf()
+    val trainersSummaries = liveData {
+        emit(Result.loading(null))
+        val trainersRes = ts.getTrainersSummaries()
+        Log.d(TAG, trainersRes.toString())
+        if(trainersRes.isSuccessful) {
+            val body = trainersRes.body()
+            Log.d(TAG, body.toString())
+            emit(Result.success(body as List<Summarisable>))
+        }
+        else {
+            val code = trainersRes.code()
+            if(code == 401) _isAuthenticated.value = false
+            emit(Result.error("Some error"))
+        }
     }
 
     // sports
-    val sportsSummaries: LiveData<List<Summarisable>> = Transformations.map(sports) {
-        it.map { sport -> SportVM(sport) }
+    val sportsSummaries = liveData {
+        emit(Result.loading(null))
+        val sportsRes = ts.getSportsSummaries()
+        Log.d(TAG, sportsRes.toString())
+        if(sportsRes.isSuccessful) {
+            val body = sportsRes.body()
+            Log.d(TAG, body.toString())
+            emit(Result.success(body as List<Summarisable>))
+        }
+        else {
+            val code = sportsRes.code()
+            if(code == 401) _isAuthenticated.value = false
+            emit(Result.error("Some error"))
+        }
     }
 
     // centres
-    val centresSummaries: LiveData<List<Summarisable>> = Transformations.map(centres) {
-        it.map { sportCentre ->
-            SportCentreVM(
-                sportCentre
-            )
+    val centresSummaries = liveData{
+        emit(Result.loading(null))
+        val centresRes = ts.getCentresSummaries()
+        Log.d(TAG, centresRes.toString())
+        if(centresRes.isSuccessful) {
+            val body = centresRes.body()
+            Log.d(TAG, body.toString())
+            emit(Result.success(centresRes.body() as List<Summarisable>))
+        }
+        else {
+            val code = centresRes.code()
+            if(code == 401) _isAuthenticated.value = false
+            emit(Result.error("Some error"))
         }
     }
 }

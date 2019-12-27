@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.pwr.trainwithme.R
 import com.pwr.trainwithme.adapters.SummaryAdapter
 import com.pwr.trainwithme.utils.initAndObserve
+import com.pwr.trainwithme.utils.toast
 import kotlinx.android.synthetic.main.fragment_offers.*
 import java.text.DateFormat
 import java.util.*
@@ -50,20 +51,22 @@ class OffersFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             requireContext(), viewLifecycleOwner, proposalViewModel.sportsSummaries, SummaryAdapter.MEDIUM
         ){
             proposalViewModel.sportID = it.id
+            toast(it.title)
             navigateNext()
         }
 
         trainers_recycler.initAndObserve(
             requireContext(), viewLifecycleOwner, proposalViewModel.trainersSummaries, SummaryAdapter.THIN
         ){
-            findNavController().navigate(R.id.action_offersFragment_to_searchFragment)
-            navigateNext()
+            toast(it.title)
+            findNavController().navigate(R.id.action_offersFragment_to_appointmentFragment)
         }
 
         objects_recycler.initAndObserve(
             requireContext(), viewLifecycleOwner, proposalViewModel.centresSummaries, SummaryAdapter.MEDIUM
         ){
             proposalViewModel.centreID = it.id
+            toast(it.title)
             navigateNext()
         }
 
@@ -95,9 +98,7 @@ class OffersFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         }.time
     }
 
-    private fun navigateNext(){
-        findNavController().navigate(R.id.action_offersFragment_to_searchFragment)
-    }
+    private fun navigateNext() = findNavController().navigate(R.id.action_offersFragment_to_searchFragment)
 
 
 }
