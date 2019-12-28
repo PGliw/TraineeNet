@@ -51,14 +51,13 @@ class OffersFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             requireContext(), viewLifecycleOwner, proposalViewModel.sportsSummaries, SummaryAdapter.MEDIUM
         ){
             proposalViewModel.sportID = it.id
-            toast(it.title)
             navigateNext()
         }
 
         trainers_recycler.initAndObserve(
             requireContext(), viewLifecycleOwner, proposalViewModel.trainersSummaries, SummaryAdapter.THIN
         ){
-            toast(it.title)
+            proposalViewModel.trainerID = it.id
             findNavController().navigate(R.id.action_offersFragment_to_appointmentFragment)
         }
 
@@ -66,7 +65,6 @@ class OffersFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             requireContext(), viewLifecycleOwner, proposalViewModel.centresSummaries, SummaryAdapter.MEDIUM
         ){
             proposalViewModel.centreID = it.id
-            toast(it.title)
             navigateNext()
         }
 
@@ -99,6 +97,4 @@ class OffersFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     }
 
     private fun navigateNext() = findNavController().navigate(R.id.action_offersFragment_to_searchFragment)
-
-
 }

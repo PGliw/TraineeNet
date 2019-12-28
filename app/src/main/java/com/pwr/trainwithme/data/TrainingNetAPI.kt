@@ -15,7 +15,8 @@ import java.util.concurrent.TimeUnit
 interface TrainingNetAPI {
 
     companion object {
-        private const val SERVER_URL = "http://192.168.0.103:8080/"
+        private const val SERVER_URL = "http://192.168.1.169:8080/"
+        private const val TIMEOUT_SECONDS = 10L
         var accessToken: String? = null
         var refreshToken: String? = null
 
@@ -24,14 +25,13 @@ interface TrainingNetAPI {
         ): TrainingNetAPI {
 
             val okHttpClient = OkHttpClient.Builder()
-                //.addInterceptor(BasicAuthHeaderInterceptor()) // TODO DI
                 .addInterceptor(HttpLoggingInterceptor().apply {
                     level = HttpLoggingInterceptor.Level.BODY
                 })
                 .addInterceptor(ConnectivityInterceptor(context))
-                .connectTimeout(15, TimeUnit.SECONDS)
-                .readTimeout(15, TimeUnit.SECONDS)
-                .writeTimeout(15, TimeUnit.SECONDS)
+                .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                .writeTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .build()
 
             return Retrofit.Builder()

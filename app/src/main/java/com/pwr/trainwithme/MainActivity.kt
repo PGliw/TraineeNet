@@ -1,21 +1,19 @@
 package com.pwr.trainwithme
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
-import com.pwr.trainwithme.training_proposal.TrainingProposalViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    // TODO replace with MainActivityViewModel ?
-    private val trainingProposalViewModel
-            by lazy { ViewModelProviders.of(this)[TrainingProposalViewModel::class.java] }
+    private val mainViewModel
+            by lazy { ViewModelProviders.of(this)[MainViewModel::class.java] }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigationView.setupWithNavController(findNavController(R.id.nav_host_fragment))
 
-        trainingProposalViewModel.isAuthenticated.observe(this){
+        mainViewModel.isAuthenticated.observe(this){
             if(!it) findNavController(R.id.nav_host_fragment).navigate(R.id.authActivity)
         }
     }
