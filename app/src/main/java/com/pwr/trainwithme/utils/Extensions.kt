@@ -1,9 +1,9 @@
 package com.pwr.trainwithme.utils
 
+import android.app.DatePickerDialog
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -13,10 +13,10 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import com.pwr.trainwithme.data.Summarisable
 import com.pwr.trainwithme.adapters.SummaryAdapter
-import com.pwr.trainwithme.data.MockData
 import com.pwr.trainwithme.data.Result
+import com.pwr.trainwithme.data.Summarisable
+import java.util.*
 
 fun Fragment.toast(message: String) = Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
 fun Fragment.snack(message: String) = Snackbar.make(view!!, message, Snackbar.LENGTH_SHORT).show()
@@ -52,4 +52,20 @@ fun RecyclerView.initAndObserve(
         if(it.status == Result.Status.SUCCESS
             && it.data != null) summaryAdapter.summaries = it.data
     })
+}
+
+/**
+ * Show date picker dialog with disabled past dates choice
+ */
+fun Fragment.showUpcomingDatePickerDialog(calendar: Calendar, listener: DatePickerDialog.OnDateSetListener){
+    DatePickerDialog(
+        requireActivity(),
+        listener,
+        calendar[Calendar.YEAR],
+        calendar[Calendar.MONTH],
+        calendar[Calendar.DAY_OF_MONTH]
+    ).apply {
+        datePicker.minDate = calendar.timeInMillis
+        show()
+    }
 }

@@ -14,7 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.pwr.trainwithme.R
 import com.pwr.trainwithme.adapters.SummaryAdapter
 import com.pwr.trainwithme.utils.initAndObserve
-import com.pwr.trainwithme.utils.toast
+import com.pwr.trainwithme.utils.showUpcomingDatePickerDialog
 import kotlinx.android.synthetic.main.fragment_offers.*
 import java.text.DateFormat
 import java.util.*
@@ -68,28 +68,22 @@ class OffersFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             navigateNext()
         }
 
-        proposalViewModel.day.observe(viewLifecycleOwner, Observer { observedDate ->
+        proposalViewModel.dayLiveData.observe(viewLifecycleOwner, Observer { observedDate ->
             calendar.time = observedDate
         })
 
         edit_text_date.setOnClickListener {
-            DatePickerDialog(
-                requireActivity(),
-                this,
-                calendar[Calendar.YEAR],
-                calendar[Calendar.MONTH],
-                calendar[Calendar.DAY_OF_MONTH]
-            ).show()
+            showUpcomingDatePickerDialog(calendar, this)
         }
 
-        proposalViewModel.day.observe(viewLifecycleOwner, Observer {
+        proposalViewModel.dayLiveData.observe(viewLifecycleOwner, Observer {
             val dateFormat: DateFormat = DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault())
             edit_text_date.setText(dateFormat.format(it))
         })
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        proposalViewModel.day.value = Calendar.getInstance().apply {
+        proposalViewModel.day = Calendar.getInstance().apply {
             set(Calendar.YEAR, year)
             set(Calendar.MONTH, month)
             set(Calendar.DAY_OF_MONTH, dayOfMonth)

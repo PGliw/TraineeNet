@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.pwr.trainwithme.TrainingNetApplication
 import com.pwr.trainwithme.data.Summarisable
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.*
 
@@ -13,8 +14,17 @@ class TrainingProposalViewModel(application: Application) : AndroidViewModel(app
         const val TAG = "TrainingProposalVM"
     }
 
-    // inputs
-    val day = MutableLiveData<Date>(Date())
+    /**
+     * setting day
+     */
+    var day = Date()
+    set(value) {
+        field = value
+        _dayLiveData.value = value
+    }
+    private val _dayLiveData = MutableLiveData<Date>(Date())
+    val dayLiveData: LiveData<Date> = _dayLiveData
+
     var startDate: LocalDateTime? = null
     var endDate: LocalDateTime? = null
 
@@ -29,7 +39,7 @@ class TrainingProposalViewModel(application: Application) : AndroidViewModel(app
     private val trainerIdLiveData = MutableLiveData<Long>()
 
     /**
-     *  setting trainerID != null causes changing sportLiveData which causes changes to UI
+     *  setting sportID != null causes changing sportLiveData which causes changes to UI
      */
     var sportID: Long? = null
         set(value) {
