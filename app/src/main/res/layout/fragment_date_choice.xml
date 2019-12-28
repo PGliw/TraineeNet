@@ -47,6 +47,8 @@
         android:id="@+id/list_date_choice_fragment_dates"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:choiceMode="singleChoice"
+        android:listSelector="@color/secondaryLightColor"
         app:layout_constraintTop_toBottomOf="@id/button_date_choice_fragment_date"
         app:layout_constraintBottom_toTopOf="@id/button_date_choice_fragment_back"
         />

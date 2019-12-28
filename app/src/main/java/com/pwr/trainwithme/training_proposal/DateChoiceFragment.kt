@@ -30,6 +30,9 @@ class DateChoiceFragment : Fragment(), AdapterView.OnItemClickListener, DatePick
     private val proposalViewModel: TrainingProposalViewModel by lazy {
         ViewModelProviders.of(requireActivity())[TrainingProposalViewModel::class.java]
     }
+    private val adapter by lazy {
+        ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1, proposalViewModel.timeSlots)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +44,6 @@ class DateChoiceFragment : Fragment(), AdapterView.OnItemClickListener, DatePick
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1, proposalViewModel.timeSlots)
         list_date_choice_fragment_dates.adapter = adapter
         list_date_choice_fragment_dates.onItemClickListener = this
 
@@ -66,6 +68,8 @@ class DateChoiceFragment : Fragment(), AdapterView.OnItemClickListener, DatePick
             button_date_choice_fragment_date.text = dateFormat.format(it)
             // enable back button only if currently displayed day is after today's date
             button_date_choice_fragment_prev_day.isEnabled = it.after(Date())
+            // clear timeSlot selection (if it was previously selected)
+            clearTimeSlotSelection()
         }
 
         button_date_choice_fragment_back.setOnClickListener {
@@ -84,7 +88,7 @@ class DateChoiceFragment : Fragment(), AdapterView.OnItemClickListener, DatePick
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         // TODO replace it with dynamic implementation
         proposalViewModel.setTimeSlot(position)
-        findNavController().navigate(R.id.action_dateChoiceFragment_to_centreChoiceFragment)
+        // findNavController().navigate(R.id.action_dateChoiceFragment_to_centreChoiceFragment)
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
@@ -95,4 +99,9 @@ class DateChoiceFragment : Fragment(), AdapterView.OnItemClickListener, DatePick
         }.time
     }
 
+    private fun clearTimeSlotSelection() {
+        list_date_choice_fragment_dates.clearChoices()
+        adapter.notifyDataSetChanged()
+        proposalViewModel.setTimeSlot(null)
+    }
 }

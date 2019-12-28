@@ -30,29 +30,40 @@ class TrainingProposalViewModel(application: Application) : AndroidViewModel(app
     // private val _timeSlotsLiveData = MutableLiveData<>
 
     private val _isTimeSlotSet = MutableLiveData<Boolean>(false)
-    val isTimeSlotSet : LiveData<Boolean> = _isTimeSlotSet
+    val isTimeSlotSet: LiveData<Boolean> = _isTimeSlotSet
 
     private var startDateTime: DateTime? = null
     private var endDateTime: DateTime? = null
 
     // TODO replace it with actual time slots
-    fun setTimeSlot(position: Int){
-        val date = LocalDate(day)
-        val hours = listOf(7, 9, 11, 13, 15, 17)
-        val chosenHour = when(position){
-            in 0..hours.size -> hours[position]
-            else -> hours[0]
+    fun setTimeSlot(position: Int?) {
+        if (position == null) {
+            startDateTime = null
+            endDateTime = null
+            _isTimeSlotSet.value = false
+        } else {
+            val date = LocalDate(day)
+            val hours = listOf(7, 9, 11, 13, 15, 17)
+            val chosenHour = when (position) {
+                in 0..hours.size -> hours[position]
+                else -> hours[0]
+            }
+            val startDT = DateTime().withDate(date).withTime(chosenHour, 0, 0, 0)
+            val endDT = DateTime(startDT).plusHours(2)
+            startDateTime = startDT
+            endDateTime = endDT
+            _isTimeSlotSet.value = true
         }
-        val startDT = DateTime().withDate(date).withTime(chosenHour, 0, 0, 0)
-        val endDT = DateTime(startDT).plusHours(2)
-        startDateTime = startDT
-        endDateTime = endDT
-        _isTimeSlotSet.value = true
     }
 
     // TODO replace it with actual time slots
     val timeSlots = listOf(
-        "7:00 - 9:00", "9:00 - 11:00", "11:00 - 13:00", "13:00 - 15:00", "15:00 - 17:00", "17:00 - 19:00"
+        "7:00 - 9:00",
+        "9:00 - 11:00",
+        "11:00 - 13:00",
+        "13:00 - 15:00",
+        "15:00 - 17:00",
+        "17:00 - 19:00"
     )
 
     /**
