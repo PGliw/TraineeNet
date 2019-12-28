@@ -47,8 +47,9 @@ class SummaryAdapter(
         val glideOptions = RequestOptions().apply { centerCrop() }
         Glide.with(context)
             .load(summaries[position].imageUrl)
+            .placeholder(R.drawable.simple_loading_img_placeholder)
+            .error(R.drawable.error_image_placeholder)
             .apply(glideOptions)
-            .error(R.drawable.ic_info_black_24dp)
             .into(holder.image)
         holder.cardView.setOnClickListener {
             onSummarySelected(summaries[position])

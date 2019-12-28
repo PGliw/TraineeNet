@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pwr.trainwithme.data.Detailable
@@ -14,14 +16,20 @@ import com.pwr.trainwithme.data.MockData
 import com.pwr.trainwithme.R
 import com.pwr.trainwithme.utils.VerticalScrollHider
 import com.pwr.trainwithme.adapters.DetailableAdapter
+import com.pwr.trainwithme.adapters.TrainerOverviewAdapter
+import com.pwr.trainwithme.data.Result
+import com.pwr.trainwithme.utils.snack
 import kotlinx.android.synthetic.main.fragment_search_results.*
 
 /**
  * A simple [Fragment] subclass.
  */
-class SearchResultsFragment : Fragment(), DetailableAdapter.OnItemSelectedListener {
+class SearchResultsFragment : Fragment(){
 
-    private val trainers = MockData.trainersDetails
+    private val viewModel by lazy {
+        ViewModelProviders.of(requireActivity())[TrainingProposalViewModel::class.java]
+    }
+
     var sortByIndex = 0
     var filterIndex = 0
 
@@ -39,13 +47,26 @@ class SearchResultsFragment : Fragment(), DetailableAdapter.OnItemSelectedListen
         // viewModel apply search
 
         offer_recycler.layoutManager = LinearLayoutManager(requireContext())
-        offer_recycler.adapter = DetailableAdapter(requireContext(), trainers, this, null, DetailableAdapter.ImageType.CIRCLE)
+        val adapter = TrainerOverviewAdapter(
+            requireContext(), listOf()
+        ) {
+            viewModel.trainerID = it.id
+            navigateNext()
+        }
+        offer_recycler.adapter = adapter
         offer_recycler.addOnScrollListener(
             VerticalScrollHider(
                 button_sort,
                 button_filter
             )
         )
+        viewModel.trainersOverviews.observe(viewLifecycleOwner) {
+            when (it.status) {
+                Result.Status.LOADING -> snack(getString(R.string.loading)) // TODO change to progress bar
+                Result.Status.SUCCESS -> if(it.data != null) adapter.items = it.data else snack(getString(R.string.null_data_error))
+                Result.Status.ERROR -> snack(it.message ?: getString(R.string.unknown_error))
+            }
+        }
 
         button_sort.setOnClickListener {
             val builder = AlertDialog.Builder(requireContext())
@@ -61,8 +82,7 @@ class SearchResultsFragment : Fragment(), DetailableAdapter.OnItemSelectedListen
         button_filter.setOnClickListener {
             val builder = AlertDialog.Builder(requireContext())
                 .setTitle(R.string.filter)
-                .setSingleChoiceItems(R.array.filter_options, filterIndex){
-                    dialog, which ->
+                .setSingleChoiceItems(R.array.filter_options, filterIndex) { dialog, which ->
                     filterIndex = which
                     dialog.dismiss()
                 }
@@ -70,7 +90,7 @@ class SearchResultsFragment : Fragment(), DetailableAdapter.OnItemSelectedListen
         }
     }
 
-    override fun onItemSelected(detailable: Detailable) {
+    fun navigateNext() {
         findNavController().navigate(R.id.action_searchFragment_to_appointmentFragment)
     }
 }

@@ -1,6 +1,7 @@
 package com.pwr.trainwithme.training_proposal
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.pwr.trainwithme.*
 import com.pwr.trainwithme.data.*
@@ -18,7 +19,7 @@ class TrainingProposalViewModel(application: Application) : AndroidViewModel(app
     val day = MutableLiveData<Date>(Date())
     var startDate: LocalDateTime? = null
     var endDate: LocalDateTime? = null
-    var trainerID: String? = null
+    var trainerID: Long? = null
     var sportID: String? = null
     var centreID: String? = null
 
@@ -29,24 +30,23 @@ class TrainingProposalViewModel(application: Application) : AndroidViewModel(app
         dataSource.trainingNetAPI.getTrainers()
     }
 
-    private val sports = liveData {
-        emit(MockData.sports)
-    }
-    private val centres = liveData {
-        emit(MockData.sportCentres)
+    // trainers overviews
+    val trainersOverviews = dataSource.load {
+        Log.d(TAG, "Loading trainers overviews")
+        dataSource.trainingNetAPI.getTrainersOverviews()
     }
 
-    // trainers
+    // trainers cards
     val trainersSummaries = dataSource.load<List<Summarisable>> {
         dataSource.trainingNetAPI.getTrainersSummaries()
     }
 
-    // sports
+    // sports cards
     val sportsSummaries = dataSource.load<List<Summarisable>> {
         dataSource.trainingNetAPI.getSportsSummaries()
     }
 
-    // centres
+    // centres cards
     val centresSummaries = dataSource.load<List<Summarisable>> {
         dataSource.trainingNetAPI.getCentresSummaries()
     }

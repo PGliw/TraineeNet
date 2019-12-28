@@ -14,6 +14,18 @@ data class Summary(
     override val imageUrl: String
 ) : Summarisable
 
+data class TrainerOverview(
+    val id: Long,
+    val firstName: String,
+    val lastName: String,
+    val photoUrl: String,
+    val meanGrade: Float?,
+    val opinionsCount: Int,
+    val maxPrice: Float?,
+    val minPrice: Float?,
+    val sports: List<String>
+)
+
 interface Detailable : Summarisable {
     val rating : Float
     val price : String?

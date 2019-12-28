@@ -49,6 +49,12 @@ interface TrainingNetAPI {
         authorizationHeaderValue: String = "Bearer $accessToken"
     ): Response<List<Trainer>>
 
+    @GET("trainers2/overviews")
+    suspend fun getTrainersOverviews(
+        @Header("Authorization")
+        authorizationHeaderValue: String = "Bearer $accessToken"
+    ): Response<List<TrainerOverview>>
+
     @GET("trainers2/summaries")
     suspend fun getTrainersSummaries(
         @Header("Authorization")
