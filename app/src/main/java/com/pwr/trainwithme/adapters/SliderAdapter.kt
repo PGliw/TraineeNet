@@ -11,8 +11,15 @@ import com.smarteist.autoimageslider.SliderViewAdapter
 
 class SliderAdapter(
     private val context: Context,
-    val imagesUrls: List<String>
+    imagesUrls: List<String>
 ) : SliderViewAdapter<SliderAdapter.SlideViewHolder>() {
+
+    var imagesUrls = imagesUrls
+    set(value) {
+        field = value
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup): SlideViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.image_slide, parent, false)
         return SlideViewHolder(view)

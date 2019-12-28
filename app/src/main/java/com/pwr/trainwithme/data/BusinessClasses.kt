@@ -26,6 +26,27 @@ data class TrainerOverview(
     val sports: List<String>
 )
 
+data class TrainerDetails(
+    val id: Long,
+    val firstName: String,
+    val lastName: String,
+    val photoUrl: String,
+    val age: Int,
+    val meanGrade: Float?,
+    val opinionsCount: Int,
+    val description: String,
+    val imagesUrls: List<String>,
+    val offers: List<OfferResponse>
+)
+
+data class OfferResponse(
+    val id: Long,
+    val pricePerHour: Float,
+    val trainerID: Long,
+    val sportID: Long,
+    val sportName: String
+)
+
 interface Detailable : Summarisable {
     val rating : Float
     val price : String?

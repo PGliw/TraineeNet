@@ -50,7 +50,7 @@ class OffersFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         sports_recycler.initAndObserve(
             requireContext(), viewLifecycleOwner, proposalViewModel.sportsSummaries, SummaryAdapter.MEDIUM
         ){
-            proposalViewModel.sportID = it.id
+            proposalViewModel.sportID = it.id.toLong() // TODO change in Summarisable
             navigateNext()
         }
 

@@ -81,6 +81,13 @@ interface TrainingNetAPI {
         @Field("password") password: String,
         @Field("grant_type") grantType: String = "password"
     ): Response<TokenResponse>
+
+    @GET("trainers2/{id}/details")
+    suspend fun getTrainerDetails(
+        @Path("id") trainerID: Long,
+        @Header("Authorization")
+        authorizationHeaderValue: String = "Bearer $accessToken"
+    ): Response<TrainerDetails>
 }
 
 /**

@@ -41,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/appointmentFragment"
-        android:name="com.pwr.trainwithme.SportChoiceFragment"
+        android:name="com.pwr.trainwithme.training_proposal.SportChoiceFragment"
         android:label="fragment_appointment"
         tools:layout="@layout/fragment_sport_choice" >
         <action
