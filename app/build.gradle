@@ -76,4 +76,7 @@ dependencies {
     // Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    // Joda date time
+    implementation 'joda-time:joda-time:2.10.5'
+
 }

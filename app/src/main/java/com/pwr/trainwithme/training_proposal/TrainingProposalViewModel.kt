@@ -1,11 +1,13 @@
 package com.pwr.trainwithme.training_proposal
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.pwr.trainwithme.TrainingNetApplication
 import com.pwr.trainwithme.data.Summarisable
-import java.time.LocalDate
-import java.time.LocalDateTime
+import org.joda.time.DateTime
+import org.joda.time.LocalDate
+import org.joda.time.LocalDateTime
 import java.util.*
 
 class TrainingProposalViewModel(application: Application) : AndroidViewModel(application) {
@@ -15,18 +17,43 @@ class TrainingProposalViewModel(application: Application) : AndroidViewModel(app
     }
 
     /**
-     * setting day
+     * setting day causes change to dayLiveData which can be observed by UI
      */
     var day = Date()
-    set(value) {
-        field = value
-        _dayLiveData.value = value
-    }
+        set(value) {
+            field = value
+            _dayLiveData.value = value
+        }
     private val _dayLiveData = MutableLiveData<Date>(Date())
     val dayLiveData: LiveData<Date> = _dayLiveData
 
-    var startDate: LocalDateTime? = null
-    var endDate: LocalDateTime? = null
+    // private val _timeSlotsLiveData = MutableLiveData<>
+
+    private val _isTimeSlotSet = MutableLiveData<Boolean>(false)
+    val isTimeSlotSet : LiveData<Boolean> = _isTimeSlotSet
+
+    private var startDateTime: DateTime? = null
+    private var endDateTime: DateTime? = null
+
+    // TODO replace it with actual time slots
+    fun setTimeSlot(position: Int){
+        val date = LocalDate(day)
+        val hours = listOf(7, 9, 11, 13, 15, 17)
+        val chosenHour = when(position){
+            in 0..hours.size -> hours[position]
+            else -> hours[0]
+        }
+        val startDT = DateTime().withDate(date).withTime(chosenHour, 0, 0, 0)
+        val endDT = DateTime(startDT).plusHours(2)
+        startDateTime = startDT
+        endDateTime = endDT
+        _isTimeSlotSet.value = true
+    }
+
+    // TODO replace it with actual time slots
+    val timeSlots = listOf(
+        "7:00 - 9:00", "9:00 - 11:00", "11:00 - 13:00", "13:00 - 15:00", "15:00 - 17:00", "17:00 - 19:00"
+    )
 
     /**
      *  setting trainerID != null causes fetching trainerDetails if they (trainingDetails) are observed
@@ -51,6 +78,7 @@ class TrainingProposalViewModel(application: Application) : AndroidViewModel(app
 
     var centreID: String? = null
 
+
     private val dataSource = (application as TrainingNetApplication).dataSource
 
 
@@ -61,6 +89,17 @@ class TrainingProposalViewModel(application: Application) : AndroidViewModel(app
             })
         }
     }
+
+    // fetch upcoming trainings for the trainer TODO - later
+    private val trainings = trainerIdLiveData.switchMap {
+        liveData {
+            emitSource(dataSource.load {
+                dataSource.trainingNetAPI.getTrainerUpcomingTrainings(it)
+            })
+        }
+    }
+
+    // val timeSlots = switchMap or MediatorLiveData
 
     // trainers overviews
     val trainersOverviews = dataSource.load {

@@ -1,5 +1,6 @@
 package com.pwr.trainwithme.data
 
+import java.text.DateFormat
 import java.util.*
 
 interface Summarisable{
@@ -38,6 +39,29 @@ data class TrainerDetails(
     val imagesUrls: List<String>,
     val offers: List<OfferResponse>
 )
+
+data class TimeSlot(
+    val startDate: Date,
+    val endDate: Date
+){
+    override fun toString(): String {
+        val startStr = DateFormat.getTimeInstance().format(startDate)
+        val endStr = DateFormat.getTimeInstance().format(endDate)
+        return "$startStr - $endStr"
+    }
+}
+
+data class TrainingSummary(
+    val trainingID: Long,
+    val startDateTime: String,
+    val endDateTime: String,
+    val centreName: String,
+    val photoUrl: String,
+    val numberOfTrainees: Int,
+    val traineesLimit: Int,
+    val trainingStatus: String
+)
+
 
 data class OfferResponse(
     val id: Long,

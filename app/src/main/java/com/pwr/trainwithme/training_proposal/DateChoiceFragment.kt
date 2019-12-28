@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import com.pwr.trainwithme.data.MockData
 import com.pwr.trainwithme.R
 import com.pwr.trainwithme.utils.showUpcomingDatePickerDialog
+import com.pwr.trainwithme.utils.snack
 import kotlinx.android.synthetic.main.fragment_date_choice.*
 import java.text.DateFormat
 import java.util.*
@@ -25,7 +26,6 @@ import java.util.*
  */
 class DateChoiceFragment : Fragment(), AdapterView.OnItemClickListener, DatePickerDialog.OnDateSetListener {
 
-    private val timeSlots = MockData.timeSlots
     private val calendar = Calendar.getInstance()
     private val proposalViewModel: TrainingProposalViewModel by lazy {
         ViewModelProviders.of(requireActivity())[TrainingProposalViewModel::class.java]
@@ -41,7 +41,7 @@ class DateChoiceFragment : Fragment(), AdapterView.OnItemClickListener, DatePick
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1, timeSlots)
+        val adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1, proposalViewModel.timeSlots)
         list_date_choice_fragment_dates.adapter = adapter
         list_date_choice_fragment_dates.onItemClickListener = this
 
@@ -71,12 +71,19 @@ class DateChoiceFragment : Fragment(), AdapterView.OnItemClickListener, DatePick
         button_date_choice_fragment_back.setOnClickListener {
             findNavController().navigateUp()
         }
+
+        proposalViewModel.isTimeSlotSet.observe(viewLifecycleOwner){
+            button_date_choice_fragment_next.isEnabled = it
+        }
+
         button_date_choice_fragment_next.setOnClickListener {
             findNavController().navigate(R.id.action_dateChoiceFragment_to_centreChoiceFragment)
         }
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        // TODO replace it with dynamic implementation
+        proposalViewModel.setTimeSlot(position)
         findNavController().navigate(R.id.action_dateChoiceFragment_to_centreChoiceFragment)
     }
 
