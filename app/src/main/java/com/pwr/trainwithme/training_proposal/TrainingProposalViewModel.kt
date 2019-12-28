@@ -34,6 +34,10 @@ class TrainingProposalViewModel(application: Application) : AndroidViewModel(app
 
     private var startDateTime: DateTime? = null
     private var endDateTime: DateTime? = null
+    val timeRangeFormatted: String?
+        get() = if (startDateTime == null || endDateTime == null) null
+        else "${startDateTime?.toString()} - ${endDateTime?.toString()}"
+
 
     // TODO replace it with actual time slots
     fun setTimeSlot(position: Int?) {

@@ -80,6 +80,15 @@
             android:id="@+id/action_proposalConclusionFragment_to_homeFragment"
             app:destination="@id/homeFragment"
             app:popUpTo="@+id/offersFragment" />
+        <action
+            android:id="@+id/action_proposalConclusionFragment_to_appointmentFragment"
+            app:destination="@id/appointmentFragment" />
+        <action
+            android:id="@+id/action_proposalConclusionFragment_to_dateChoiceFragment"
+            app:destination="@id/dateChoiceFragment" />
+        <action
+            android:id="@+id/action_proposalConclusionFragment_to_centreChoiceFragment2"
+            app:destination="@id/centreChoiceFragment" />
     </fragment>
     <activity
         android:id="@+id/authActivity"
