@@ -40,6 +40,14 @@ data class TrainerDetails(
     val offers: List<OfferResponse>
 )
 
+data class CentreOverview(
+    val id: Long,
+    val name: String,
+    val latitude: Float,
+    val longitude: Float,
+    val photoUrl: String
+)
+
 data class TimeSlot(
     val startDate: Date,
     val endDate: Date

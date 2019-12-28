@@ -87,8 +87,16 @@ class TrainingProposalViewModel(application: Application) : AndroidViewModel(app
     private val _sportIdLiveData = MutableLiveData<Long>()
     val sportIdLiveData: LiveData<Long> = _sportIdLiveData
 
-    var centreID: String? = null
-
+    /**
+     *  setting centreID != null causes changing sportLiveData which causes changes to UI
+     */
+    var centreID: Long? = null
+        set(value) {
+            if (value != null) _centreIdLiveData.value = value
+            field = value
+        }
+    private val _centreIdLiveData = MutableLiveData<Long>()
+    val centreIdLiveData: LiveData<Long> = _centreIdLiveData
 
     private val dataSource = (application as TrainingNetApplication).dataSource
 
@@ -110,7 +118,14 @@ class TrainingProposalViewModel(application: Application) : AndroidViewModel(app
         }
     }
 
-    // val timeSlots = switchMap or MediatorLiveData
+    // centres overviews
+    val centresOverviews = trainerIdLiveData.switchMap {
+        liveData {
+            emitSource(dataSource.load {
+                dataSource.trainingNetAPI.getTrainerCentres(it)
+            })
+        }
+    }
 
     // trainers overviews
     val trainersOverviews = dataSource.load {

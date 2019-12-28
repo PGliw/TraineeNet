@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.fragment_search_results.*
 /**
  * A simple [Fragment] subclass.
  */
-class SearchResultsFragment : Fragment(){
+class SearchResultsFragment : Fragment() {
 
     private val viewModel by lazy {
         ViewModelProviders.of(requireActivity())[TrainingProposalViewModel::class.java]
@@ -63,7 +63,9 @@ class SearchResultsFragment : Fragment(){
         viewModel.trainersOverviews.observe(viewLifecycleOwner) {
             when (it.status) {
                 Result.Status.LOADING -> snack(getString(R.string.loading)) // TODO change to progress bar
-                Result.Status.SUCCESS -> if(it.data != null) adapter.items = it.data else snack(getString(R.string.null_data_error))
+                Result.Status.SUCCESS -> if (it.data != null) adapter.items = it.data else snack(
+                    getString(R.string.null_data_error)
+                )
                 Result.Status.ERROR -> snack(it.message ?: getString(R.string.unknown_error))
             }
         }
@@ -79,6 +81,7 @@ class SearchResultsFragment : Fragment(){
                 .create()
             builder.show()
         }
+
         button_filter.setOnClickListener {
             val builder = AlertDialog.Builder(requireContext())
                 .setTitle(R.string.filter)
@@ -90,7 +93,7 @@ class SearchResultsFragment : Fragment(){
         }
     }
 
-    fun navigateNext() {
+    private fun navigateNext() {
         findNavController().navigate(R.id.action_searchFragment_to_appointmentFragment)
     }
 }

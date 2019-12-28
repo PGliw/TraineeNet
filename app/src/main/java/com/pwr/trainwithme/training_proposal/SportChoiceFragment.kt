@@ -65,6 +65,10 @@ class SportChoiceFragment : Fragment() {
         renderSportChoiceButton()
         renderPricePerHourText()
 
+        button_sport_fragment_back.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
         button_sport_fragment_next.setOnClickListener {
             findNavController().navigate(R.id.action_appointmentFragment_to_dateChoiceFragment)
         }

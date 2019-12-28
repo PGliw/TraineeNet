@@ -64,7 +64,7 @@ class OffersFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         objects_recycler.initAndObserve(
             requireContext(), viewLifecycleOwner, proposalViewModel.centresSummaries, SummaryAdapter.MEDIUM
         ){
-            proposalViewModel.centreID = it.id
+            proposalViewModel.centreID = it.id.toLong()
             navigateNext()
         }
 

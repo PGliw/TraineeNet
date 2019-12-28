@@ -95,6 +95,14 @@ interface TrainingNetAPI {
         @Header("Authorization")
         authorizationHeaderValue: String = "Bearer $accessToken"
     ): Response<List<TrainingSummary>>
+
+    // TODO query param with sport id, eg. ?sportID=XYZ
+    @GET("trainers2/{id}/centres")
+    suspend fun getTrainerCentres(
+        @Path("id") trainerID: Long,
+        @Header("Authorization")
+        authorizationHeaderValue: String = "Bearer $accessToken"
+    ): Response<List<CentreOverview>>
 }
 
 /**

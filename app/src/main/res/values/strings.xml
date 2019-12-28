@@ -66,4 +66,6 @@
     <string name="null_data_error">Loaded data is null</string>
     <string name="choose_sport">Choose sport</string>
     <string name="dollars_per_hour">$/h</string>
+    <string name="centre_photo">Centre photo</string>
+    <string name="selected">Selected</string>
 </resources>
