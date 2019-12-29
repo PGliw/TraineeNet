@@ -48,6 +48,7 @@ class HomeFragment : Fragment() {
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         upcoming_trainings_recycler.adapter = trainingSummaryAdapter
 
+        trainingsManagementViewModel.refreshTrainingsSummaries()
         trainingsManagementViewModel.trainingsSummaries.observe(viewLifecycleOwner) {
             when (it.status) {
                 Result.Status.LOADING -> snack(getString(R.string.loading)) // TODO change to progress bar
@@ -58,7 +59,6 @@ class HomeFragment : Fragment() {
                 }
             }
         }
-
 
         passes_recycler.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
