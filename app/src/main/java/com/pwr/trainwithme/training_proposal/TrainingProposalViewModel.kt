@@ -1,16 +1,13 @@
 package com.pwr.trainwithme.training_proposal
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
 import com.pwr.trainwithme.TrainingNetApplication
 import com.pwr.trainwithme.data.Summarisable
 import com.pwr.trainwithme.data.TraineeTrainingDTO
 import org.joda.time.DateTime
 import org.joda.time.LocalDate
-import org.joda.time.LocalDateTime
 import org.joda.time.format.DateTimeFormat
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 class TrainingProposalViewModel(application: Application) : AndroidViewModel(application) {
@@ -79,32 +76,54 @@ class TrainingProposalViewModel(application: Application) : AndroidViewModel(app
     /**
      *  setting trainerID != null causes fetching trainerDetails if they (trainingDetails) are observed
      */
+    fun setTrainerIdAndName(id: Long, name: String) {
+        trainerID = id
+        trainerName = name
+    }
+
     var trainerID: Long? = null
-        set(value) {
+        private set(value) {
             if (value != null) trainerIdLiveData.value = value
             field = value
         }
+    var trainerName: String? = null
+        private set
     private val trainerIdLiveData = MutableLiveData<Long>()
+
 
     /**
      *  setting sportID != null causes changing sportLiveData which causes changes to UI
      */
+    fun setSportIdAndName(id: Long, name: String) {
+        sportID = id
+        sportName = name
+    }
+
     var sportID: Long? = null
-        set(value) {
+        private set(value) {
             if (value != null) _sportIdLiveData.value = value
             field = value
         }
+    var sportName: String? = null
+        private set
     private val _sportIdLiveData = MutableLiveData<Long>()
     val sportIdLiveData: LiveData<Long> = _sportIdLiveData
+
 
     /**
      *  setting centreID != null causes changing sportLiveData which causes changes to UI
      */
+    fun setCentreIdAndName(id: Long, name: String) {
+        centreID = id
+        centreName = name
+    }
     var centreID: Long? = null
-        set(value) {
+        private set(value) {
             if (value != null) _centreIdLiveData.value = value
             field = value
         }
+    var centreName: String? = null
+        private set
     private val _centreIdLiveData = MutableLiveData<Long>()
     val centreIdLiveData: LiveData<Long> = _centreIdLiveData
 
@@ -112,7 +131,7 @@ class TrainingProposalViewModel(application: Application) : AndroidViewModel(app
 
     fun sendTrainingProposal() = dataSource.load {
         val formatter = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSS")
-        if( startDateTime == null || endDateTime == null) throw NullPointerException("dates = null")
+        if (startDateTime == null || endDateTime == null) throw NullPointerException("dates = null")
         val startDateTimeStr = formatter.print(startDateTime)
         val endDateTimeStr = formatter.print(endDateTime)
         val dto = TraineeTrainingDTO(
@@ -122,7 +141,6 @@ class TrainingProposalViewModel(application: Application) : AndroidViewModel(app
             trainerID = trainerID ?: throw NullPointerException("trainerID = null"),
             centreID = centreID ?: throw java.lang.NullPointerException("centreID = null")
         )
-        Log.d(TAG, dto.toString())
         dataSource.trainingNetAPI.postTraineeTraining(dto)
     }
 

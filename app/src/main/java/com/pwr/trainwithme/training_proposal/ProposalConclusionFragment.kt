@@ -1,6 +1,8 @@
 package com.pwr.trainwithme.training_proposal
 
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -19,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_proposal_conclusion.*
 /**
  * A simple [Fragment] subclass.
  */
-class ProposalConclusionFragment : Fragment(), SlideToActView.OnSlideCompleteListener {
+class ProposalConclusionFragment : Fragment(), SlideToActView.OnSlideCompleteListener, DialogInterface.OnClickListener {
 
     companion object{
         const val TAG = "ProposalConcFrag"
@@ -40,8 +42,7 @@ class ProposalConclusionFragment : Fragment(), SlideToActView.OnSlideCompleteLis
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // TODO display proper texts in buttons (from where???)
-
+        button_fragment_proposal_conclusion_sport.text = proposalViewModel.sportName
         button_fragment_proposal_conclusion_sport.setOnClickListener {
             findNavController().navigate(R.id.action_proposalConclusionFragment_to_appointmentFragment)
         }
@@ -51,6 +52,7 @@ class ProposalConclusionFragment : Fragment(), SlideToActView.OnSlideCompleteLis
             findNavController().navigate(R.id.action_proposalConclusionFragment_to_dateChoiceFragment)
         }
 
+        button_fragment_proposal_conclusion_center.text = proposalViewModel.centreName
         button_fragment_proposal_conclusion_center.setOnClickListener {
             findNavController().navigate(R.id.action_proposalConclusionFragment_to_centreChoiceFragment2)
         }
@@ -59,21 +61,29 @@ class ProposalConclusionFragment : Fragment(), SlideToActView.OnSlideCompleteLis
     }
 
     override fun onSlideComplete(view: SlideToActView) {
-        // TODO send request
         val result = proposalViewModel.sendTrainingProposal()
         result.observe(viewLifecycleOwner){
             when(it.status){
-                Result.Status.LOADING -> snack("Loading")
+                Result.Status.LOADING -> snack(getString(R.string.loading))
                 Result.Status.ERROR -> {
-                    snack(it.message ?: "Error")
-                    Log.d(TAG, "${it.message}")
+                    snack(it.message ?: getString(R.string.unknown_error))
+                    Log.e(TAG, it.message)
                     slide_fragment_proposal_conclusion_send_proposal.resetSlider()
                 }
-                Result.Status.SUCCESS -> {
-                    snack("Success")
-                    findNavController().navigate(R.id.action_proposalConclusionFragment_to_homeFragment)
-                }
+                Result.Status.SUCCESS -> renderConfirmationPopup()
             }
         }
+    }
+
+    private fun renderConfirmationPopup(){
+        AlertDialog.Builder(requireActivity())
+            .setMessage(R.string.training_proposal_sent_message)
+            .setPositiveButton(R.string.ok, this)
+            .show()
+    }
+
+    override fun onClick(dialog: DialogInterface?, which: Int) {
+        dialog?.dismiss()
+        findNavController().navigate(R.id.action_proposalConclusionFragment_to_homeFragment)
     }
 }

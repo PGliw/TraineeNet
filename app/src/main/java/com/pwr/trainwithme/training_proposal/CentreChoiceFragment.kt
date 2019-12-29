@@ -87,7 +87,7 @@ class CentreChoiceFragment : Fragment() {
 
     private fun onCentreSelected(centreOverview: CentreOverview) {
         snack("${getString(R.string.selected)}: ${centreOverview.name}")
-        proposalViewModel.centreID = centreOverview.id
+        proposalViewModel.setCentreIdAndName(centreOverview.id, centreOverview.name)
     }
 
     private fun onMoreInfoClicked(centreOverview: CentreOverview) {

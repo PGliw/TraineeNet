@@ -68,4 +68,6 @@
     <string name="dollars_per_hour">$/h</string>
     <string name="centre_photo">Centre photo</string>
     <string name="selected">Selected</string>
+    <string name="training_proposal_sent_message">Training proposal was successfully sent. You will be informed about trainer\'s feedback</string>
+    <string name="ok">OK</string>
 </resources>

@@ -122,7 +122,7 @@ class SportChoiceFragment : Fragment() {
         val builder = AlertDialog.Builder(requireContext())
             .setTitle(R.string.sport_discipline)
             .setSingleChoiceItems(sports.toTypedArray(), initialPosition) { dialog, which ->
-                viewModel.sportID = offers[which].sportID
+                viewModel.setSportIdAndName(offers[which].sportID, offers[which].sportName)
                 dialog.dismiss()
             }
         builder.create().show()

@@ -50,7 +50,7 @@ class SearchResultsFragment : Fragment() {
         val adapter = TrainerOverviewAdapter(
             requireContext(), listOf()
         ) {
-            viewModel.trainerID = it.id
+            viewModel.setTrainerIdAndName(it.id, "${it.firstName} ${it.lastName}")
             navigateNext()
         }
         offer_recycler.adapter = adapter

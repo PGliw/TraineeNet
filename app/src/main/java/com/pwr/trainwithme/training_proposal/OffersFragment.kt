@@ -50,21 +50,21 @@ class OffersFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         sports_recycler.initAndObserve(
             requireContext(), viewLifecycleOwner, proposalViewModel.sportsSummaries, SummaryAdapter.MEDIUM
         ){
-            proposalViewModel.sportID = it.id.toLong() // TODO change in Summarisable
+            proposalViewModel.setSportIdAndName(it.id.toLong(), it.title) // TODO change in Summarisable
             navigateNext()
         }
 
         trainers_recycler.initAndObserve(
             requireContext(), viewLifecycleOwner, proposalViewModel.trainersSummaries, SummaryAdapter.THIN
         ){
-            proposalViewModel.trainerID = it.id.toLong() // TODO change in Summarisable
+            proposalViewModel.setTrainerIdAndName(it.id.toLong(), it.title) // TODO change in Summarisable
             findNavController().navigate(R.id.action_offersFragment_to_appointmentFragment)
         }
 
         objects_recycler.initAndObserve(
             requireContext(), viewLifecycleOwner, proposalViewModel.centresSummaries, SummaryAdapter.MEDIUM
         ){
-            proposalViewModel.centreID = it.id.toLong()
+            proposalViewModel.setCentreIdAndName(it.id.toLong(), it.title) // TODO change in Summarisable
             navigateNext()
         }
 
