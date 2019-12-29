@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="240dp"
+    android:layout_height="180dp"
+    app:cardCornerRadius="5dp"
+    android:layout_margin="5dp"
+    android:layout_marginBottom="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/text_training_summary_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textAlignment="center"
+            tools:text="PROPOSED"
+            style="@style/TextAppearance.AppCompat.Caption"
+            />
+
+        <ImageView
+            android:id="@+id/image_left_side"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:contentDescription="@string/sport_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_training_summary_status"
+            app:layout_constraintBottom_toTopOf="@id/text_training_summary_sport" />
+
+        <TextView
+            android:id="@+id/text_training_summary_sport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/text_training_summary_centre"
+            android:textAlignment="center"
+            style="@style/TextAppearance.AppCompat.Headline"
+            tools:text="Judo"
+            />
+
+        <TextView
+            android:id="@+id/text_training_summary_centre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/text_training_summary_date"
+            android:textAlignment="center"
+            style="@style/TextAppearance.AppCompat.Body1"
+            tools:text="Fitness Academy"
+            />
+
+        <TextView
+            android:id="@+id/text_training_summary_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="10dp"
+            android:textAlignment="center"
+            style="@style/TextAppearance.AppCompat.Body1"
+            tools:text="31.12.2019"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
