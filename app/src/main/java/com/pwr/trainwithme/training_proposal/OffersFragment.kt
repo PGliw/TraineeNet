@@ -57,7 +57,7 @@ class OffersFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         trainers_recycler.initAndObserve(
             requireContext(), viewLifecycleOwner, proposalViewModel.trainersSummaries, SummaryAdapter.THIN
         ){
-            proposalViewModel.setTrainerIdAndName(it.id.toLong(), it.title) // TODO change in Summarisable
+            proposalViewModel.setTrainerIdAndNameAndPhotoUrl(it.id.toLong(), it.title, it.imageUrl) // TODO change in Summarisable
             findNavController().navigate(R.id.action_offersFragment_to_appointmentFragment)
         }
 

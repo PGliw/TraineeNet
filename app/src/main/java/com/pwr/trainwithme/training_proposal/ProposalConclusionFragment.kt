@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.ncorti.slidetoact.SlideToActView
 import com.pwr.trainwithme.R
 import com.pwr.trainwithme.data.Result
@@ -42,16 +43,27 @@ class ProposalConclusionFragment : Fragment(), SlideToActView.OnSlideCompleteLis
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // render trainer
+        Glide.with(requireActivity())
+            .load(proposalViewModel.trainerPhotoUrl)
+            .placeholder(R.drawable.simple_loading_img_placeholder)
+            .error(R.drawable.error_image_placeholder)
+            .into(image_fragment_proposal_conclusion_trainer)
+        text_fragment_proposal_conclusion_trainer_name.text = proposalViewModel.trainerName
+
+        // render sport
         button_fragment_proposal_conclusion_sport.text = proposalViewModel.sportName
         button_fragment_proposal_conclusion_sport.setOnClickListener {
             findNavController().navigate(R.id.action_proposalConclusionFragment_to_appointmentFragment)
         }
 
+        // render date
         button_fragment_proposal_conclusion_date.text = proposalViewModel.timeRangeFormatted
         button_fragment_proposal_conclusion_date.setOnClickListener {
             findNavController().navigate(R.id.action_proposalConclusionFragment_to_dateChoiceFragment)
         }
 
+        // render centre
         button_fragment_proposal_conclusion_center.text = proposalViewModel.centreName
         button_fragment_proposal_conclusion_center.setOnClickListener {
             findNavController().navigate(R.id.action_proposalConclusionFragment_to_centreChoiceFragment2)

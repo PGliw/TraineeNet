@@ -17,7 +17,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        style="@style/TextAppearance.AppCompat.Body1"
+        style="@style/TextAppearance.AppCompat.Headline"
+        android:id="@+id/text_fragment_proposal_conclusion_trainer_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="John, 21"
@@ -73,7 +74,7 @@
         style="@style/TextAppearance.AppCompat.Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="I want an individual training"
+        android:text="@string/i_want_an_individual_training"
         android:layout_marginStart="16dp"
         app:layout_constraintStart_toEndOf="@id/checkbox_fragment_proposal_conclusion_individual"
         app:layout_constraintTop_toTopOf="@id/checkbox_fragment_proposal_conclusion_individual"

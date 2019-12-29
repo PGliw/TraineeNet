@@ -11,11 +11,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.pwr.trainwithme.data.Detailable
-import com.pwr.trainwithme.data.MockData
 import com.pwr.trainwithme.R
 import com.pwr.trainwithme.utils.VerticalScrollHider
-import com.pwr.trainwithme.adapters.DetailableAdapter
 import com.pwr.trainwithme.adapters.TrainerOverviewAdapter
 import com.pwr.trainwithme.data.Result
 import com.pwr.trainwithme.utils.snack
@@ -50,7 +47,11 @@ class SearchResultsFragment : Fragment() {
         val adapter = TrainerOverviewAdapter(
             requireContext(), listOf()
         ) {
-            viewModel.setTrainerIdAndName(it.id, "${it.firstName} ${it.lastName}")
+            viewModel.setTrainerIdAndNameAndPhotoUrl(
+                it.id,
+                "${it.firstName} ${it.lastName}",
+                it.photoUrl
+            )
             navigateNext()
         }
         offer_recycler.adapter = adapter

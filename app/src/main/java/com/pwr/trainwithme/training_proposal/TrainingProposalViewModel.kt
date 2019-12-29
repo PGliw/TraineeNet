@@ -76,17 +76,19 @@ class TrainingProposalViewModel(application: Application) : AndroidViewModel(app
     /**
      *  setting trainerID != null causes fetching trainerDetails if they (trainingDetails) are observed
      */
-    fun setTrainerIdAndName(id: Long, name: String) {
+    fun setTrainerIdAndNameAndPhotoUrl(id: Long, name: String, photoUrl: String) {
         trainerID = id
         trainerName = name
+        trainerPhotoUrl = photoUrl
     }
-
     var trainerID: Long? = null
         private set(value) {
             if (value != null) trainerIdLiveData.value = value
             field = value
         }
     var trainerName: String? = null
+        private set
+    var trainerPhotoUrl: String? = null
         private set
     private val trainerIdLiveData = MutableLiveData<Long>()
 
