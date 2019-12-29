@@ -9,6 +9,8 @@ import com.pwr.trainwithme.data.TraineeTrainingDTO
 import org.joda.time.DateTime
 import org.joda.time.LocalDate
 import org.joda.time.LocalDateTime
+import org.joda.time.format.DateTimeFormat
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class TrainingProposalViewModel(application: Application) : AndroidViewModel(application) {
@@ -36,9 +38,12 @@ class TrainingProposalViewModel(application: Application) : AndroidViewModel(app
     private var startDateTime: DateTime? = null
     private var endDateTime: DateTime? = null
     val timeRangeFormatted: String?
-        get() = if (startDateTime == null || endDateTime == null) null
-        else "${startDateTime?.toString()} - ${endDateTime?.toString()}"
-
+        get() {
+            return if (startDateTime == null || endDateTime == null) null
+            else {
+                "${startDateTime?.toString()} - ${endDateTime?.toString()}"
+            }
+        }
 
     // TODO replace it with actual time slots
     fun setTimeSlot(position: Int?) {
@@ -106,16 +111,22 @@ class TrainingProposalViewModel(application: Application) : AndroidViewModel(app
     private val dataSource = (application as TrainingNetApplication).dataSource
 
     fun sendTrainingProposal() = dataSource.load {
+        val formatter = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSS")
+        if( startDateTime == null || endDateTime == null) throw NullPointerException("dates = null")
+        val startDateTimeStr = formatter.print(startDateTime)
+        val endDateTimeStr = formatter.print(endDateTime)
+        val dto = TraineeTrainingDTO(
+            startDateTime = startDateTimeStr,
+            endDateTime = endDateTimeStr,
+            sportID = sportID ?: throw NullPointerException("sportID = null"),
+            traineeID = 17L, // TODO change
+            trainerID = trainerID ?: throw NullPointerException("trainerID = null"),
+            centreID = centreID ?: throw java.lang.NullPointerException("centreID = null")
+        )
+        Log.d(TAG, dto.toString())
         dataSource.trainingNetAPI.postTraineeTraining(
             17, // TODO change
-            TraineeTrainingDTO(
-                startDateTime = startDateTime.toString(),
-                endDateTime = endDateTime.toString(),
-                sportID = sportID ?: throw NullPointerException("sportID = null"),
-                traineeID = 17L, // TODO change
-                trainerID = trainerID ?: throw NullPointerException("trainerID = null"),
-                centreID = centreID ?: throw java.lang.NullPointerException("centreID = null")
-            )
+            dto
         )
     }
 

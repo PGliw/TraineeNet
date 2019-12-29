@@ -2,6 +2,7 @@ package com.pwr.trainwithme.training_proposal
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,10 @@ import kotlinx.android.synthetic.main.fragment_proposal_conclusion.*
  * A simple [Fragment] subclass.
  */
 class ProposalConclusionFragment : Fragment(), SlideToActView.OnSlideCompleteListener {
+
+    companion object{
+        const val TAG = "ProposalConcFrag"
+    }
 
     private val proposalViewModel by lazy {
         ViewModelProviders.of(requireActivity())[TrainingProposalViewModel::class.java]
@@ -60,7 +65,8 @@ class ProposalConclusionFragment : Fragment(), SlideToActView.OnSlideCompleteLis
             when(it.status){
                 Result.Status.LOADING -> snack("Loading")
                 Result.Status.ERROR -> {
-                    snack("Error")
+                    snack(it.message ?: "Error")
+                    Log.d(TAG, "${it.message}")
                     slide_fragment_proposal_conclusion_send_proposal.resetSlider()
                 }
                 Result.Status.SUCCESS -> {

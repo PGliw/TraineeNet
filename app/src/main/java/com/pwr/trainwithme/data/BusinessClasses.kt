@@ -87,7 +87,7 @@ data class TraineeTrainingDTO(
     val centreID: Long,
     val trainerID: Long,
     val traineeID: Long,
-    val traineesLimit: Int = 1
+    val traineeLimit: Int = 1
 )
 
 interface Detailable : Summarisable {
