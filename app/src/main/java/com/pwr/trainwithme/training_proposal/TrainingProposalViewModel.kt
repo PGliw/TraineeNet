@@ -119,15 +119,11 @@ class TrainingProposalViewModel(application: Application) : AndroidViewModel(app
             startDateTime = startDateTimeStr,
             endDateTime = endDateTimeStr,
             sportID = sportID ?: throw NullPointerException("sportID = null"),
-            traineeID = 17L, // TODO change
             trainerID = trainerID ?: throw NullPointerException("trainerID = null"),
             centreID = centreID ?: throw java.lang.NullPointerException("centreID = null")
         )
         Log.d(TAG, dto.toString())
-        dataSource.trainingNetAPI.postTraineeTraining(
-            17, // TODO change
-            dto
-        )
+        dataSource.trainingNetAPI.postTraineeTraining(dto)
     }
 
     val trainerDetails = trainerIdLiveData.switchMap {

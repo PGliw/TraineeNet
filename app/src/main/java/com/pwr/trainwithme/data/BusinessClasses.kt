@@ -86,7 +86,6 @@ data class TraineeTrainingDTO(
     val sportID: Long,
     val centreID: Long,
     val trainerID: Long,
-    val traineeID: Long,
     val traineeLimit: Int = 1
 )
 
