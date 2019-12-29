@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.pwr.trainwithme.R
-import com.pwr.trainwithme.data.TrainerOverview
+import com.pwr.commonplatform.data.TrainerOverview
 
 class TrainerOverviewAdapter(
     private val context: Context,

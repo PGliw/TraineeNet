@@ -12,10 +12,10 @@ import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.pwr.trainwithme.R
 import com.pwr.trainwithme.adapters.SliderAdapter
-import com.pwr.trainwithme.data.OfferResponse
-import com.pwr.trainwithme.data.Result
-import com.pwr.trainwithme.data.TrainerDetails
-import com.pwr.trainwithme.utils.snack
+import com.pwr.commonplatform.data.OfferResponse
+import com.pwr.commonplatform.data.Result
+import com.pwr.commonplatform.data.TrainerDetails
+import com.pwr.commonplatform.utils.snack
 import com.smarteist.autoimageslider.IndicatorAnimations
 import kotlinx.android.synthetic.main.fragment_sport_choice.*
 
@@ -54,7 +54,7 @@ class SportChoiceFragment : Fragment() {
         viewModel.trainerDetails.observe(viewLifecycleOwner){
             when (it.status) {
                 Result.Status.LOADING -> snack(getString(R.string.loading)) // TODO change to progress bar
-                Result.Status.SUCCESS -> if(it.data != null) renderUI(it.data) else snack(getString(R.string.null_data_error))
+                Result.Status.SUCCESS -> renderUI(it.data)
                 Result.Status.ERROR -> {
                     button_sport_fragment_next.isEnabled = false
                     snack(it.message ?: getString(R.string.unknown_error))
@@ -77,7 +77,11 @@ class SportChoiceFragment : Fragment() {
     /**
      * Setup UI and listeners with given trainerDetails
      */
-    private fun renderUI(trainerDetails: TrainerDetails){
+    private fun renderUI(trainerDetails: TrainerDetails?){
+        if(trainerDetails == null){
+            snack(getString(R.string.null_data_error))
+            return
+        }
         val title = "${trainerDetails.firstName} ${trainerDetails.lastName}, ${trainerDetails.age}"
         text_fragment_sport_choice_trainer_name.text = title
         text_fragment_sport_choice_trainer_description.text = trainerDetails.description

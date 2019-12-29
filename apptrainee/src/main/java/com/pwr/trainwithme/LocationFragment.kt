@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.pwr.commonplatform.SampleSharedClass
-import com.pwr.trainwithme.utils.snack
+import com.pwr.commonplatform.utils.snack
 
 /**
  * A simple [Fragment] subclass.

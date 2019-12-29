@@ -1,4 +1,4 @@
-package com.pwr.trainwithme.data
+package com.pwr.commonplatform.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData

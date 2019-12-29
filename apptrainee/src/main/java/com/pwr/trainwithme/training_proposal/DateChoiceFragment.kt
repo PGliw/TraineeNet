@@ -13,10 +13,8 @@ import android.widget.DatePicker
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
-import com.pwr.trainwithme.data.MockData
 import com.pwr.trainwithme.R
-import com.pwr.trainwithme.utils.showUpcomingDatePickerDialog
-import com.pwr.trainwithme.utils.snack
+import com.pwr.commonplatform.utils.showUpcomingDatePickerDialog
 import kotlinx.android.synthetic.main.fragment_date_choice.*
 import java.text.DateFormat
 import java.util.*

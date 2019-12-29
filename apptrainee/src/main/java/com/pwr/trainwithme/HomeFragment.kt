@@ -7,16 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pwr.trainwithme.adapters.SummaryAdapter
 import com.pwr.trainwithme.adapters.TrainingSummaryAdapter
-import com.pwr.trainwithme.data.MockData
-import com.pwr.trainwithme.data.Result
-import com.pwr.trainwithme.data.TrainingSummary
-import com.pwr.trainwithme.utils.snack
+import com.pwr.commonplatform.data.MockData
+import com.pwr.commonplatform.data.Result
+import com.pwr.commonplatform.data.TrainingSummary
+import com.pwr.commonplatform.utils.snack
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_sport_choice.*
+import androidx.lifecycle.observe
 
 class HomeFragment : Fragment() {
 
@@ -52,8 +51,7 @@ class HomeFragment : Fragment() {
         trainingsManagementViewModel.trainingsSummaries.observe(viewLifecycleOwner) {
             when (it.status) {
                 Result.Status.LOADING -> snack(getString(R.string.loading)) // TODO change to progress bar
-                Result.Status.SUCCESS -> if (it.data != null) renderTrainingsSummaries(it.data)
-                else snack(getString(R.string.null_data_error))
+                Result.Status.SUCCESS -> renderTrainingsSummaries(it.data)
                 Result.Status.ERROR -> {
                     snack(it.message ?: getString(R.string.unknown_error))
                 }
@@ -71,8 +69,9 @@ class HomeFragment : Fragment() {
             )
     }
 
-    private fun renderTrainingsSummaries(summaries: List<TrainingSummary>) {
-        trainingSummaryAdapter.items = summaries
+    private fun renderTrainingsSummaries(summaries: List<TrainingSummary>?) {
+        if(summaries == null) snack(getString(R.string.null_data_error))
+        else trainingSummaryAdapter.items = summaries
     }
 
 }

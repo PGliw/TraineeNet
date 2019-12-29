@@ -1,4 +1,4 @@
-package com.pwr.trainwithme.data
+package com.pwr.commonplatform.data
 
 /**
  * SOURCE: https://gist.github.com/Eli-Fox/5e175fedead29486f232160c74901dd5#file-result-kt

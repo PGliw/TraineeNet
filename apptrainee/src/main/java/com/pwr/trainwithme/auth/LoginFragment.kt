@@ -2,25 +2,19 @@ package com.pwr.trainwithme.auth
 
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import com.pwr.trainwithme.R
-import com.pwr.trainwithme.data.Result
-import com.pwr.trainwithme.utils.afterTextChanged
-import com.pwr.trainwithme.utils.snack
+import com.pwr.commonplatform.data.Result
+import com.pwr.commonplatform.utils.afterTextChanged
+import com.pwr.commonplatform.utils.snack
 import kotlinx.android.synthetic.main.fragment_login.*
 
 /**

@@ -2,9 +2,8 @@ package com.pwr.trainwithme.training_proposal
 
 import android.app.Application
 import androidx.lifecycle.*
+import com.pwr.commonplatform.data.*
 import com.pwr.trainwithme.TrainingNetApplication
-import com.pwr.trainwithme.data.Summarisable
-import com.pwr.trainwithme.data.TraineeTrainingDTO
 import org.joda.time.DateTime
 import org.joda.time.LocalDate
 import org.joda.time.format.DateTimeFormat
@@ -131,7 +130,7 @@ class TrainingProposalViewModel(application: Application) : AndroidViewModel(app
 
     private val dataSource = (application as TrainingNetApplication).dataSource
 
-    fun sendTrainingProposal() = dataSource.load {
+    fun sendTrainingProposal() : LiveData<Result<Any>> = dataSource.load {
         val formatter = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSS")
         if (startDateTime == null || endDateTime == null) throw NullPointerException("dates = null")
         val startDateTimeStr = formatter.print(startDateTime)

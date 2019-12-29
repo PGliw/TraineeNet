@@ -1,8 +1,8 @@
-package com.pwr.trainwithme.data
+package com.pwr.commonplatform.data
 
 import android.content.Context
 import com.google.gson.annotations.SerializedName
-import com.pwr.trainwithme.utils.ConnectivityInterceptor
+import com.pwr.commonplatform.utils.ConnectivityInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

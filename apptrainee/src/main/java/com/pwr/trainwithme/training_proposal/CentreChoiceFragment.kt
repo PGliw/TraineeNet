@@ -2,7 +2,6 @@ package com.pwr.trainwithme.training_proposal
 
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,11 +12,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pwr.trainwithme.R
 import com.pwr.trainwithme.adapters.CentreOverviewAdapter
-import com.pwr.trainwithme.adapters.DetailableAdapter
-import com.pwr.trainwithme.data.*
-import com.pwr.trainwithme.utils.snack
+import com.pwr.commonplatform.data.*
+import com.pwr.commonplatform.utils.snack
 import kotlinx.android.synthetic.main.fragment_centre_choice.*
-import kotlinx.android.synthetic.main.fragment_sport_choice.*
 
 /**
  * A simple [Fragment] subclass.
@@ -57,9 +54,7 @@ class CentreChoiceFragment : Fragment() {
         proposalViewModel.centresOverviews.observe(viewLifecycleOwner) {
             when (it.status) {
                 Result.Status.LOADING -> snack(getString(R.string.loading)) // TODO change to progress bar
-                Result.Status.SUCCESS -> if (it.data != null) renderUI(it.data) else snack(
-                    getString(R.string.null_data_error)
-                )
+                Result.Status.SUCCESS -> renderUI(it.data)
                 Result.Status.ERROR -> {
                     button_centre_choice_fragment_next.isEnabled = false
                     snack(it.message ?: getString(R.string.unknown_error))
@@ -76,12 +71,15 @@ class CentreChoiceFragment : Fragment() {
         }
     }
 
-    private fun renderUI(centres: List<CentreOverview>) {
-        adapter.items = centres
+    private fun renderUI(centres: List<CentreOverview>?) {
+        if (centres == null) snack(getString(R.string.null_data_error))
+        else {
+            adapter.items = centres
 
-        // enable only if the centre is in centre id overviews
-        proposalViewModel.centreIdLiveData.observe(viewLifecycleOwner){ id ->
-            button_centre_choice_fragment_next.isEnabled = id in centres.map { it.id }
+            // enable only if the centre is in centre id overviews
+            proposalViewModel.centreIdLiveData.observe(viewLifecycleOwner) { id ->
+                button_centre_choice_fragment_next.isEnabled = id in centres.map { it.id }
+            }
         }
     }
 

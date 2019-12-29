@@ -1,4 +1,4 @@
-package com.pwr.trainwithme.data
+package com.pwr.commonplatform.data
 
 import androidx.lifecycle.*
 import retrofit2.Response

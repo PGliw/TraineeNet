@@ -8,15 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pwr.trainwithme.R
-import com.pwr.trainwithme.utils.VerticalScrollHider
+import com.pwr.commonplatform.utils.VerticalScrollHider
 import com.pwr.trainwithme.adapters.TrainerOverviewAdapter
-import com.pwr.trainwithme.data.Result
-import com.pwr.trainwithme.utils.snack
+import com.pwr.commonplatform.data.Result
+import com.pwr.commonplatform.utils.snack
 import kotlinx.android.synthetic.main.fragment_search_results.*
+import androidx.lifecycle.observe
+import com.pwr.commonplatform.data.TrainerOverview
 
 /**
  * A simple [Fragment] subclass.
@@ -26,9 +27,20 @@ class SearchResultsFragment : Fragment() {
     private val viewModel by lazy {
         ViewModelProviders.of(requireActivity())[TrainingProposalViewModel::class.java]
     }
-
-    var sortByIndex = 0
-    var filterIndex = 0
+    private val adapter by lazy {
+        TrainerOverviewAdapter(
+            requireContext(), listOf()
+        ) {
+            viewModel.setTrainerIdAndNameAndPhotoUrl(
+                it.id,
+                "${it.firstName} ${it.lastName}",
+                it.photoUrl
+            )
+            navigateNext()
+        }
+    }
+    private var sortByIndex = 0
+    private var filterIndex = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,16 +56,6 @@ class SearchResultsFragment : Fragment() {
         // viewModel apply search
 
         offer_recycler.layoutManager = LinearLayoutManager(requireContext())
-        val adapter = TrainerOverviewAdapter(
-            requireContext(), listOf()
-        ) {
-            viewModel.setTrainerIdAndNameAndPhotoUrl(
-                it.id,
-                "${it.firstName} ${it.lastName}",
-                it.photoUrl
-            )
-            navigateNext()
-        }
         offer_recycler.adapter = adapter
         offer_recycler.addOnScrollListener(
             VerticalScrollHider(
@@ -64,9 +66,7 @@ class SearchResultsFragment : Fragment() {
         viewModel.trainersOverviews.observe(viewLifecycleOwner) {
             when (it.status) {
                 Result.Status.LOADING -> snack(getString(R.string.loading)) // TODO change to progress bar
-                Result.Status.SUCCESS -> if (it.data != null) adapter.items = it.data else snack(
-                    getString(R.string.null_data_error)
-                )
+                Result.Status.SUCCESS -> renderTrainersOverviews(it.data)
                 Result.Status.ERROR -> snack(it.message ?: getString(R.string.unknown_error))
             }
         }
@@ -92,6 +92,11 @@ class SearchResultsFragment : Fragment() {
                 }
             builder.show()
         }
+    }
+
+    private fun renderTrainersOverviews(trainerOverviews : List<TrainerOverview>?){
+        if(trainerOverviews == null) snack(getString(R.string.null_data_error))
+        else adapter.items = trainerOverviews
     }
 
     private fun navigateNext() {

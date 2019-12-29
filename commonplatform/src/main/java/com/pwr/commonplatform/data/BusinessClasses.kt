@@ -1,4 +1,4 @@
-package com.pwr.trainwithme.data
+package com.pwr.commonplatform.data
 
 import org.joda.time.DateTime
 import java.text.DateFormat

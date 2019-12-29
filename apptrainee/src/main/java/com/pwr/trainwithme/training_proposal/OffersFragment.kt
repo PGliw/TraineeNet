@@ -8,13 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.*
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import com.pwr.commonplatform.utils.showUpcomingDatePickerDialog
 import com.pwr.trainwithme.R
 import com.pwr.trainwithme.adapters.SummaryAdapter
 import com.pwr.trainwithme.utils.initAndObserve
-import com.pwr.trainwithme.utils.showUpcomingDatePickerDialog
 import kotlinx.android.synthetic.main.fragment_offers.*
 import java.text.DateFormat
 import java.util.*

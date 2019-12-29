@@ -1,4 +1,4 @@
-package com.pwr.trainwithme.utils
+package com.pwr.commonplatform.utils
 
 import android.content.Context
 import android.net.ConnectivityManager

@@ -1,7 +1,6 @@
 package com.pwr.trainwithme.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -11,9 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.pwr.trainwithme.R
-import com.pwr.trainwithme.data.Summarisable
-import com.squareup.picasso.Picasso
-import com.squareup.picasso.PicassoProvider
+import com.pwr.commonplatform.data.Summarisable
 
 class SummaryAdapter(
     private val context: Context,
