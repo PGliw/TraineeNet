@@ -60,18 +60,6 @@ data class TimeSlot(
     }
 }
 
-data class TrainingSummary(
-    val trainingID: Long,
-    val startDateTime: String,
-    val endDateTime: String,
-    val centreName: String,
-    val photoUrl: String,
-    val numberOfTrainees: Int,
-    val traineesLimit: Int,
-    val trainingStatus: String
-)
-
-
 data class OfferResponse(
     val id: Long,
     val pricePerHour: Float,
@@ -87,6 +75,18 @@ data class TraineeTrainingDTO(
     val centreID: Long,
     val trainerID: Long,
     val traineeLimit: Int = 1
+)
+
+data class TrainingSummary(
+    val trainingID: Long,
+    val centreName: String,
+    val trainerFirstName: String,
+    val trainerLastName: String,
+    val trainingStartDateTime: String,
+    val trainingEndDateTime: String,
+    val trainingStatus: String,
+    val sportPhotoUrl: String,
+    val sportName: String
 )
 
 interface Detailable : Summarisable {
