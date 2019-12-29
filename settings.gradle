@@ -1,2 +1,2 @@
-include ':apptrainee', ':commonplatform'
+include ':apptrainee', ':commonplatform', ':apptrainer'
 rootProject.name='TrainWithMe'
