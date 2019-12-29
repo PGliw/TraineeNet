@@ -1,4 +1,4 @@
-package com.pwr.trainwithme
+package com.pwr.trainwithme.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +8,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
+import com.pwr.trainwithme.MainViewModel
+import com.pwr.trainwithme.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -23,7 +25,11 @@ class MainActivity : AppCompatActivity() {
 
         // Set of top level destinations - don't show up arrow in toolbar in there
         val appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.offersFragment, R.id.homeFragment, R.id.locationFragment)
+            setOf(
+                R.id.offersFragment,
+                R.id.homeFragment,
+                R.id.locationFragment
+            )
         )
         NavigationUI.setupWithNavController(
             toolbar,
@@ -34,7 +40,9 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setupWithNavController(findNavController(R.id.nav_host_fragment))
 
         mainViewModel.isAuthenticated.observe(this){
-            if(!it) findNavController(R.id.nav_host_fragment).navigate(R.id.authActivity)
+            if(!it) findNavController(R.id.nav_host_fragment).navigate(
+                R.id.authActivity
+            )
         }
     }
 

@@ -1,4 +1,4 @@
-package com.pwr.trainwithme
+package com.pwr.trainwithme.main.training_management
 
 
 import android.os.Bundle
@@ -12,10 +12,11 @@ import com.pwr.trainwithme.adapters.SummaryAdapter
 import com.pwr.trainwithme.adapters.TrainingSummaryAdapter
 import com.pwr.commonplatform.data.MockData
 import com.pwr.commonplatform.data.Result
-import com.pwr.commonplatform.data.TrainingSummary
+import com.pwr.commonplatform.data.model.TrainingSummary
 import com.pwr.commonplatform.utils.snack
 import kotlinx.android.synthetic.main.fragment_home.*
 import androidx.lifecycle.observe
+import com.pwr.trainwithme.R
 
 class HomeFragment : Fragment() {
 

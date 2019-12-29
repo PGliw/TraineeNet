@@ -1,4 +1,4 @@
-package com.pwr.trainwithme
+package com.pwr.trainwithme.main.centre_location
 
 
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.pwr.commonplatform.SampleSharedClass
 import com.pwr.commonplatform.utils.snack
+import com.pwr.trainwithme.R
 
 /**
  * A simple [Fragment] subclass.

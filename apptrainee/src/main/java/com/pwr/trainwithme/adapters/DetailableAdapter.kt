@@ -11,7 +11,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.pwr.commonplatform.data.Detailable
+import com.pwr.commonplatform.data.model.Detailable
 import com.pwr.trainwithme.R
 
 class DetailableAdapter(

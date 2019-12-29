@@ -10,7 +10,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.pwr.trainwithme.R
-import com.pwr.commonplatform.data.CentreOverview
+import com.pwr.commonplatform.data.model.CentreOverview
 
 class CentreOverviewAdapter(
     private val context: Context,

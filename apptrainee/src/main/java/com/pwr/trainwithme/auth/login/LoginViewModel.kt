@@ -1,4 +1,4 @@
-package com.pwr.trainwithme.auth
+package com.pwr.trainwithme.auth.login
 
 import android.app.Application
 import android.util.Patterns
@@ -22,9 +22,15 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
     fun loginDataChanged(username: String, password: String) {
         _loginForm.value = when {
-            isUserNameValid(username) && isPasswordValid(password) -> LoginFormState(isDataValid = true)
-            isUserNameValid(username) -> LoginFormState(passwordError = R.string.invalid_password)
-            isPasswordValid(password) -> LoginFormState(usernameError = R.string.invalid_username)
+            isUserNameValid(username) && isPasswordValid(password) -> LoginFormState(
+                isDataValid = true
+            )
+            isUserNameValid(username) -> LoginFormState(
+                passwordError = R.string.invalid_password
+            )
+            isPasswordValid(password) -> LoginFormState(
+                usernameError = R.string.invalid_username
+            )
             else -> LoginFormState(
                 usernameError = R.string.invalid_username,
                 passwordError = R.string.invalid_password

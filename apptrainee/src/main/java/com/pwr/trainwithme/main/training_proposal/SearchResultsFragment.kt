@@ -1,4 +1,4 @@
-package com.pwr.trainwithme.training_proposal
+package com.pwr.trainwithme.main.training_proposal
 
 
 import android.app.AlertDialog
@@ -17,7 +17,7 @@ import com.pwr.commonplatform.data.Result
 import com.pwr.commonplatform.utils.snack
 import kotlinx.android.synthetic.main.fragment_search_results.*
 import androidx.lifecycle.observe
-import com.pwr.commonplatform.data.TrainerOverview
+import com.pwr.commonplatform.data.model.TrainerOverview
 
 /**
  * A simple [Fragment] subclass.

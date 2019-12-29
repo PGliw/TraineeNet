@@ -1,4 +1,4 @@
-package com.pwr.trainwithme.auth
+package com.pwr.trainwithme.auth.login
 
 /**
  * Data validation state of the login form.

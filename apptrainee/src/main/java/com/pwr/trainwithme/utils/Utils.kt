@@ -7,7 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pwr.commonplatform.data.Result
-import com.pwr.commonplatform.data.Summarisable
+import com.pwr.commonplatform.data.model.Summarisable
 import com.pwr.trainwithme.adapters.SummaryAdapter
 
 fun RecyclerView.initAndObserve(

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".training_proposal.SportChoiceFragment">
+    tools:context=".main.training_proposal.SportChoiceFragment">
 
     <com.smarteist.autoimageslider.SliderView
         android:id="@+id/image_slider_fragment_sport_choice"

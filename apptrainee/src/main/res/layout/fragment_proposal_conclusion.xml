@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".training_proposal.ProposalConclusionFragment">
+    tools:context=".main.training_proposal.ProposalConclusionFragment">
 
     <ImageView
         android:id="@+id/image_fragment_proposal_conclusion_trainer"

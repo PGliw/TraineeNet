@@ -1,4 +1,4 @@
-package com.pwr.trainwithme.training_proposal
+package com.pwr.trainwithme.main.training_proposal
 
 
 import android.os.Bundle
@@ -12,9 +12,9 @@ import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.pwr.trainwithme.R
 import com.pwr.trainwithme.adapters.SliderAdapter
-import com.pwr.commonplatform.data.OfferResponse
+import com.pwr.commonplatform.data.model.OfferResponse
 import com.pwr.commonplatform.data.Result
-import com.pwr.commonplatform.data.TrainerDetails
+import com.pwr.commonplatform.data.model.TrainerDetails
 import com.pwr.commonplatform.utils.snack
 import com.smarteist.autoimageslider.IndicatorAnimations
 import kotlinx.android.synthetic.main.fragment_sport_choice.*

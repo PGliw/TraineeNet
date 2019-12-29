@@ -1,5 +1,6 @@
 package com.pwr.commonplatform.data
 
+import com.pwr.commonplatform.data.model.*
 import java.util.*
 
 object MockData {
@@ -49,7 +50,11 @@ object MockData {
         )
     )
 
-    private val sportsVMs = sports.map { SportVM(it) }
+    private val sportsVMs = sports.map {
+        SportVM(
+            it
+        )
+    }
 
     val trainers = listOf(
         Trainer(

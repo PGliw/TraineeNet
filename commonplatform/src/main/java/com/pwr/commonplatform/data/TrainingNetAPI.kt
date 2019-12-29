@@ -2,6 +2,7 @@ package com.pwr.commonplatform.data
 
 import android.content.Context
 import com.google.gson.annotations.SerializedName
+import com.pwr.commonplatform.data.model.*
 import com.pwr.commonplatform.utils.ConnectivityInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

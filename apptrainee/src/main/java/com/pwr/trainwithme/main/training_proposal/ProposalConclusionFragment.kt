@@ -1,4 +1,4 @@
-package com.pwr.trainwithme.training_proposal
+package com.pwr.trainwithme.main.training_proposal
 
 
 import android.app.AlertDialog

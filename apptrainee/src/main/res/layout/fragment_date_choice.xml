@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".training_proposal.DateChoiceFragment">
+    tools:context=".main.training_proposal.DateChoiceFragment">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_date_choice_fragment_next_day"

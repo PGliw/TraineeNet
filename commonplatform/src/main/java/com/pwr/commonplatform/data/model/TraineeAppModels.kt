@@ -1,6 +1,5 @@
-package com.pwr.commonplatform.data
+package com.pwr.commonplatform.data.model
 
-import org.joda.time.DateTime
 import java.text.DateFormat
 import java.util.*
 

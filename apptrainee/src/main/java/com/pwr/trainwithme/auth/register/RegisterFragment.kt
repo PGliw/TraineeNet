@@ -1,4 +1,4 @@
-package com.pwr.trainwithme.auth
+package com.pwr.trainwithme.auth.register
 
 
 import android.os.Bundle

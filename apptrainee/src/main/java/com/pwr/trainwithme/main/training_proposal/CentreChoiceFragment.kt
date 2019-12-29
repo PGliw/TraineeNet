@@ -1,4 +1,4 @@
-package com.pwr.trainwithme.training_proposal
+package com.pwr.trainwithme.main.training_proposal
 
 
 import android.os.Bundle
@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.pwr.trainwithme.R
 import com.pwr.trainwithme.adapters.CentreOverviewAdapter
 import com.pwr.commonplatform.data.*
+import com.pwr.commonplatform.data.model.CentreOverview
 import com.pwr.commonplatform.utils.snack
 import kotlinx.android.synthetic.main.fragment_centre_choice.*
 
