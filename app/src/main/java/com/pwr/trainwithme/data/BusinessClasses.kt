@@ -1,5 +1,6 @@
 package com.pwr.trainwithme.data
 
+import org.joda.time.DateTime
 import java.text.DateFormat
 import java.util.*
 
@@ -77,6 +78,16 @@ data class OfferResponse(
     val trainerID: Long,
     val sportID: Long,
     val sportName: String
+)
+
+data class TraineeTrainingDTO(
+    val startDateTime: String,
+    val endDateTime: String,
+    val sportID: Long,
+    val centreID: Long,
+    val trainerID: Long,
+    val traineeID: Long,
+    val traineesLimit: Int = 1
 )
 
 interface Detailable : Summarisable {

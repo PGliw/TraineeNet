@@ -103,6 +103,14 @@ interface TrainingNetAPI {
         @Header("Authorization")
         authorizationHeaderValue: String = "Bearer $accessToken"
     ): Response<List<CentreOverview>>
+
+    @POST("trainees/{id}/trainings")
+    suspend fun postTraineeTraining(
+        @Path("id") traineeID: Long,
+        @Body traineeTrainingDTO: TraineeTrainingDTO,
+        @Header("Authorization")
+        authorizationHeaderValue: String = "Bearer $accessToken"
+    ): Response<Any>
 }
 
 /**

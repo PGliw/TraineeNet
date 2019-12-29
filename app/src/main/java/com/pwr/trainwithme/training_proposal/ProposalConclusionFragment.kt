@@ -7,9 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.ncorti.slidetoact.SlideToActView
 import com.pwr.trainwithme.R
+import com.pwr.trainwithme.data.Result
+import com.pwr.trainwithme.utils.snack
 import kotlinx.android.synthetic.main.fragment_proposal_conclusion.*
 
 /**
@@ -52,6 +55,19 @@ class ProposalConclusionFragment : Fragment(), SlideToActView.OnSlideCompleteLis
 
     override fun onSlideComplete(view: SlideToActView) {
         // TODO send request
-        findNavController().navigate(R.id.action_proposalConclusionFragment_to_homeFragment)
+        val result = proposalViewModel.sendTrainingProposal()
+        result.observe(viewLifecycleOwner){
+            when(it.status){
+                Result.Status.LOADING -> snack("Loading")
+                Result.Status.ERROR -> {
+                    snack("Error")
+                    slide_fragment_proposal_conclusion_send_proposal.resetSlider()
+                }
+                Result.Status.SUCCESS -> {
+                    snack("Success")
+                    findNavController().navigate(R.id.action_proposalConclusionFragment_to_homeFragment)
+                }
+            }
+        }
     }
 }

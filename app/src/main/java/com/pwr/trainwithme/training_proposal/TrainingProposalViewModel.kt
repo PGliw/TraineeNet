@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.pwr.trainwithme.TrainingNetApplication
 import com.pwr.trainwithme.data.Summarisable
+import com.pwr.trainwithme.data.TraineeTrainingDTO
 import org.joda.time.DateTime
 import org.joda.time.LocalDate
 import org.joda.time.LocalDateTime
@@ -104,6 +105,19 @@ class TrainingProposalViewModel(application: Application) : AndroidViewModel(app
 
     private val dataSource = (application as TrainingNetApplication).dataSource
 
+    fun sendTrainingProposal() = dataSource.load {
+        dataSource.trainingNetAPI.postTraineeTraining(
+            17, // TODO change
+            TraineeTrainingDTO(
+                startDateTime = startDateTime.toString(),
+                endDateTime = endDateTime.toString(),
+                sportID = sportID ?: throw NullPointerException("sportID = null"),
+                traineeID = 17L, // TODO change
+                trainerID = trainerID ?: throw NullPointerException("trainerID = null"),
+                centreID = centreID ?: throw java.lang.NullPointerException("centreID = null")
+            )
+        )
+    }
 
     val trainerDetails = trainerIdLiveData.switchMap {
         liveData {
