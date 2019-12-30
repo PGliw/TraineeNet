@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/trainer_register_screen"
+    tools:context=".auth.register.RegisterFragment">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_register_fragment_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="16dp"
+        app:errorEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text_input_edit_text_register_fragment_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:hint="@string/email" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_register_fragment_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:errorEnabled="true"
+        app:layout_constraintEnd_toEndOf="@id/text_input_layout_register_fragment_email"
+        app:layout_constraintStart_toStartOf="@id/text_input_layout_register_fragment_email"
+        app:layout_constraintTop_toBottomOf="@+id/text_input_layout_register_fragment_email">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text_input_edit_text_register_fragment_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="@string/password" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/text_input_layout_register_fragment_first_name"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    app:errorEnabled="true"
+    app:layout_constraintEnd_toEndOf="@id/text_input_layout_register_fragment_email"
+    app:layout_constraintStart_toStartOf="@id/text_input_layout_register_fragment_email"
+    app:layout_constraintTop_toBottomOf="@+id/text_input_layout_register_fragment_password">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/text_input_edit_text_register_fragment_first_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/first_name" />
+</com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_register_fragment_last_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:errorEnabled="true"
+        app:layout_constraintEnd_toEndOf="@id/text_input_layout_register_fragment_email"
+        app:layout_constraintStart_toStartOf="@id/text_input_layout_register_fragment_email"
+        app:layout_constraintTop_toBottomOf="@+id/text_input_layout_register_fragment_first_name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text_input_edit_text_register_fragment_last_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/last_name" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_register_fragment_phone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:errorEnabled="true"
+        app:layout_constraintEnd_toEndOf="@id/text_input_layout_register_fragment_email"
+        app:layout_constraintStart_toStartOf="@id/text_input_layout_register_fragment_email"
+        app:layout_constraintTop_toBottomOf="@+id/text_input_layout_register_fragment_last_name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text_input_edit_text_register_fragment_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:hint="@string/phone" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_register_fragment_birthday"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:errorEnabled="true"
+        app:layout_constraintEnd_toEndOf="@id/text_input_layout_register_fragment_email"
+        app:layout_constraintStart_toStartOf="@id/text_input_layout_register_fragment_email"
+        app:layout_constraintTop_toBottomOf="@+id/text_input_layout_register_fragment_phone">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text_input_edit_text_register_fragment_birthday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:hint="@string/date_of_birth" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_register_fragment_profile_photo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:errorEnabled="true"
+        app:layout_constraintBottom_toTopOf="@+id/button_register_fragment_next"
+        app:layout_constraintEnd_toEndOf="@id/text_input_layout_register_fragment_email"
+        app:layout_constraintStart_toStartOf="@id/text_input_layout_register_fragment_email"
+        app:layout_constraintTop_toBottomOf="@+id/text_input_layout_register_fragment_birthday"
+        app:layout_constraintVertical_bias="0.0">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text_input_edit_text_register_fragment_profile_photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/link_to_profile_photo" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_register_fragment_back"
+        style="@style/SecondaryButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_register_fragment_next"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_register_fragment_next"
+        style="@style/PrimaryButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button_register_fragment_back" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
