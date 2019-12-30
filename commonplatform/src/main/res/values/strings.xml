@@ -71,4 +71,6 @@
     <string name="training_proposal_sent_message">Training proposal was successfully sent. You will be informed about trainer\'s feedback</string>
     <string name="ok">OK</string>
     <string name="i_want_an_individual_training">I want an individual training</string>
+
+    <string name="trainingnet_logo">TrainingNet logo</string>
 </resources>
