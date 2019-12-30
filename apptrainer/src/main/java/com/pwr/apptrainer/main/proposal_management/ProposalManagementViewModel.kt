@@ -17,6 +17,7 @@ class ProposalManagementViewModel(application: Application) : AndroidViewModel(a
             field = value
         }
     private val proposalIdLiveData = MutableLiveData<Long>()
+    var refusalMessage: String? = null
 
     val trainingProposals = proposalsReloadTrigger.switchMap {
         dataSource.load {

@@ -1,14 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".main.proposal_management.ProposalRefusalFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/text_fragment_proposal_refusal_label"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:text="@string/training_proposal_refusal" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/text_fragment_proposal_refusal_message_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/tell_the_trainee_why_are_you_refusing"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintTop_toBottomOf="@+id/text_fragment_proposal_refusal_label" />
+
+    <EditText
+        android:id="@+id/edit_text_fragment_proposal_refusal_message"
+        android:hint="@string/type_your_message_here"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="top|start"
+        android:inputType="textMultiLine"
+        android:lines="8"
+        android:maxLines="10"
+        android:minLines="6"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_fragment_proposal_refusal_message_label" />
+
+    <com.ncorti.slidetoact.SlideToActView
+        android:id="@+id/slide_fragment_proposal_refusal_send_refusal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        app:inner_color="@color/warningAccentColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_fragment_proposal_refusal_message"
+        app:layout_constraintVertical_bias="1.0"
+        app:outer_color="@color/warningPrimaryColor"
+        app:text="@string/confirm_refusal"
+        app:text_size="24dp" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

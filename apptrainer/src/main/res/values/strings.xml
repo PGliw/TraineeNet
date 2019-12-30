@@ -5,5 +5,9 @@
     <string name="reject">Reject</string>
     <string name="accept">Accept</string>
     <string name="confirmation_successfully_sent">Confirmation successfully sent</string>
-
+    <string name="confirm_refusal">Confirm refusal</string>
+    <string name="training_proposal_refusal">Training proposal refusal</string>
+    <string name="tell_the_trainee_why_are_you_refusing">Tell the trainee why are you refusing</string>
+    <string name="type_your_message_here">Type your message here…</string>
+    <string name="refusal_successfully_sent">Refusal successfully sent</string>
 </resources>
