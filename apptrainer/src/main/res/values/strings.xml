@@ -4,5 +4,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="reject">Reject</string>
     <string name="accept">Accept</string>
+    <string name="confirmation_successfully_sent">Confirmation successfully sent</string>
 
 </resources>

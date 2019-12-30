@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName
 import com.pwr.commonplatform.data.model.trainee.*
 import com.pwr.commonplatform.data.model.trainer.TrainerTrainingDetails
 import com.pwr.commonplatform.data.model.trainer.TrainerTrainingOverview
+import com.pwr.commonplatform.data.model.trainer.TrainingStatusDTO
 import com.pwr.commonplatform.utils.ConnectivityInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -128,6 +129,16 @@ interface TrainingNetAPI {
         @Header("Authorization")
         authorizationHeaderValue: String = "Bearer $accessToken"
     ): Response<TrainerTrainingDetails>
+
+    @PATCH("trainer/trainings/{id}")
+    suspend fun updateTrainerTrainingStatus(
+        @Path("id")
+        trainingID: Long,
+        @Body
+        statusDTO: TrainingStatusDTO,
+        @Header("Authorization")
+        authorizationHeaderValue: String = "Bearer $accessToken"
+    ): Response<Any>
 
     @POST("trainee/trainings")
     suspend fun postTraineeTraining(

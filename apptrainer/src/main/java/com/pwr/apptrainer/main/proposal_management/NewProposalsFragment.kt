@@ -10,7 +10,7 @@ import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pwr.apptrainer.R
-import com.pwr.apptrainer.auth.adapters.TrainerTrainingOverviewAdapter
+import com.pwr.apptrainer.adapters.TrainerTrainingOverviewAdapter
 import com.pwr.commonplatform.data.Result
 import com.pwr.commonplatform.data.model.trainer.TrainerTrainingOverview
 import com.pwr.commonplatform.utils.snack

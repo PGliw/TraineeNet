@@ -1,4 +1,4 @@
-package com.pwr.apptrainer.auth.adapters
+package com.pwr.apptrainer.adapters
 
 import android.content.Context
 import android.view.LayoutInflater

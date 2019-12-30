@@ -1,6 +1,8 @@
 package com.pwr.apptrainer.main.proposal_management
 
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.pwr.apptrainer.R
 import com.pwr.commonplatform.data.Result
@@ -18,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_proposal_details.*
 /**
  * A simple [Fragment] subclass.
  */
-class ProposalDetailsFragment : Fragment() {
+class ProposalDetailsFragment : Fragment(), DialogInterface.OnClickListener {
 
     private val proposalManagementViewModel by lazy {
         ViewModelProviders.of(requireActivity())[ProposalManagementViewModel::class.java]
@@ -99,15 +102,35 @@ class ProposalDetailsFragment : Fragment() {
         // enable buttons and set listeners
         button_fragment_proposal_details_accept.isEnabled = true
         button_fragment_proposal_details_accept.setOnClickListener {
-            // TODO viewModel.accept(details.trainingID)
-            snack("Accept ${details.trainingID}")
+            acceptProposal()
         }
 
         button_fragment_proposal_details_reject.isEnabled = true
         button_fragment_proposal_details_reject.setOnClickListener {
-            // TODO viewModel.accept(details.trainingID)
-            snack("Reject ${details.trainingID}")
+            findNavController().navigate(R.id.action_proposalDetailsFragment_to_proposalRefusalFragment)
         }
+    }
+
+    private fun acceptProposal(){
+        proposalManagementViewModel.acceptProposal().observe(viewLifecycleOwner){
+            when (it.status) {
+                Result.Status.LOADING -> snack(getString(R.string.loading)) // TODO change to progress bar
+                Result.Status.SUCCESS -> renderConfirmationPopUp()
+                Result.Status.ERROR -> snack(it.message ?: getString(R.string.unknown_error))
+            }
+        }
+    }
+
+    private fun renderConfirmationPopUp(){
+        AlertDialog.Builder(requireContext())
+            .setMessage(getString(R.string.confirmation_successfully_sent))
+            .setPositiveButton(getString(R.string.ok), this)
+            .show()
+    }
+
+    override fun onClick(dialog: DialogInterface?, which: Int) {
+        dialog?.dismiss()
+        findNavController().navigateUp()
     }
 
 }

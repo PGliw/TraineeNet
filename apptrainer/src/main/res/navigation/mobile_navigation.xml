@@ -28,5 +28,18 @@
         android:id="@+id/proposalDetailsFragment"
         android:name="com.pwr.apptrainer.main.proposal_management.ProposalDetailsFragment"
         android:label="fragment_proposal_details"
-        tools:layout="@layout/fragment_proposal_details" />
+        tools:layout="@layout/fragment_proposal_details" >
+        <action
+            android:id="@+id/action_proposalDetailsFragment_to_proposalRefusalFragment"
+            app:destination="@id/proposalRefusalFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/proposalRefusalFragment"
+        android:name="com.pwr.apptrainer.main.proposal_management.ProposalRefusalFragment"
+        android:label="fragment_proposal_refusal"
+        tools:layout="@layout/fragment_proposal_refusal" >
+        <action
+            android:id="@+id/action_proposalRefusalFragment_to_newProposalsFragment"
+            app:destination="@id/newProposalsFragment" />
+    </fragment>
 </navigation>

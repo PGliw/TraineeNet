@@ -29,3 +29,7 @@ data class TrainerTrainingDetails(
     val sportName: String,
     val traineesSummaries: List<Summary>
 )
+
+data class TrainingStatusDTO(
+    val status: String
+)
