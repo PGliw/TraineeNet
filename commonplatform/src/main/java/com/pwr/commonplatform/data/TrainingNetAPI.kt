@@ -2,7 +2,10 @@ package com.pwr.commonplatform.data
 
 import android.content.Context
 import com.google.gson.annotations.SerializedName
-import com.pwr.commonplatform.data.model.*
+import com.pwr.commonplatform.data.model.trainee.*
+import com.pwr.commonplatform.data.model.trainer.TrainerTrainingDetails
+import com.pwr.commonplatform.data.model.trainer.TrainerTrainingOverview
+import com.pwr.commonplatform.data.model.trainer.TrainingStatusDTO
 import com.pwr.commonplatform.utils.ConnectivityInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -106,10 +109,36 @@ interface TrainingNetAPI {
     ): Response<List<CentreOverview>>
 
     @GET("trainee/trainings/summaries")
-    suspend fun getTrainingsSummmaries(
+    suspend fun getTrainingsSummaries(
         @Header("Authorization")
         authorizationHeaderValue: String = "Bearer $accessToken"
     ): Response<List<TrainingSummary>>
+
+    @GET("trainer/trainings")
+    suspend fun getTrainerTrainingsOverviews(
+        @Header("Authorization")
+        authorizationHeaderValue: String = "Bearer $accessToken",
+        @Query("status")
+        trainingStatus: String? = null
+    ): Response<List<TrainerTrainingOverview>>
+
+    @GET("trainer/trainings/{id}/details")
+    suspend fun getTrainerTrainingDetails(
+        @Path("id")
+        trainingID: Long,
+        @Header("Authorization")
+        authorizationHeaderValue: String = "Bearer $accessToken"
+    ): Response<TrainerTrainingDetails>
+
+    @PATCH("trainer/trainings/{id}")
+    suspend fun updateTrainerTrainingStatus(
+        @Path("id")
+        trainingID: Long,
+        @Body
+        statusDTO: TrainingStatusDTO,
+        @Header("Authorization")
+        authorizationHeaderValue: String = "Bearer $accessToken"
+    ): Response<Any>
 
     @POST("trainee/trainings")
     suspend fun postTraineeTraining(

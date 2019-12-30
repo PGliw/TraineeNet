@@ -17,7 +17,7 @@ import com.pwr.commonplatform.data.Result
 import com.pwr.commonplatform.utils.snack
 import kotlinx.android.synthetic.main.fragment_search_results.*
 import androidx.lifecycle.observe
-import com.pwr.commonplatform.data.model.TrainerOverview
+import com.pwr.commonplatform.data.model.trainee.TrainerOverview
 
 /**
  * A simple [Fragment] subclass.

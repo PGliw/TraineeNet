@@ -1,6 +1,6 @@
 package com.pwr.commonplatform.data
 
-import com.pwr.commonplatform.data.model.*
+import com.pwr.commonplatform.data.model.trainee.*
 import java.util.*
 
 object MockData {
