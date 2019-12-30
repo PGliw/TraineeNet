@@ -8,7 +8,12 @@
     <fragment
         android:id="@+id/newProposalsFragment"
         android:name="com.pwr.apptrainer.main.proposal_management.NewProposalsFragment"
-        android:label="fragment_new_proposals" />
+        android:label="fragment_new_proposals"
+        tools:layout="@layout/fragment_new_proposals" >
+        <action
+            android:id="@+id/action_newProposalsFragment_to_proposalDetailsFragment"
+            app:destination="@id/proposalDetailsFragment" />
+    </fragment>
     <activity
         android:id="@+id/authActivity"
         android:name="com.pwr.apptrainer.auth.AuthActivity"
@@ -19,4 +24,9 @@
         android:name="com.pwr.apptrainer.main.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/proposalDetailsFragment"
+        android:name="com.pwr.apptrainer.main.proposal_management.ProposalDetailsFragment"
+        android:label="fragment_proposal_details"
+        tools:layout="@layout/fragment_proposal_details" />
 </navigation>

@@ -3,6 +3,7 @@ package com.pwr.commonplatform.data
 import android.content.Context
 import com.google.gson.annotations.SerializedName
 import com.pwr.commonplatform.data.model.trainee.*
+import com.pwr.commonplatform.data.model.trainer.TrainerTrainingDetails
 import com.pwr.commonplatform.data.model.trainer.TrainerTrainingOverview
 import com.pwr.commonplatform.utils.ConnectivityInterceptor
 import okhttp3.Interceptor
@@ -119,6 +120,14 @@ interface TrainingNetAPI {
         @Query("status")
         trainingStatus: String? = null
     ): Response<List<TrainerTrainingOverview>>
+
+    @GET("trainer/trainings/{id}/details")
+    suspend fun getTrainerTrainingDetails(
+        @Path("id")
+        trainingID: Long,
+        @Header("Authorization")
+        authorizationHeaderValue: String = "Bearer $accessToken"
+    ): Response<TrainerTrainingDetails>
 
     @POST("trainee/trainings")
     suspend fun postTraineeTraining(

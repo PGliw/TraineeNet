@@ -10,12 +10,24 @@ class ProposalManagementViewModel(application: Application) : AndroidViewModel(a
 
     private val dataSource = (application as TrainingNetApplication).dataSource
     private val proposalsReloadTrigger = MutableLiveData<Boolean>()
+    var proposalID: Long? = null
+    set(value) {
+        proposalIdLiveData.value = value
+        field = value
+    }
+    private val proposalIdLiveData = MutableLiveData<Long>()
 
     val trainingProposals = proposalsReloadTrigger.switchMap {
         dataSource.load {
             dataSource.trainingNetAPI.getTrainerTrainingsOverviews(
                 trainingStatus = "PROPOSED"
             )
+        }
+    }
+
+    val proposalDetails = proposalIdLiveData.switchMap {
+        dataSource.load {
+            dataSource.trainingNetAPI.getTrainerTrainingDetails(it)
         }
     }
 

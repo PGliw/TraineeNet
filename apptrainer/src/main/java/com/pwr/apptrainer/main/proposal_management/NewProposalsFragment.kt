@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pwr.apptrainer.R
 import com.pwr.apptrainer.auth.adapters.TrainerTrainingOverviewAdapter
@@ -65,7 +66,8 @@ class NewProposalsFragment : Fragment() {
     }
 
     private fun onProposalSelected(trainingOverview: TrainerTrainingOverview){
-        // TODO implement
+        proposalManagementViewModel.proposalID = trainingOverview.trainingID
+        findNavController().navigate(R.id.action_newProposalsFragment_to_proposalDetailsFragment)
     }
 
     private fun onProposalSwipeLeft(trainingOverview: TrainerTrainingOverview){
