@@ -1,4 +1,4 @@
-package com.pwr.commonplatform.data.model
+package com.pwr.commonplatform.data.model.trainee
 
 import java.text.DateFormat
 import java.util.*

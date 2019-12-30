@@ -3,8 +3,8 @@ package com.pwr.trainwithme.main.training_proposal
 import android.app.Application
 import androidx.lifecycle.*
 import com.pwr.commonplatform.data.*
-import com.pwr.commonplatform.data.model.Summarisable
-import com.pwr.commonplatform.data.model.TraineeTrainingDTO
+import com.pwr.commonplatform.data.model.trainee.Summarisable
+import com.pwr.commonplatform.data.model.trainee.TraineeTrainingDTO
 import com.pwr.trainwithme.TrainingNetApplication
 import org.joda.time.DateTime
 import org.joda.time.LocalDate
