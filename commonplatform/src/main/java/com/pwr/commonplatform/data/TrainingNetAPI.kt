@@ -19,7 +19,8 @@ import java.util.concurrent.TimeUnit
 interface TrainingNetAPI {
 
     companion object {
-        private const val SERVER_URL = "http://192.168.1.169:8080/"
+        //private const val SERVER_URL = "http://192.168.1.169:8080/"
+        private const val SERVER_URL = "http://34.89.157.85:80/"
         private const val TIMEOUT_SECONDS = 10L
         var accessToken: String? = null
         var refreshToken: String? = null
