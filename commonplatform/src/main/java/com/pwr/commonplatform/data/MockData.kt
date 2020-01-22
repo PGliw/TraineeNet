@@ -12,20 +12,6 @@ object MockData {
      * you are sure that the elements read are subtypes of T,
      * e.g. subtypes of Summarisable in case of <out Summarisable>
      */
-    val trainersSummaries: List<Summarisable>
-        get() = trainersVMs
-
-    val trainersDetails: List<Detailable>
-        get() = trainersVMs
-
-    val centresSummaries: List<Summarisable>
-        get() = sportCentresVMs
-
-    val centresDetails: List<Detailable>
-        get() = sportCentresVMs
-
-    val sportsSummaries: List<Summarisable>
-        get() = sportsVMs
 
     val trainingsSummaries: List<Summarisable>
         get() = trainingsVMs
@@ -33,9 +19,8 @@ object MockData {
     val passesSummaries: List<Summarisable>
         get() = passesVMs
 
-    val timeSlots = listOf("12:00 - 13:30", "13:30 - 15:00", "15:00 - 16:30")
 
-    val sports = listOf(
+    private val sports = listOf(
         Sport(
             "Tennis",
             "https://images.pexels.com/photos/1432039/pexels-photo-1432039.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
@@ -50,13 +35,8 @@ object MockData {
         )
     )
 
-    private val sportsVMs = sports.map {
-        SportVM(
-            it
-        )
-    }
 
-    val trainers = listOf(
+    private val trainers = listOf(
         Trainer(
             "John",
             "Doe",
@@ -79,13 +59,9 @@ object MockData {
         )
     )
 
-    private val trainersVMs = trainers.map {
-        TrainerVM(
-            it
-        )
-    }
 
-    val sportCentres = listOf(
+
+    private val sportCentres = listOf(
         SportCentre(
             "Surfpoint",
             "https://www.surfpoint.pl/wp-content/uploads/2015/04/team-biegnie-compressor.jpg",
@@ -98,13 +74,8 @@ object MockData {
         )
     )
 
-    private val sportCentresVMs = sportCentres.map {
-        SportCentreVM(
-            it
-        )
-    }
 
-    val trainings = listOf(
+    private val trainings = listOf(
         Training(
             trainers[0],
             Date(),
@@ -133,7 +104,7 @@ object MockData {
         )
     }
 
-    val passes = listOf(
+    private val passes = listOf(
         Pass(
             "MultiSport",
             "https://fitness-legionowo.pl/wp-content/uploads/2017/06/MultiSportPlus.jpg"
@@ -149,17 +120,5 @@ object MockData {
             it
         )
     }
-
-    val imagesUrls = listOf(
-        "https://www.fit-academy.pl/wp-content/uploads/kompleksowy-1024x683-1.jpg",
-        "https://www.fit-academy.pl/wp-content/uploads/IMG_4355-1024x683.jpg",
-        "https://s5.dziennik.pl/pliki/11132000/11132862-jerzy-brzeczek-900-555.jpg",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSglmhcjYdbPXi-PJL4JBmZoRREdEmRPX9awimdsXqlUa7kuNxAWQ&s"
-    )
-
-    val sportNames = listOf(
-        "Karate", "Judo", "Windsurfing", "Baseball", "Gym"
-    )
-
 
 }
