@@ -149,36 +149,6 @@ interface TrainingNetAPI {
     ): Response<Any>
 }
 
-/**
- * Basic auth is used to authenticate client app to the server
- */
-class BasicAuthHeaderInterceptor : Interceptor {
-    companion object {
-        const val CLIENT_AUTH_HEADER_KEY = "Authorization"
-        const val CLIENT_AUTH_HEADER_VALUE =
-            "Basic ZnJvbnRlbmRDbGllbnRJZDpmcm9udGVuZENsaWVudFNlY3JldA=="
-    }
-
-    override fun intercept(chain: Interceptor.Chain): okhttp3.Response {
-        var request = chain.request()
-        val headers = request
-            .headers
-            .newBuilder()
-            .add(CLIENT_AUTH_HEADER_KEY, CLIENT_AUTH_HEADER_VALUE)
-            .build()
-        request = request
-            .newBuilder()
-            .headers(headers)
-            .build()
-        return chain.proceed(request)
-    }
-}
-
-data class TokenRequest(
-    @Field("username") val username: String,
-    @Field("password") val password: String,
-    @Field("grant_type") val grantType: String = "password"
-)
 
 data class TokenResponse(
     @SerializedName("access_token") val accessToken: String? = null,
