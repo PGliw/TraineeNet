@@ -1,6 +1,8 @@
 package com.pwr.apptrainer.main.proposal_management
 
 import android.app.AlertDialog
+import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -25,7 +27,7 @@ import kotlinx.android.synthetic.main.fragment_new_proposals.*
 /**
  * A simple [Fragment] subclass.
  */
-class NewProposalsFragment : Fragment() {
+class NewProposalsFragment : ProposalManagementFragment(), DialogInterface.OnClickListener {
 
     companion object {
         const val TAG = "NewProposalsFragment"
@@ -40,9 +42,7 @@ class NewProposalsFragment : Fragment() {
             this::onProposalSwipeRight
         )
     }
-    private val proposalManagementViewModel by lazy {
-        ViewModelProviders.of(requireActivity())[ProposalManagementViewModel::class.java]
-    }
+
     private val swipeCallback by lazy {
         object : RecyclerSwipeCallback(requireContext()) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
@@ -124,12 +124,15 @@ class NewProposalsFragment : Fragment() {
 
     private fun onProposalSwipeLeft(trainingOverview: TrainerTrainingOverview) {
         proposalManagementViewModel.proposalID = trainingOverview.trainingID
-        proposalManagementViewModel.acceptProposal()
+        acceptProposal()
     }
 
     private fun onProposalSwipeRight(trainingOverview: TrainerTrainingOverview) {
         // TODO implement
     }
 
+    override fun onClick(dialog: DialogInterface?, which: Int) {
+        dialog?.dismiss()
+    }
 
 }

@@ -21,11 +21,8 @@ import kotlinx.android.synthetic.main.fragment_proposal_details.*
 /**
  * A simple [Fragment] subclass.
  */
-class ProposalDetailsFragment : Fragment(), DialogInterface.OnClickListener {
+class ProposalDetailsFragment : ProposalManagementFragment(), DialogInterface.OnClickListener {
 
-    private val proposalManagementViewModel by lazy {
-        ViewModelProviders.of(requireActivity())[ProposalManagementViewModel::class.java]
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -109,23 +106,6 @@ class ProposalDetailsFragment : Fragment(), DialogInterface.OnClickListener {
         button_fragment_proposal_details_reject.setOnClickListener {
             findNavController().navigate(R.id.action_proposalDetailsFragment_to_proposalRefusalFragment)
         }
-    }
-
-    private fun acceptProposal(){
-        proposalManagementViewModel.acceptProposal().observe(viewLifecycleOwner){
-            when (it.status) {
-                Result.Status.LOADING -> snack(getString(R.string.loading)) // TODO change to progress bar
-                Result.Status.SUCCESS -> renderConfirmationPopUp()
-                Result.Status.ERROR -> snack(it.message ?: getString(R.string.unknown_error))
-            }
-        }
-    }
-
-    private fun renderConfirmationPopUp(){
-        AlertDialog.Builder(requireContext())
-            .setMessage(getString(R.string.confirmation_successfully_sent))
-            .setPositiveButton(getString(R.string.ok), this)
-            .show()
     }
 
     override fun onClick(dialog: DialogInterface?, which: Int) {
