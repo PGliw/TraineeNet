@@ -1,6 +1,7 @@
 package com.pwr.apptrainer.main.proposal_management
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.switchMap
@@ -8,6 +9,10 @@ import com.pwr.apptrainer.TrainingNetApplication
 import com.pwr.commonplatform.data.model.trainer.TrainingStatusDTO
 
 class ProposalManagementViewModel(application: Application) : AndroidViewModel(application) {
+
+    companion object {
+        const val TAG = "PMVM"
+    }
 
     private val dataSource = (application as TrainingNetApplication).dataSource
     private val proposalsReloadTrigger = MutableLiveData<Boolean>()
@@ -18,6 +23,8 @@ class ProposalManagementViewModel(application: Application) : AndroidViewModel(a
         }
     private val proposalIdLiveData = MutableLiveData<Long>()
     var refusalMessage: String? = null
+
+    var sortOptionPosition: Int = 0
 
     val trainingProposals = proposalsReloadTrigger.switchMap {
         dataSource.load {
@@ -34,6 +41,7 @@ class ProposalManagementViewModel(application: Application) : AndroidViewModel(a
     }
 
     fun acceptProposal() = dataSource.load {
+        Log.d(TAG, "acceptProposal()")
         dataSource.trainingNetAPI.updateTrainerTrainingStatus(
             proposalID ?: throw NullPointerException("proposalID == null"),
             TrainingStatusDTO("ACCEPTED")

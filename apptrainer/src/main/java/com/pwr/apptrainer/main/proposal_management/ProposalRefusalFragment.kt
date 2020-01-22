@@ -19,11 +19,7 @@ import kotlinx.android.synthetic.main.fragment_proposal_refusal.*
 /**
  * A simple [Fragment] subclass.
  */
-class ProposalRefusalFragment : Fragment(), SlideToActView.OnSlideCompleteListener {
-
-    private val proposalManagementViewModel by lazy {
-        ViewModelProviders.of(requireActivity())[ProposalManagementViewModel::class.java]
-    }
+class ProposalRefusalFragment : ProposalManagementFragment(), SlideToActView.OnSlideCompleteListener {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

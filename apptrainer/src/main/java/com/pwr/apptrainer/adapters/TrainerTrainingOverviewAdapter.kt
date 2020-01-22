@@ -16,7 +16,7 @@ class TrainerTrainingOverviewAdapter(
     private val context: Context,
     items: List<TrainerTrainingOverview>,
     private val onItemSelected: (TrainerTrainingOverview) -> Unit,
-    private val onSwipeLeft: (TrainerTrainingOverview) -> Unit,
+    val onSwipeLeft: (TrainerTrainingOverview) -> Unit,
     private val onSwipeRight: (TrainerTrainingOverview) -> Unit
 ) : RecyclerView.Adapter<TrainerTrainingOverviewAdapter.TrainerTrainingSummaryViewHolder>() {
 
@@ -48,6 +48,7 @@ class TrainerTrainingOverviewAdapter(
         private val subtitle: TextView = cardView.findViewById(R.id.text_subtitle)
         private val extraText1: TextView = cardView.findViewById(R.id.text_extra_1)
         private val extraText2: TextView = cardView.findViewById(R.id.text_extra_2)
+        var onSwipeLeft: (() -> Unit)? = null
         fun bind(item: TrainerTrainingOverview,
                  context: Context,
                  onItemSelected: (TrainerTrainingOverview) -> Unit,
@@ -64,6 +65,9 @@ class TrainerTrainingOverviewAdapter(
             extraText2.text = item.sportName
             cardView.setOnClickListener {
                 onItemSelected(item)
+            }
+            this.onSwipeLeft = {
+                onSwipeLeft(item)
             }
         }
     }

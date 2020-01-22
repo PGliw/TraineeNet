@@ -1,6 +1,5 @@
 <resources>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="reject">Reject</string>
     <string name="accept">Accept</string>
@@ -10,4 +9,16 @@
     <string name="tell_the_trainee_why_are_you_refusing">Tell the trainee why are you refusing</string>
     <string name="type_your_message_here">Type your message here…</string>
     <string name="refusal_successfully_sent">Refusal successfully sent</string>
+    <string-array name="sort_options">
+        <item>Newest first</item>
+        <item>Oldest first</item>
+        <item>Closest first</item>>
+    </string-array>
+
+    <string-array name="filter_options">
+        <item>Proposed</item>
+        <item>Accepted</item>
+        <item>All</item>>
+    </string-array>
+
 </resources>

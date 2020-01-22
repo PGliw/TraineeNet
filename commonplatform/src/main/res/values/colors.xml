@@ -5,4 +5,6 @@
 
     <color name="warningAccentColor">#FFFFFF</color>
 
+    <color name="acceptColor">#00a32c</color>
+
 </resources>
