@@ -1,7 +1,13 @@
 package com.pwr.commonplatform.utils
 
+import android.content.Context
+import android.graphics.*
+import android.graphics.drawable.ColorDrawable
 import android.view.View
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.pwr.commonplatform.R
 
 class VerticalScrollHider(private vararg val viewsToManage : View) : RecyclerView.OnScrollListener(){
 
@@ -21,3 +27,4 @@ class VerticalScrollHider(private vararg val viewsToManage : View) : RecyclerVie
 
     }
 }
+
